@@ -1,0 +1,44 @@
+<h2><span class="mw-headline" id="fastcgi_request_buffering"> fastcgi_request_buffering </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_request_buffering</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_request_buffering on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.11.
+            </p></div><p>
+Enables or disables buffering of a client request body.
+</p><p>
+When buffering is enabled, the entire request body is
+<a href="ngx_http_core_module.html#client_body_buffer_size">read</a>
+from the client before sending the request to a FastCGI server.
+</p><p>
+When buffering is disabled, the request body is sent to the FastCGI server
+immediately as it is received.
+In this case, the request cannot be passed to the
+<a href="#fastcgi_next_upstream">next server</a>
+if nginx already started sending the request body.
+</p><a name="fastcgi_send_lowat"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_request_buffering">fastcgi_request_buffering</a>]</span>

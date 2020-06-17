@@ -1,0 +1,44 @@
+<h2><span class="mw-headline" id="keyval"> keyval </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>keyval</strong> 
+    <code><i>key</i></code>
+    <code><i>$variable</i></code>
+    <code>zone</code>=<code><i>name</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Creates a new <code><i>$variable</i></code> whose value
+is looked up by the <code><i>key</i></code> in the key-value database.
+Matching rules are defined by the
+<a href="#keyval_type"><code>type</code></a> parameter of the
+<a href="#keyval_zone"><code>keyval_zone</code></a> directive.
+The database is stored in a shared memory zone
+specified by the <code>zone</code> parameter.
+</p><a name="keyval_zone"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_keyval_module.html#keyval">keyval</a>]</span>

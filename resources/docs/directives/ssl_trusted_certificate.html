@@ -1,0 +1,40 @@
+<h2><span class="mw-headline" id="ssl_trusted_certificate"> ssl_trusted_certificate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_trusted_certificate</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.8.
+            </p></div><p>
+Specifies a <code><i>file</i></code> with trusted CA certificates in the PEM format
+used to <a href="#ssl_verify_client">verify</a> client certificates.
+</p><p>
+In contrast to the certificate set by <a href="#ssl_client_certificate">ssl_client_certificate</a>,
+the list of these certificates will not be sent to clients.
+</p><a name="ssl_verify_client"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_trusted_certificate">ssl_trusted_certificate</a>]</span>

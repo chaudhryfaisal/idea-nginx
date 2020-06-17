@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="auth_http_pass_client_cert"> auth_http_pass_client_cert </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_http_pass_client_cert</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>auth_http_pass_client_cert off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.11.
+            </p></div><p>
+Appends the “Auth-SSL-Cert” header with the
+<a href="ngx_mail_ssl_module.html#ssl_verify_client">client</a>
+certificate in the PEM format (urlencoded)
+to requests sent to the authentication server.
+</p><a name="auth_http_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_auth_http_module.html#auth_http_pass_client_cert">auth_http_pass_client_cert</a>]</span>

@@ -1,0 +1,41 @@
+<h2><span class="mw-headline" id="zone_sync_buffers"> zone_sync_buffers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone_sync_buffers</strong> <code><i>number</i></code> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>zone_sync_buffers 8 4k|8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>number</i></code> and <code><i>size</i></code> of the
+per-zone buffers used for pushing zone contents.
+By default, the buffer size is equal to one memory page.
+This is either 4K or 8K, depending on a platform.
+</p><p>
+</p> <blockquote class="note">
+A single buffer must be large enough to hold any entry of each zone being
+synchronized.
+</blockquote><p> 
+</p><a name="zone_sync_connect_retry_interval"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_zone_sync_module.html#zone_sync_buffers">zone_sync_buffers</a>]</span>

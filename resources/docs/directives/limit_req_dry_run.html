@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="limit_req_dry_run"> limit_req_dry_run </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>limit_req_dry_run</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>limit_req_dry_run off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.17.1.
+            </p></div><p>
+Enables the dry run mode.
+In this mode, requests processing rate is not limited, however,
+in the shared memory zone, the number of excessive requests is accounted
+as usual.
+</p><a name="limit_req_log_level"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_dry_run">limit_req_dry_run</a>]</span>

@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="uwsgi_ssl_ciphers"> uwsgi_ssl_ciphers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_ssl_ciphers</strong> <code><i>ciphers</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_ssl_ciphers DEFAULT;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.8.
+            </p></div><p>
+Specifies the enabled ciphers for requests to a secured uwsgi server.
+The ciphers are specified in the format understood by the OpenSSL library.
+</p><p>
+The full list can be viewed using the
+“<code>openssl ciphers</code>” command.
+</p><a name="uwsgi_ssl_crl"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_ssl_ciphers">uwsgi_ssl_ciphers</a>]</span>

@@ -1,0 +1,72 @@
+<h2><span class="mw-headline" id="zone_sync_server"> zone_sync_server </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone_sync_server</strong> <code><i>address</i></code> [<code>resolve</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the <code><i>address</i></code> of a cluster node.
+The address can be specified as a domain name or IP address
+with a mandatory port, or as a UNIX-domain socket path
+specified after the “<code>unix:</code>” prefix.
+A domain name that resolves to several IP addresses defines
+multiple nodes at once.
+</p><a name="resolve"></a><p>
+The <code>resolve</code> parameter instructs nginx to monitor
+changes of the IP addresses that correspond to a domain name of the node
+and automatically modify the configuration
+without the need of restarting nginx.
+</p><p>
+Cluster nodes are specified either dynamically as a single
+<code>zone_sync_server</code> directive with
+the <code>resolve</code> parameter, or statically as a series of several
+directives without the parameter.
+</p> <blockquote class="note">
+Each cluster node should be specified only once.
+</blockquote><p> 
+</p> <blockquote class="note">
+All cluster nodes should use the same configuration.
+</blockquote><p> 
+</p><p>
+In order for the <code>resolve</code> parameter to work,
+the <a href="ngx_stream_core_module.html#resolver">resolver</a> directive
+must be specified in the
+<a href="ngx_stream_core_module.html#stream">stream</a> block.
+Example:
+</p> <blockquote class="example"><pre>
+stream {
+    resolver 10.0.0.1;
+    server {
+        zone_sync;
+        zone_sync_server cluster.example.com:12345 resolve;
+        ...
+    }
+}
+</pre></blockquote><p> 
+</p><a name="zone_sync_ssl"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_zone_sync_module.html#zone_sync_server">zone_sync_server</a>]</span>

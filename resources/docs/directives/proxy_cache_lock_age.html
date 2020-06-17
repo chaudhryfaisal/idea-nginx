@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="proxy_cache_lock_age"> proxy_cache_lock_age </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_lock_age</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_cache_lock_age 5s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.8.
+            </p></div><p>
+If the last request passed to the proxied server
+for populating a new cache element
+has not completed for the specified <code><i>time</i></code>,
+one more request may be passed to the proxied server.
+</p><a name="proxy_cache_lock_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age">proxy_cache_lock_age</a>]</span>

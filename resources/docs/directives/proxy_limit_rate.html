@@ -1,0 +1,42 @@
+<h2><span class="mw-headline" id="proxy_limit_rate"> proxy_limit_rate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_limit_rate</strong> <code><i>rate</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_limit_rate 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.7.
+            </p></div><p>
+Limits the speed of reading the response from the proxied server.
+The <code><i>rate</i></code> is specified in bytes per second.
+The zero value disables rate limiting.
+The limit is set per a request, and so if nginx simultaneously opens
+two connections to the proxied server,
+the overall rate will be twice as much as the specified limit.
+The limitation works only if
+<a href="#proxy_buffering">buffering</a> of responses from the proxied
+server is enabled.
+</p><a name="proxy_max_temp_file_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate">proxy_limit_rate</a>]</span>

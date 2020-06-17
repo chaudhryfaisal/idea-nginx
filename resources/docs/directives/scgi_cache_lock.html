@@ -1,0 +1,40 @@
+<h2><span class="mw-headline" id="scgi_cache_lock"> scgi_cache_lock </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_cache_lock</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_cache_lock off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.12.
+            </p></div><p>
+When enabled, only one request at a time will be allowed to populate
+a new cache element identified according to the <a href="#scgi_cache_key">scgi_cache_key</a>
+directive by passing a request to an SCGI server.
+Other requests of the same cache element will either wait
+for a response to appear in the cache or the cache lock for
+this element to be released, up to the time set by the
+<a href="#scgi_cache_lock_timeout">scgi_cache_lock_timeout</a> directive.
+</p><a name="scgi_cache_lock_age"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_cache_lock">scgi_cache_lock</a>]</span>

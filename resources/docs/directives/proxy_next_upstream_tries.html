@@ -1,0 +1,35 @@
+<h2><span class="mw-headline" id="proxy_next_upstream_tries"> proxy_next_upstream_tries </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_next_upstream_tries</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_next_upstream_tries 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Limits the number of possible tries for passing a connection to the
+<a href="#proxy_next_upstream">next server</a>.
+The <code>0</code> value turns off this limitation.
+</p><a name="proxy_pass"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_next_upstream_tries">proxy_next_upstream_tries</a>]</span>

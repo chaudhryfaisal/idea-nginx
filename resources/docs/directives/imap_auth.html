@@ -1,0 +1,53 @@
+<h2><span class="mw-headline" id="imap_auth"> imap_auth </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>imap_auth</strong> <code><i>method</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>imap_auth plain;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets permitted methods of authentication for IMAP clients.
+Supported methods are:
+</p> <dl class="compact">
+<dt><code>login</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/draft-murchison-sasl-login-00">AUTH=LOGIN</a>
+</dd>
+<dt><code>plain</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc4616">AUTH=PLAIN</a>
+</dd>
+<dt><code>cram-md5</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc2195">AUTH=CRAM-MD5</a>.
+In order for this method to work, the password must be stored unencrypted.
+</dd>
+<dt><code>external</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc4422">AUTH=EXTERNAL</a> (1.11.6).
+</dd>
+</dl><p> 
+</p><a name="imap_capabilities"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_imap_module.html#imap_auth">imap_auth</a>]</span>

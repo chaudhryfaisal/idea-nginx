@@ -1,0 +1,41 @@
+<h2><span class="mw-headline" id="proxy_requests"> proxy_requests </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_requests</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_requests 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.7.
+            </p></div><p>
+Sets the number of client datagrams at which
+binding between a client and existing UDP stream session is dropped.
+After receiving the specified number of datagrams, next datagram
+from the same client starts a new session.
+The session terminates when all client datagrams are transmitted
+to a proxied server and the expected number of
+<a href="#proxy_responses">responses</a> is received,
+or when it reaches a <a href="#proxy_timeout">timeout</a>.
+</p><a name="proxy_responses"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_requests">proxy_requests</a>]</span>

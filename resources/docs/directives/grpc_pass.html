@@ -1,0 +1,64 @@
+<h2><span class="mw-headline" id="grpc_pass"> grpc_pass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_pass</strong> <code><i>address</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the gRPC server address.
+The address can be specified as a domain name or IP address,
+and a port:
+</p> <blockquote class="example"><pre>
+grpc_pass localhost:9000;
+</pre></blockquote><p> 
+or as a UNIX-domain socket path:
+</p> <blockquote class="example"><pre>
+grpc_pass unix:/tmp/grpc.socket;
+</pre></blockquote><p> 
+Alternatively, the “<code>grpc://</code>” scheme can be used:
+</p> <blockquote class="example"><pre>
+grpc_pass grpc://127.0.0.1:9000;
+</pre></blockquote><p> 
+To use gRPC over SSL, the “<code>grpcs://</code>” scheme should be used:
+</p> <blockquote class="example"><pre>
+grpc_pass grpcs://127.0.0.1:443;
+</pre></blockquote><p> 
+</p><p>
+If a domain name resolves to several addresses, all of them will be
+used in a round-robin fashion.
+In addition, an address can be specified as a
+<a href="ngx_http_upstream_module.html">server group</a>.
+</p><p>
+Parameter value can contain variables (1.17.8).
+In this case, if an address is specified as a domain name,
+the name is searched among the described
+<a href="ngx_http_upstream_module.html">server groups</a>,
+and, if not found, is determined using a
+<a href="ngx_http_core_module.html#resolver">resolver</a>.
+</p><a name="grpc_pass_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_pass">grpc_pass</a>]</span>

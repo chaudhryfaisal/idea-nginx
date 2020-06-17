@@ -1,0 +1,48 @@
+<h2><span class="mw-headline" id="ssl_ecdh_curve"> ssl_ecdh_curve </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_ecdh_curve</strong> <code><i>curve</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_ecdh_curve auto;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a <code><i>curve</i></code> for ECDHE ciphers.
+</p><p>
+When using OpenSSL 1.0.2 or higher,
+it is possible to specify multiple curves (1.11.0), for example:
+</p> <blockquote class="example"><pre>
+ssl_ecdh_curve prime256v1:secp384r1;
+</pre></blockquote><p> 
+</p><p>
+The special value <code>auto</code> (1.11.0) instructs nginx to use
+a list built into the OpenSSL library when using OpenSSL 1.0.2 or higher,
+or <code>prime256v1</code> with older versions.
+</p><p>
+</p> <blockquote class="note">
+Prior to version 1.11.0,
+the <code>prime256v1</code> curve was used by default.
+</blockquote><p> 
+</p><a name="ssl_handshake_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_ecdh_curve">ssl_ecdh_curve</a>]</span>

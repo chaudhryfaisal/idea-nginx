@@ -1,0 +1,40 @@
+<h2><span class="mw-headline" id="scgi_cache_lock_timeout"> scgi_cache_lock_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_cache_lock_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_cache_lock_timeout 5s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.12.
+            </p></div><p>
+Sets a timeout for <a href="#scgi_cache_lock">scgi_cache_lock</a>.
+When the <code><i>time</i></code> expires,
+the request will be passed to the SCGI server,
+however, the response will not be cached.
+</p> <blockquote class="note">
+Before 1.7.8, the response could be cached.
+</blockquote><p> 
+</p><a name="scgi_cache_max_range_offset"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_cache_lock_timeout">scgi_cache_lock_timeout</a>]</span>

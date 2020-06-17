@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="aio_write"> aio_write </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>aio_write</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>aio_write off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.13.
+            </p></div><p>
+If <a href="#aio">aio</a> is enabled, specifies whether it is used for writing files.
+Currently, this only works when using
+<code>aio threads</code>
+and is limited to writing temporary files
+with data received from proxied servers.
+</p><a name="alias"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#aio_write">aio_write</a>]</span>

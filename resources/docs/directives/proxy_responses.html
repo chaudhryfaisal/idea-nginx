@@ -1,0 +1,45 @@
+<h2><span class="mw-headline" id="proxy_responses"> proxy_responses </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_responses</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.13.
+            </p></div><p>
+Sets the number of datagrams expected from the proxied server
+in response to a client datagram
+if the <a href="ngx_stream_core_module.html#udp">UDP</a>
+protocol is used.
+The number serves as a hint for session termination.
+By default, the number of datagrams is not limited.
+</p><p>
+If zero value is specified, no response is expected.
+However, if a response is received and the
+session is still not finished, the response will be handled.
+</p><a name="proxy_session_drop"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_responses">proxy_responses</a>]</span>

@@ -1,0 +1,49 @@
+<h2><span class="mw-headline" id="ssl_early_data"> ssl_early_data </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_early_data</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_early_data off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.3.
+            </p></div><p>
+Enables or disables TLS 1.3
+<a href="https://tools.ietf.org/html/rfc8446#section-2.3">early data</a>.
+</p> <blockquote class="note">
+Requests sent within early data are subject to
+<a href="https://tools.ietf.org/html/rfc8470">replay attacks</a>.
+To protect against such attacks at the application layer,
+the <a href="#var_ssl_early_data">$ssl_early_data</a> variable
+should be used.
+</blockquote><p> 
+</p> <blockquote class="example"><pre>
+proxy_set_header Early-Data $ssl_early_data;
+</pre></blockquote><p> 
+</p> <blockquote class="note">
+The directive is supported when using OpenSSL 1.1.1 or higher (1.15.4) and
+<a href="https://boringssl.googlesource.com/boringssl/">BoringSSL</a>.
+</blockquote><p> 
+</p><a name="ssl_ecdh_curve"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_early_data">ssl_early_data</a>]</span>

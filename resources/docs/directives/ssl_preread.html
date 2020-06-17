@@ -1,0 +1,53 @@
+<h2><span class="mw-headline" id="ssl_preread"> ssl_preread </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_preread</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_preread off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables extracting information from the ClientHello message at
+the <a href="stream_processing.html#preread_phase">preread</a> phase.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+</p> <dl class="compact">
+<dt id="var_ssl_preread_protocol"><code>$ssl_preread_protocol</code></dt>
+<dd>
+the highest SSL protocol version supported by the client (1.15.2)
+</dd>
+<dt id="var_ssl_preread_server_name"><code>$ssl_preread_server_name</code></dt>
+<dd>
+server name requested through SNI
+</dd>
+<dt id="var_ssl_preread_alpn_protocols"><code>$ssl_preread_alpn_protocols</code></dt>
+<dd>
+list of protocols advertised by the client through ALPN (1.13.10).
+The values are separated by commas.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html#ssl_preread">ssl_preread</a>]</span>

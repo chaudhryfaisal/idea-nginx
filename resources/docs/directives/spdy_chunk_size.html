@@ -1,0 +1,41 @@
+<h2><span class="mw-headline" id="spdy_chunk_size"> spdy_chunk_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>spdy_chunk_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>spdy_chunk_size 8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.9.
+            </p></div><p>
+Sets the maximum size of chunks
+into which the response body is
+<a href="http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft2#TOC-Data-frames">
+sliced</a>.
+A too low value results in higher overhead.
+A too high value impairs prioritization due to
+<a href="http://en.wikipedia.org/wiki/Head-of-line_blocking">
+HOL blocking</a>.
+</p><a name="spdy_headers_comp"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html#spdy_chunk_size">spdy_chunk_size</a>]</span>

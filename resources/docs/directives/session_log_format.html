@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="session_log_format"> session_log_format </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>session_log_format</strong> 
+    <code><i>name</i></code>
+    <code><i>string</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>session_log_format combined "...";</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies the output format of a log.
+The value of the <code>$body_bytes_sent</code> variable is aggregated across
+all requests in a session.
+The values of all other variables available for logging correspond to the
+first request in a session.
+</p><a name="session_log_zone"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_session_log_module.html#session_log_format">session_log_format</a>]</span>

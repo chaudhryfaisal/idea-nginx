@@ -1,0 +1,47 @@
+<h2><span class="mw-headline" id="fastcgi_catch_stderr"> fastcgi_catch_stderr </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_catch_stderr</strong> <code><i>string</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a string to search for in the error stream of a response
+received from a FastCGI server.
+If the <code><i>string</i></code> is found then it is considered that the FastCGI
+server has returned an <a href="#fastcgi_next_upstream">invalid response</a>.
+This allows handling application errors in nginx, for example:
+</p> <blockquote class="example"><pre>
+location /php/ {
+    fastcgi_pass backend:9000;
+    ...
+    fastcgi_catch_stderr "PHP Fatal error";
+    fastcgi_next_upstream error timeout invalid_header;
+}
+</pre></blockquote><p> 
+</p><a name="fastcgi_connect_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_catch_stderr">fastcgi_catch_stderr</a>]</span>

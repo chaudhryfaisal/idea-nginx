@@ -1,0 +1,59 @@
+<h2><span class="mw-headline" id="mirror_request_body"> mirror_request_body </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>mirror_request_body</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>mirror_request_body on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Indicates whether the client request body is mirrored.
+When enabled, the client request body will be read
+prior to creating mirror subrequests.
+In this case, unbuffered client request body proxying
+set by the
+<a href="ngx_http_proxy_module.html#proxy_request_buffering">proxy_request_buffering</a>,
+<a href="ngx_http_fastcgi_module.html#fastcgi_request_buffering">fastcgi_request_buffering</a>,
+<a href="ngx_http_scgi_module.html#scgi_request_buffering">scgi_request_buffering</a>,
+and
+<a href="ngx_http_uwsgi_module.html#uwsgi_request_buffering">uwsgi_request_buffering</a>
+directives will be disabled.
+</p> <blockquote class="example"><pre>
+location / {
+    mirror /mirror;
+    mirror_request_body off;
+    proxy_pass http://backend;
+}
+location = /mirror {
+    internal;
+    proxy_pass http://log_backend;
+    proxy_pass_request_body off;
+    proxy_set_header Content-Length "";
+    proxy_set_header X-Original-URI $request_uri;
+}
+</pre></blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_mirror_module.html#mirror_request_body">mirror_request_body</a>]</span>

@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="auth_delay"> auth_delay </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_delay</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>auth_delay 0s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.17.10.
+            </p></div><p>
+Delays processing of unauthorized requests with 401 response code
+to prevent timing attacks when access is limited by
+<a href="ngx_http_auth_basic_module.html">password</a>, by the
+<a href="ngx_http_auth_request_module.html">result of subrequest</a>,
+or by <a href="ngx_http_auth_jwt_module.html">JWT</a>.
+</p><a name="chunked_transfer_encoding"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#auth_delay">auth_delay</a>]</span>

@@ -1,0 +1,52 @@
+<h2><span class="mw-headline" id="proxy_session_drop"> proxy_session_drop </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_session_drop</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_session_drop off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.8.
+            </p></div><p>
+Enables terminating all sessions to a proxied server
+after it was removed from the group or marked as permanently unavailable.
+This can occur because of
+<a href="ngx_stream_core_module.html#resolver">re-resolve</a>
+or with the API
+<a href="../http/ngx_http_api_module.html#deleteStreamUpstreamServer"><code>DELETE</code></a>
+command.
+A server can be marked as permanently unavailable if it is considered
+<a href="ngx_stream_upstream_hc_module.html#health_check">unhealthy</a>
+or with the API
+<a href="../http/ngx_http_api_module.html#patchStreamUpstreamServer"><code>PATCH</code></a>
+command.
+Each session is terminated when the next
+read or write event is processed for the client or proxied server.
+</p><p>
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="proxy_socket_keepalive"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_session_drop">proxy_session_drop</a>]</span>

@@ -1,0 +1,7 @@
+.idea
+vendor
+out
+build
+.git
+.gradle
+idea-nginx-support*.zip

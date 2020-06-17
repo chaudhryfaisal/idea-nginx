@@ -1,0 +1,50 @@
+<h2><span class="mw-headline" id="proxy_download_rate"> proxy_download_rate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_download_rate</strong> <code><i>rate</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_download_rate 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.3.
+            </p></div><p>
+Limits the speed of reading the data from the proxied server.
+The <code><i>rate</i></code> is specified in bytes per second.
+The zero value disables rate limiting.
+The limit is set per a connection, so if nginx simultaneously opens
+two connections to the proxied server,
+the overall rate will be twice as much as the specified limit.
+</p><p>
+Parameter value can contain variables (1.17.0).
+It may be useful in cases where rate should be limited
+depending on a certain condition:
+</p> <blockquote class="example"><pre>
+map $slow $rate {
+    1     4k;
+    2     8k;
+}
+proxy_download_rate $rate;
+</pre></blockquote><p> 
+</p><a name="proxy_next_upstream"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_download_rate">proxy_download_rate</a>]</span>

@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="uwsgi_ssl_server_name"> uwsgi_ssl_server_name </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_ssl_server_name</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_ssl_server_name off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.0.
+            </p></div><p>
+Enables or disables passing of the server name through
+<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">TLS
+Server Name Indication extension</a> (SNI, RFC 6066)
+when establishing a connection with the secured uwsgi server.
+</p><a name="uwsgi_ssl_session_reuse"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_ssl_server_name">uwsgi_ssl_server_name</a>]</span>

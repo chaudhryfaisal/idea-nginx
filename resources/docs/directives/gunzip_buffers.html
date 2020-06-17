@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="gunzip_buffers"> gunzip_buffers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>gunzip_buffers</strong> <code><i>number</i></code> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>gunzip_buffers 32 4k|16 8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>number</i></code> and <code><i>size</i></code> of buffers
+used to decompress a response.
+By default, the buffer size is equal to one memory page.
+This is either 4K or 8K, depending on a platform.
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_gunzip_module.html#gunzip_buffers">gunzip_buffers</a>]</span>

@@ -1,0 +1,48 @@
+<h2><span class="mw-headline" id="memcached_socket_keepalive"> memcached_socket_keepalive </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>memcached_socket_keepalive</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>memcached_socket_keepalive off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.6.
+            </p></div><p>
+Configures the “TCP keepalive” behavior
+for outgoing connections to a memcached server.
+By default, the operating system’s settings are in effect for the socket.
+If the directive is set to the value “<code>on</code>”, the
+<code>SO_KEEPALIVE</code> socket option is turned on for the socket.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+</p> <dl class="compact">
+<dt id="var_memcached_key"><code>$memcached_key</code></dt>
+<dd>
+Defines a key for obtaining response from a memcached server.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_socket_keepalive">memcached_socket_keepalive</a>]</span>

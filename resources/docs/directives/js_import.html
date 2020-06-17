@@ -1,0 +1,50 @@
+<h2><span class="mw-headline" id="js_import"> js_import </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>js_import</strong> <code><i>module.js</i></code> |
+<code><i>export_name from module.js</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 0.4.0.
+            </p></div><p>
+Imports a module that implements location and variable handlers in njs.
+The <code>export_name</code> is used as a namespace
+to access module functions.
+If the <code>export_name</code> is not specified,
+the module name will be used as a namespace.
+</p> <blockquote class="example"><pre>
+js_import stream.js;
+</pre></blockquote><p> 
+Here, the module name <code>stream</code> is used as a namespace
+while accessing exports.
+If the imported module contains <code>foo()</code>,
+<code>stream.foo</code> is used to refer to it.
+</p><p>
+Several <code>js_import</code> directives can be specified.
+</p><a name="js_include"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_js_module.html#js_import">js_import</a>]</span>

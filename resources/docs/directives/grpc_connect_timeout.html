@@ -1,0 +1,34 @@
+<h2><span class="mw-headline" id="grpc_connect_timeout"> grpc_connect_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_connect_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_connect_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a timeout for establishing a connection with a gRPC server.
+It should be noted that this timeout cannot usually exceed 75 seconds.
+</p><a name="grpc_hide_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_connect_timeout">grpc_connect_timeout</a>]</span>

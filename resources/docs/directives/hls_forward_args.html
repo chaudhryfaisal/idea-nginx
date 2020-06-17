@@ -1,0 +1,98 @@
+<h2><span class="mw-headline" id="hls_forward_args"> hls_forward_args </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>hls_forward_args</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>hls_forward_args off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.12.
+            </p></div><p>
+Adds arguments from a playlist request to URIs of fragments.
+This may be useful for performing client authorization at the moment of
+requesting a fragment, or when protecting an HLS stream with the
+<a href="ngx_http_secure_link_module.html">ngx_http_secure_link_module</a>
+module.
+</p><p>
+For example, if a client requests a playlist
+<code>http://example.com/hls/test.mp4.m3u8?a=1&amp;b=2</code>,
+the arguments <code>a=1</code> and <code>b=2</code>
+will be added to URIs of fragments after the arguments
+<code>start</code> and <code>end</code>:
+</p> <blockquote class="example"><pre>
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:15
+#EXT-X-PLAYLIST-TYPE:VOD
+#EXTINF:9.333,
+test.mp4.ts?start=0.000&amp;end=9.333&amp;a=1&amp;b=2
+#EXTINF:7.167,
+test.mp4.ts?start=9.333&amp;end=16.500&amp;a=1&amp;b=2
+#EXTINF:5.416,
+test.mp4.ts?start=16.500&amp;end=21.916&amp;a=1&amp;b=2
+#EXTINF:5.500,
+test.mp4.ts?start=21.916&amp;end=27.416&amp;a=1&amp;b=2
+#EXTINF:15.167,
+test.mp4.ts?start=27.416&amp;end=42.583&amp;a=1&amp;b=2
+#EXTINF:9.626,
+test.mp4.ts?start=42.583&amp;end=52.209&amp;a=1&amp;b=2
+#EXT-X-ENDLIST
+</pre></blockquote><p> 
+</p><p>
+If an HLS stream is protected with the
+<a href="ngx_http_secure_link_module.html">ngx_http_secure_link_module</a>
+module, <code>$uri</code> should not be used in the
+<a href="ngx_http_secure_link_module.html#secure_link_md5">secure_link_md5</a>
+expression because this will cause errors when requesting the fragments.
+<a href="ngx_http_map_module.html#map">Base URI</a> should be used
+instead of <code>$uri</code>
+(<code>$hls_uri</code> in the example):
+</p> <blockquote class="example"><pre>
+http {
+    ...
+    map $uri $hls_uri {
+        ~^(?&lt;base_uri&gt;.*).m3u8$ $base_uri;
+        ~^(?&lt;base_uri&gt;.*).ts$   $base_uri;
+        default                 $uri;
+    }
+    server {
+        ...
+        location /hls/ {
+            hls;
+            hls_forward_args on;
+            alias /var/videos/;
+            secure_link $arg_md5,$arg_expires;
+            secure_link_md5 "$secure_link_expires$hls_uri$remote_addr secret";
+            if ($secure_link = "") {
+                return 403;
+            }
+            if ($secure_link = "0") {
+                return 410;
+            }
+        }
+    }
+}
+</pre></blockquote><p> 
+</p><a name="hls_fragment"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_hls_module.html#hls_forward_args">hls_forward_args</a>]</span>

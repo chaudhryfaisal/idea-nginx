@@ -1,0 +1,66 @@
+<h2><span class="mw-headline" id="zone_sync_timeout"> zone_sync_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone_sync_timeout</strong> <code><i>timeout</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>zone_sync_timeout 5s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>timeout</i></code> between two successive
+read or write operations on connection to another cluster node.
+If no data is transmitted within this time, the connection is closed.
+</p>
+<a name="stream_zone_sync_status"></a><center><h4>API endpoints</h4></center><p>
+The synchronization status of a node is available via the
+<a href="../http/ngx_http_api_module.html#stream_zone_sync_">/stream/zone_sync/</a>
+endpoint of the API which returns the
+<a href="../http/ngx_http_api_module.html#def_nginx_stream_zone_sync">following</a>
+metrics.
+</p>
+<a name="controlling_cluster_node"></a><center><h4>Starting, stopping, removing a cluster node</h4></center><p>
+To start a new node, update a DNS record of a cluster hostname
+with the IP address of the new node and start an instance.
+The new node will discover other nodes from DNS or static configuration
+and will start sending updates to them.
+Other nodes will eventually discover the new node using DNS and
+start pushing updates to it.
+In case of static configuration,
+other nodes need to be reloaded in order to send updates to the new node.
+</p><p>
+To stop a node, send the <code>QUIT</code> signal to the instance.
+The node will finish zone synchronization
+and gracefully close open connections.
+</p><p>
+To remove a node, update a DNS record of a cluster hostname
+and remove the IP address of the node.
+All other nodes will eventually discover that the node is removed,
+close connections to the node, and will no longer try to connect to it.
+After the node is removed, it can be stopped as described above.
+In case of static configuration, other nodes need to be reloaded
+in order to stop sending updates to the removed node.
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_zone_sync_module.html#zone_sync_timeout">zone_sync_timeout</a>]</span>

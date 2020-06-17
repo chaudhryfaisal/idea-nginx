@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="grpc_send_timeout"> grpc_send_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_send_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_send_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a timeout for transmitting a request to the gRPC server.
+The timeout is set only between two successive write operations,
+not for the transmission of the whole request.
+If the gRPC server does not receive anything within this time,
+the connection is closed.
+</p><a name="grpc_set_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_send_timeout">grpc_send_timeout</a>]</span>

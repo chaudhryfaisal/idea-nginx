@@ -1,0 +1,76 @@
+<h2><span class="mw-headline" id="ntlm"> ntlm </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ntlm</strong>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.2.
+            </p></div><p>
+Allows proxying requests with
+<a href="https://en.wikipedia.org/wiki/Integrated_Windows_Authentication">NTLM
+Authentication</a>.
+The upstream connection is bound to the client connection
+once the client sends a request with the “Authorization”
+header field value
+starting with “<code>Negotiate</code>” or “<code>NTLM</code>”.
+Further client requests will be proxied through the same upstream connection,
+keeping the authentication context.
+</p><p>
+In order for NTLM authentication to work,
+it is necessary to enable keepalive connections to upstream servers.
+The <a href="ngx_http_proxy_module.html#proxy_http_version">proxy_http_version</a>
+directive should be set to “<code>1.1</code>”
+and the “Connection” header field should be cleared:
+</p> <blockquote class="example"><pre>
+upstream http_backend {
+    server 127.0.0.1:8080;
+    ntlm;
+}
+server {
+    ...
+    location /http/ {
+        proxy_pass http://http_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        ...
+    }
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+When using load balancer methods other than the default
+round-robin method, it is necessary to activate them before
+the <code>ntlm</code> directive.
+</blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="least_conn"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ntlm">ntlm</a>]</span>

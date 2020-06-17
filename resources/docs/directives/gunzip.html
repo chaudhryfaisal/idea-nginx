@@ -1,0 +1,40 @@
+<h2><span class="mw-headline" id="gunzip"> gunzip </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>gunzip</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>gunzip off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables decompression of gzipped responses
+for clients that lack gzip support.
+If enabled, the following directives are also taken into account
+when determining if clients support gzip:
+<a href="ngx_http_gzip_module.html#gzip_http_version">gzip_http_version</a>,
+<a href="ngx_http_gzip_module.html#gzip_proxied">gzip_proxied</a>, and
+<a href="ngx_http_gzip_module.html#gzip_disable">gzip_disable</a>.
+See also the <a href="ngx_http_gzip_module.html#gzip_vary">gzip_vary</a> directive.
+</p><a name="gunzip_buffers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_gunzip_module.html#gunzip">gunzip</a>]</span>

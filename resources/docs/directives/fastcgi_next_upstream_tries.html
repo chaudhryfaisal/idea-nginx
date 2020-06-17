@@ -1,0 +1,36 @@
+<h2><span class="mw-headline" id="fastcgi_next_upstream_tries"> fastcgi_next_upstream_tries </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_next_upstream_tries</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_next_upstream_tries 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.5.
+            </p></div><p>
+Limits the number of possible tries for passing a request to the
+<a href="#fastcgi_next_upstream">next server</a>.
+The <code>0</code> value turns off this limitation.
+</p><a name="fastcgi_no_cache"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_next_upstream_tries">fastcgi_next_upstream_tries</a>]</span>

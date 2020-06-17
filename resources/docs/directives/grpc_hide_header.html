@@ -1,0 +1,43 @@
+<h2><span class="mw-headline" id="grpc_hide_header"> grpc_hide_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_hide_header</strong> <code><i>field</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+By default,
+nginx does not pass the header fields “Date”,
+“Server”, and
+“X-Accel-...” from the response of a gRPC
+server to a client.
+The <code>grpc_hide_header</code> directive sets additional fields
+that will not be passed.
+If, on the contrary, the passing of fields needs to be permitted,
+the <a href="#grpc_pass_header">grpc_pass_header</a> directive can be used.
+</p><a name="grpc_ignore_headers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_hide_header">grpc_hide_header</a>]</span>

@@ -1,0 +1,35 @@
+<h2><span class="mw-headline" id="ssi_min_file_chunk"> ssi_min_file_chunk </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssi_min_file_chunk</strong> <code>size</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssi_min_file_chunk 1k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the minimum <code><i>size</i></code> for parts of a response stored on disk,
+starting from which it makes sense to send them using
+<a href="ngx_http_core_module.html#sendfile">sendfile</a>.
+</p><a name="ssi_silent_errors"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssi_module.html#ssi_min_file_chunk">ssi_min_file_chunk</a>]</span>

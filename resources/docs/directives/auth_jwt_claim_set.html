@@ -1,0 +1,47 @@
+<h2><span class="mw-headline" id="auth_jwt_claim_set"> auth_jwt_claim_set </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_jwt_claim_set</strong> <code><i>$variable</i></code> <code><i>name</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.10.
+            </p></div><p>
+Sets the <code><i>variable</i></code> to a JWT claim parameter
+identified by key names.
+Name matching starts from the top level of the JSON tree.
+For arrays, the variable keeps a list of array elements separated by commas.
+</p> <blockquote class="example"><pre>
+auth_jwt_claim_set $email info e-mail;
+auth_jwt_claim_set $job info "job title";
+</pre></blockquote><p> 
+</p> <blockquote class="note">
+Prior to version 1.13.7, only one key name could be specified,
+and the result was undefined for arrays.
+</blockquote><p> 
+</p><a name="auth_jwt_header_set"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_auth_jwt_module.html#auth_jwt_claim_set">auth_jwt_claim_set</a>]</span>

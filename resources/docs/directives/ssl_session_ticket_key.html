@@ -1,0 +1,55 @@
+<h2><span class="mw-headline" id="ssl_session_ticket_key"> ssl_session_ticket_key </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_session_ticket_key</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a <code><i>file</i></code> with the secret key used to encrypt
+and decrypt TLS session tickets.
+The directive is necessary if the same key has to be shared between
+multiple servers.
+By default, a randomly generated key is used.
+</p><p>
+If several keys are specified, only the first key is
+used to encrypt TLS session tickets.
+This allows configuring key rotation, for example:
+</p> <blockquote class="example"><pre>
+ssl_session_ticket_key current.key;
+ssl_session_ticket_key previous.key;
+</pre></blockquote><p> 
+</p><p>
+The <code><i>file</i></code> must contain 80 or 48 bytes
+of random data and can be created using the following command:
+</p> <blockquote class="example"><pre>
+openssl rand 80 &gt; ticket.key
+</pre></blockquote><p> 
+Depending on the file size either AES256 (for 80-byte keys, 1.11.8)
+or AES128 (for 48-byte keys) is used for encryption.
+</p><a name="ssl_session_tickets"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_session_ticket_key">ssl_session_ticket_key</a>]</span>

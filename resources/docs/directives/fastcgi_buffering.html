@@ -1,0 +1,55 @@
+<h2><span class="mw-headline" id="fastcgi_buffering"> fastcgi_buffering </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_buffering</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_buffering on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.6.
+            </p></div><p>
+Enables or disables buffering of responses from the FastCGI server.
+</p><p>
+When buffering is enabled, nginx receives a response from the FastCGI server
+as soon as possible, saving it into the buffers set by the
+<a href="#fastcgi_buffer_size">fastcgi_buffer_size</a> and <a href="#fastcgi_buffers">fastcgi_buffers</a> directives.
+If the whole response does not fit into memory, a part of it can be saved
+to a <a href="#fastcgi_temp_path">temporary file</a> on the disk.
+Writing to temporary files is controlled by the
+<a href="#fastcgi_max_temp_file_size">fastcgi_max_temp_file_size</a> and
+<a href="#fastcgi_temp_file_write_size">fastcgi_temp_file_write_size</a> directives.
+</p><p>
+When buffering is disabled, the response is passed to a client synchronously,
+immediately as it is received.
+nginx will not try to read the whole response from the FastCGI server.
+The maximum size of the data that nginx can receive from the server
+at a time is set by the <a href="#fastcgi_buffer_size">fastcgi_buffer_size</a> directive.
+</p><p>
+Buffering can also be enabled or disabled by passing
+“<code>yes</code>” or “<code>no</code>” in the
+“X-Accel-Buffering” response header field.
+This capability can be disabled using the
+<a href="#fastcgi_ignore_headers">fastcgi_ignore_headers</a> directive.
+</p><a name="fastcgi_buffers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_buffering">fastcgi_buffering</a>]</span>

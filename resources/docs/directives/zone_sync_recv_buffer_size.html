@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="zone_sync_recv_buffer_size"> zone_sync_recv_buffer_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone_sync_recv_buffer_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>zone_sync_recv_buffer_size 4k|8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets <code><i>size</i></code> of a per-connection receive buffer used to parse
+incoming stream of synchronization messages.
+The buffer size must be equal or greater than one of the
+<a href="#zone_sync_buffers">zone_sync_buffers</a>.
+By default, the buffer size is equal to
+<a href="#zone_sync_buffers">zone_sync_buffers</a> <code><i>size</i></code>
+multiplied by <code><i>number</i></code>.
+</p><a name="zone_sync_server"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_zone_sync_module.html#zone_sync_recv_buffer_size">zone_sync_recv_buffer_size</a>]</span>

@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="proxy_cache_convert_head"> proxy_cache_convert_head </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_convert_head</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_cache_convert_head on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.7.
+            </p></div><p>
+Enables or disables the conversion of the “<code>HEAD</code>” method
+to “<code>GET</code>” for caching.
+When the conversion is disabled, the
+<a href="#proxy_cache_key">cache key</a> should be configured
+to include the <code>$request_method</code>.
+</p><a name="proxy_cache_key"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_convert_head">proxy_cache_convert_head</a>]</span>

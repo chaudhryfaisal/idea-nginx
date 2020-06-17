@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="status_format"> status_format </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>status_format</strong> <code>json</code>;</code><br><code><strong>status_format</strong> <code>jsonp</code> [<code><i>callback</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>status_format json;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+By default, status information is output in the JSON format.
+</p><p>
+Alternatively, data may be output as JSONP.
+The <code><i>callback</i></code> parameter specifies the name of a callback function.
+Parameter value can contain variables.
+If parameter is omitted, or the computed value is an empty string,
+then “<code>ngx_status_jsonp_callback</code>” is used.
+</p><a name="status_zone"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_status_module.html#status_format">status_format</a>]</span>

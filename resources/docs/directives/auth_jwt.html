@@ -1,0 +1,52 @@
+<h2><span class="mw-headline" id="auth_jwt"> auth_jwt </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_jwt</strong> 
+    <code><i>string</i></code>
+    [<code>token=</code><code><i>$variable</i></code>] |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>auth_jwt off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>limit_except</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables validation of JSON Web Token.
+The specified <code><i>string</i></code> is used as a <code>realm</code>.
+Parameter value can contain variables.
+</p><p>
+The optional <code>token</code> parameter specifies a variable
+that contains JSON Web Token.
+By default, JWT is passed in the “Authorization” header
+as a
+<a href="https://tools.ietf.org/html/rfc6750">Bearer Token</a>.
+JWT may be also passed as a cookie or a part of a query string:
+</p> <blockquote class="example"><pre>
+auth_jwt "closed site" token=$cookie_auth_token;
+</pre></blockquote><p> 
+</p><p>
+The special value <code>off</code> cancels the effect
+of the <code>auth_jwt</code> directive
+inherited from the previous configuration level.
+</p><a name="auth_jwt_claim_set"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_auth_jwt_module.html#auth_jwt">auth_jwt</a>]</span>

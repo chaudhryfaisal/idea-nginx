@@ -1,0 +1,40 @@
+<h2><span class="mw-headline" id="uwsgi_ssl_protocols"> uwsgi_ssl_protocols </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_ssl_protocols</strong> 
+    [<code>SSLv2</code>]
+    [<code>SSLv3</code>]
+    [<code>TLSv1</code>]
+    [<code>TLSv1.1</code>]
+    [<code>TLSv1.2</code>]
+    [<code>TLSv1.3</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.8.
+            </p></div><p>
+Enables the specified protocols for requests to a secured uwsgi server.
+</p><a name="uwsgi_ssl_server_name"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_ssl_protocols">uwsgi_ssl_protocols</a>]</span>

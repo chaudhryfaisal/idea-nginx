@@ -1,0 +1,63 @@
+<h2><span class="mw-headline" id="auth_jwt_leeway"> auth_jwt_leeway </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_jwt_leeway</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>auth_jwt_leeway 0s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.13.10.
+            </p></div><p>
+Sets the maximum allowable leeway to compensate
+clock skew when verifying the
+<a href="https://tools.ietf.org/html/rfc7519#section-4.1.4">exp</a>
+and
+<a href="https://tools.ietf.org/html/rfc7519#section-4.1.5">nbf</a>
+JWT claims.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_http_auth_jwt_module</code> module
+supports embedded variables:
+</p><p>
+</p> <dl class="compact">
+<dt id="var_jwt_header_"><code>$jwt_header_</code><code><i>name</i></code></dt>
+<dd>
+returns the value of a specified
+<a href="https://tools.ietf.org/html/rfc7515#section-4">JOSE header</a>
+</dd>
+<dt id="var_jwt_claim_"><code>$jwt_claim_</code><code><i>name</i></code></dt>
+<dd>
+returns the value of a specified
+<a href="https://tools.ietf.org/html/rfc7519#section-4">JWT claim</a>
+<p>
+For nested claims and claims including a dot (“.”),
+the value of the variable cannot be evaluated;
+the <a href="#auth_jwt_claim_set">auth_jwt_claim_set</a> directive should be used instead.
+</p>
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_auth_jwt_module.html#auth_jwt_leeway">auth_jwt_leeway</a>]</span>

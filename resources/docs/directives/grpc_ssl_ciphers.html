@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="grpc_ssl_ciphers"> grpc_ssl_ciphers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_ssl_ciphers</strong> <code><i>ciphers</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_ssl_ciphers DEFAULT;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies the enabled ciphers for requests to a gRPC SSL server.
+The ciphers are specified in the format understood by the OpenSSL library.
+</p><p>
+The full list can be viewed using the
+“<code>openssl ciphers</code>” command.
+</p><a name="grpc_ssl_crl"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_ssl_ciphers">grpc_ssl_ciphers</a>]</span>

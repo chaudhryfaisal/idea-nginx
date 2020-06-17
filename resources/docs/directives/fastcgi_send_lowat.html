@@ -1,0 +1,41 @@
+<h2><span class="mw-headline" id="fastcgi_send_lowat"> fastcgi_send_lowat </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_send_lowat</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_send_lowat 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If the directive is set to a non-zero value, nginx will try to
+minimize the number
+of send operations on outgoing connections to a FastCGI server by using either
+<code>NOTE_LOWAT</code> flag of the
+<a href="../events.html#kqueue">kqueue</a> method,
+or the <code>SO_SNDLOWAT</code> socket option,
+with the specified <code><i>size</i></code>.
+</p><p>
+This directive is ignored on Linux, Solaris, and Windows.
+</p><a name="fastcgi_send_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_send_lowat">fastcgi_send_lowat</a>]</span>

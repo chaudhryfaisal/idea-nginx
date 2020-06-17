@@ -1,0 +1,42 @@
+<h2><span class="mw-headline" id="ssl_buffer_size"> ssl_buffer_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_buffer_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_buffer_size 16k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.9.
+            </p></div><p>
+Sets the size of the buffer used for sending data.
+</p><p>
+By default, the buffer size is 16k, which corresponds to minimal
+overhead when sending big responses.
+To minimize Time To First Byte it may be beneficial to use smaller values,
+for example:
+</p> <blockquote class="example"><pre>
+ssl_buffer_size 4k;
+</pre></blockquote><p> 
+</p><a name="ssl_certificate"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_buffer_size">ssl_buffer_size</a>]</span>

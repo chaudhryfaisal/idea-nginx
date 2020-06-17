@@ -1,0 +1,64 @@
+<h2><span class="mw-headline" id="random"> random </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>random</strong> [<code>two</code> [<code><i>method</i></code>]];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.1.
+            </p></div><p>
+Specifies that a group should use a load balancing method where a connection
+is passed to a randomly selected server, taking into account weights
+of servers.
+</p><p>
+The optional <code>two</code> parameter
+instructs nginx to randomly select
+<a href="https://homes.cs.washington.edu/~karlin/papers/balls.pdf">two</a>
+servers and then choose a server
+using the specified <code>method</code>.
+The default method is <code>least_conn</code>
+which passes a connection to a server
+with the least number of active connections.
+</p><a name="random_least_time"></a><p>
+The <code>least_time</code> method passes a connection to a server
+with the least average time and least number of active connections.
+If <code>least_time=connect</code> parameter is specified,
+time to
+<a href="#var_upstream_connect_time">connect</a>
+to the upstream server is used.
+If <code>least_time=first_byte</code> parameter is specified,
+time to receive the
+<a href="#var_upstream_first_byte_time">first byte</a> of data is used.
+If <code>least_time=last_byte</code> is specified,
+time to receive the
+<a href="#var_upstream_session_time">last byte</a> of data is used.
+</p> <blockquote class="note">
+The <code>least_time</code> method is available as a part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="resolver"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#random">random</a>]</span>

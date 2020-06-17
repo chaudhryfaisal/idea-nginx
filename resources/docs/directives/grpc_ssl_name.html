@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="grpc_ssl_name"> grpc_ssl_name </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_ssl_name</strong> <code><i>name</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_ssl_name host from grpc_pass;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Allows overriding the server name used to
+<a href="#grpc_ssl_verify">verify</a>
+the certificate of the gRPC SSL server and to be
+<a href="#grpc_ssl_server_name">passed through SNI</a>
+when establishing a connection with the gRPC SSL server.
+</p><p>
+By default, the host part from <a href="#grpc_pass">grpc_pass</a> is used.
+</p><a name="grpc_ssl_password_file"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_ssl_name">grpc_ssl_name</a>]</span>

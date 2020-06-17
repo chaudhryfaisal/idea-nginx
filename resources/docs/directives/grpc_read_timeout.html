@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="grpc_read_timeout"> grpc_read_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_read_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_read_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a timeout for reading a response from the gRPC server.
+The timeout is set only between two successive read operations,
+not for the transmission of the whole response.
+If the gRPC server does not transmit anything within this time,
+the connection is closed.
+</p><a name="grpc_send_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_read_timeout">grpc_read_timeout</a>]</span>

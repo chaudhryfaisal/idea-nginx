@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="proxy_cache_max_range_offset"> proxy_cache_max_range_offset </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_max_range_offset</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.6.
+            </p></div><p>
+Sets an offset in bytes for byte-range requests.
+If the range is beyond the offset,
+the range request will be passed to the proxied server
+and the response will not be cached.
+</p><a name="proxy_cache_methods"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_max_range_offset">proxy_cache_max_range_offset</a>]</span>

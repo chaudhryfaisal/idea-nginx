@@ -1,0 +1,59 @@
+<h2><span class="mw-headline" id="queue"> queue </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>queue</strong> 
+<code><i>number</i></code>
+[<code>timeout</code>=<code><i>time</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.12.
+            </p></div><p>
+If an upstream server cannot be selected immediately
+while processing a request,
+the request will be placed into the queue.
+The directive specifies the maximum <code><i>number</i></code> of requests
+that can be in the queue at the same time.
+If the queue is filled up,
+or the server to pass the request to cannot be selected within
+the time period specified in the <code>timeout</code> parameter,
+the 502 (Bad Gateway)
+error will be returned to the client.
+</p><p>
+The default value of the <code>timeout</code> parameter is 60 seconds.
+</p><p>
+</p> <blockquote class="note">
+When using load balancer methods other than the default
+round-robin method, it is necessary to activate them before
+the <code>queue</code> directive.
+</blockquote><p> 
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="random"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#queue">queue</a>]</span>

@@ -1,0 +1,47 @@
+<h2><span class="mw-headline" id="userid_mark"> userid_mark </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>userid_mark</strong> 
+    <code><i>letter</i></code> | <code><i>digit</i></code> |
+    <code>=</code> |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>userid_mark off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If the parameter is not <code>off</code>, enables the cookie marking
+mechanism and sets the character used as a mark.
+This mechanism is used to add or change
+<a href="#userid_p3p">userid_p3p</a> and/or a cookie expiration time while
+preserving the client identifier.
+A mark can be any letter of the English alphabet (case-sensitive),
+digit, or the “<code>=</code>” character.
+</p><p>
+If the mark is set, it is compared with the first padding symbol
+in the base64 representation of the client identifier passed in a cookie.
+If they do not match, the cookie is resent with the specified mark,
+expiration time, and “P3P” header.
+</p><a name="userid_name"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid_mark">userid_mark</a>]</span>

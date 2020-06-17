@@ -1,0 +1,60 @@
+<h2><span class="mw-headline" id="grpc_bind"> grpc_bind </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_bind</strong> 
+    <code><i>address</i></code>
+    [<code>transparent </code>] |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Makes outgoing connections to a gRPC server originate
+from the specified local IP address with an optional port.
+Parameter value can contain variables.
+The special value <code>off</code> cancels the effect
+of the <code>grpc_bind</code> directive
+inherited from the previous configuration level, which allows the
+system to auto-assign the local IP address and port.
+</p><a name="grpc_bind_transparent"></a><p>
+The <code>transparent</code> parameter allows
+outgoing connections to a gRPC server originate
+from a non-local IP address,
+for example, from a real IP address of a client:
+</p> <blockquote class="example"><pre>
+grpc_bind $remote_addr transparent;
+</pre></blockquote><p> 
+In order for this parameter to work,
+it is usually necessary to run nginx worker processes with the
+<a href="../ngx_core_module.html#user">superuser</a> privileges.
+On Linux it is not required as if
+the <code>transparent</code> parameter is specified, worker processes
+inherit the <code>CAP_NET_RAW</code> capability from the master process.
+It is also necessary to configure kernel routing table
+to intercept network traffic from the gRPC server.
+</p><a name="grpc_buffer_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_bind">grpc_bind</a>]</span>

@@ -1,0 +1,52 @@
+<h2><span class="mw-headline" id="js_include"> js_include </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>js_include</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a file that implements server and variable handlers in njs:
+</p> <blockquote class="example"><pre>
+nginx.conf:
+js_include stream.js;
+js_set     $js_addr address;
+server {
+    listen 127.0.0.1:12345;
+    return $js_addr;
+}
+stream.js:
+function address(s) {
+    return s.remoteAddress;
+}
+</pre></blockquote><p> 
+</p><p>
+The directive is deprecated since
+<a href="../njs/changes.html#njs0.4.0">0.4.0</a>,
+the <a href="#js_import">js_import</a> directive should be used instead.
+</p><a name="js_path"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_js_module.html#js_include">js_include</a>]</span>

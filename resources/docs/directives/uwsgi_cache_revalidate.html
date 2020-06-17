@@ -1,0 +1,36 @@
+<h2><span class="mw-headline" id="uwsgi_cache_revalidate"> uwsgi_cache_revalidate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache_revalidate</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_cache_revalidate off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.7.
+            </p></div><p>
+Enables revalidation of expired cache items using conditional requests with
+the “If-Modified-Since” and “If-None-Match”
+header fields.
+</p><a name="uwsgi_cache_use_stale"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache_revalidate">uwsgi_cache_revalidate</a>]</span>

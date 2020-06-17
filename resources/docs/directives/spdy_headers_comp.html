@@ -1,0 +1,54 @@
+<h2><span class="mw-headline" id="spdy_headers_comp"> spdy_headers_comp </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>spdy_headers_comp</strong> <code><i>level</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>spdy_headers_comp 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the header compression <code><i>level</i></code> of a response in a range from
+1 (fastest, less compression) to 9 (slowest, best compression).
+The special value 0 turns off the header compression.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_http_spdy_module</code> module
+supports the following embedded variables:
+</p> <dl>
+<dt id="var_spdy"><code>$spdy</code></dt>
+<dd>
+SPDY protocol version for SPDY connections,
+or an empty string otherwise;
+</dd>
+<dt id="var_spdy_request_priority"><code>$spdy_request_priority</code>
+</dt>
+<dd>
+request priority for SPDY connections,
+or an empty string otherwise.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html#spdy_headers_comp">spdy_headers_comp</a>]</span>

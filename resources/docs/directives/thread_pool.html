@@ -1,0 +1,50 @@
+<h2><span class="mw-headline" id="thread_pool"> thread_pool </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>thread_pool</strong> 
+    <code><i>name</i></code>
+    <code>threads</code>=<code><i>number</i></code>
+    [<code>max_queue</code>=<code><i>number</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>thread_pool default threads=32 max_queue=65536;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.11.
+            </p></div><p>
+Defines named thread pools
+used for multi-threaded reading and sending of files
+<a href="http/ngx_http_core_module.html#aio">without blocking</a>
+worker processes.
+</p><p>
+The <code>threads</code> parameter
+defines the number of threads in the pool.
+</p><p>
+In the event that all threads in the pool are busy,
+a new task will wait in the queue.
+The <code>max_queue</code> parameter limits the number
+of tasks allowed to be waiting in the queue.
+By default, up to 65536 tasks can wait in the queue.
+When the queue overflows, the task is completed with an error.
+</p><a name="timer_resolution"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#thread_pool">thread_pool</a>]</span>

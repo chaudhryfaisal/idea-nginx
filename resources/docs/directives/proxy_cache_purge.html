@@ -1,0 +1,72 @@
+<h2><span class="mw-headline" id="proxy_cache_purge"> proxy_cache_purge </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_purge</strong> string ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.5.7.
+            </p></div><p>
+Defines conditions under which the request will be considered a cache
+purge request.
+If at least one value of the string parameters is not empty and is not equal
+to “0” then the cache entry with a corresponding
+<a href="#proxy_cache_key">cache key</a> is removed.
+The result of successful operation is indicated by returning
+the 204 (No Content) response.
+</p><p>
+If the <a href="#proxy_cache_key">cache key</a> of a purge request ends
+with an asterisk (“<code>*</code>”), all cache entries matching the
+wildcard key will be removed from the cache.
+However, these entries will remain on the disk until they are deleted
+for either <a href="#proxy_cache_path">inactivity</a>,
+or processed by the <a href="#purger">cache purger</a> (1.7.12),
+or a client attempts to access them.
+</p><p>
+Example configuration:
+</p> <blockquote class="example"><pre>
+proxy_cache_path /data/nginx/cache keys_zone=cache_zone:10m;
+map $request_method $purge_method {
+    PURGE   1;
+    default 0;
+}
+server {
+    ...
+    location / {
+        proxy_pass http://backend;
+        proxy_cache cache_zone;
+        proxy_cache_key $uri;
+        proxy_cache_purge $purge_method;
+    }
+}
+</pre></blockquote><p> 
+</p> <blockquote class="note">
+This functionality is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="proxy_cache_revalidate"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_purge">proxy_cache_purge</a>]</span>

@@ -1,0 +1,42 @@
+<h2><span class="mw-headline" id="worker_aio_requests"> worker_aio_requests </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>worker_aio_requests</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>worker_aio_requests 32;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table>
+                        <p>
+                    This directive appeared in versions 1.1.4 and 1.0.7.
+                    
+                        </p>
+                    </div><p>
+When using <a href="http/ngx_http_core_module.html#aio">aio</a>
+with the <a href="../docs/events.html#epoll">epoll</a>
+connection processing method, sets the maximum <code><i>number</i></code> of
+outstanding asynchronous I/O operations
+for a single worker process.
+</p><a name="worker_connections"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#worker_aio_requests">worker_aio_requests</a>]</span>

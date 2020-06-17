@@ -1,0 +1,43 @@
+<h2><span class="mw-headline" id="hls_mp4_max_buffer_size"> hls_mp4_max_buffer_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>hls_mp4_max_buffer_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>hls_mp4_max_buffer_size 10m;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+During metadata processing, a larger buffer may become necessary.
+Its size cannot exceed the specified <code><i>size</i></code>,
+or else nginx will return the server error
+500 (Internal Server Error),
+and log the following message:
+</p> <blockquote class="example"><pre>
+"/some/movie/file.mp4" mp4 moov atom is too large:
+12583268, you may want to increase hls_mp4_max_buffer_size
+</pre></blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_hls_module.html#hls_mp4_max_buffer_size">hls_mp4_max_buffer_size</a>]</span>

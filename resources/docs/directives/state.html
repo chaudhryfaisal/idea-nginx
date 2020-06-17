@@ -1,0 +1,63 @@
+<h2><span class="mw-headline" id="state"> state </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>state</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.7.
+            </p></div><p>
+Specifies a <code><i>file</i></code> that keeps the state
+of the dynamically configurable group.
+</p><p>
+Examples:
+</p> <blockquote class="example"><pre>
+state /var/lib/nginx/state/servers.conf; # path for Linux
+state /var/db/nginx/state/servers.conf;  # path for FreeBSD
+</pre></blockquote><p> 
+</p><p>
+The state is currently limited to the list of servers with their parameters.
+The file is read when parsing the configuration and is updated each time
+the upstream configuration is
+<a href="../http/ngx_http_api_module.html#stream_upstreams_stream_upstream_name_servers_">changed</a>.
+Changing the file content directly should be avoided.
+The directive cannot be used
+along with the <a href="#server">server</a> directive.
+</p><p>
+</p> <blockquote class="note">
+Changes made during
+<a href="../control.html#reconfiguration">configuration reload</a>
+or <a href="../control.html#upgrade">binary upgrade</a>
+can be lost.
+</blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="hash"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#state">state</a>]</span>

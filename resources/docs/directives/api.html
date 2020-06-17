@@ -1,0 +1,53 @@
+<h2><span class="mw-headline" id="api"> api </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>api</strong> 
+[<code>write</code>=<code>on</code>|<code>off</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Turns on the REST API interface in the surrounding location.
+Access to this location should be
+<a href="ngx_http_core_module.html#satisfy">limited</a>.
+</p><p>
+The <code>write</code> parameter determines whether the API
+is read-only or read-write.
+By default, the API is read-only.
+</p><a name="api_version"></a><p>
+All API requests should contain a supported API version in the URI.
+If the request URI equals the location prefix,
+the list of supported API versions is returned.
+The current API version is “<code>6</code>”.
+</p><p>
+The optional “<code>fields</code>” argument in the request line
+specifies which fields of the requested objects will be output:
+</p> <blockquote class="example"><pre>
+http://127.0.0.1/api/6/nginx?fields=version,build
+</pre></blockquote><p> 
+</p><a name="status_zone"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_api_module.html#api">api</a>]</span>

@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="proxy_protocol_timeout"> proxy_protocol_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_protocol_timeout</strong> <code><i>timeout</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_protocol_timeout 30s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.4.
+            </p></div><p>
+Specifies a <code><i>timeout</i></code> for
+reading the PROXY protocol header to complete.
+If no entire header is transmitted within this time,
+the connection is closed.
+</p><a name="resolver"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_core_module.html#proxy_protocol_timeout">proxy_protocol_timeout</a>]</span>

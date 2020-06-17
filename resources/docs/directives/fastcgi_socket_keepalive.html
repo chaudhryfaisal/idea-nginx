@@ -1,0 +1,38 @@
+<h2><span class="mw-headline" id="fastcgi_socket_keepalive"> fastcgi_socket_keepalive </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_socket_keepalive</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_socket_keepalive off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.6.
+            </p></div><p>
+Configures the “TCP keepalive” behavior
+for outgoing connections to a FastCGI server.
+By default, the operating system’s settings are in effect for the socket.
+If the directive is set to the value “<code>on</code>”, the
+<code>SO_KEEPALIVE</code> socket option is turned on for the socket.
+</p><a name="fastcgi_split_path_info"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_socket_keepalive">fastcgi_socket_keepalive</a>]</span>

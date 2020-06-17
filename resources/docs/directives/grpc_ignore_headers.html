@@ -1,0 +1,52 @@
+<h2><span class="mw-headline" id="grpc_ignore_headers"> grpc_ignore_headers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_ignore_headers</strong> <code><i>field</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Disables processing of certain response header fields from the gRPC server.
+The following fields can be ignored: “X-Accel-Redirect”
+and “X-Accel-Charset”.
+</p><p>
+If not disabled, processing of these header fields has the following
+effect:
+</p> <ul>
+<li>
+“X-Accel-Redirect” performs an
+<a href="ngx_http_core_module.html#internal">internal
+redirect</a> to the specified URI;
+</li>
+<li>
+“X-Accel-Charset” sets the desired
+<a href="ngx_http_charset_module.html#charset">charset</a>
+of a response.
+</li>
+</ul><p> 
+</p><a name="grpc_intercept_errors"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_ignore_headers">grpc_ignore_headers</a>]</span>

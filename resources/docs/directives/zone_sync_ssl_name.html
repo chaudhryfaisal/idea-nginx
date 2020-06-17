@@ -1,0 +1,41 @@
+<h2><span class="mw-headline" id="zone_sync_ssl_name"> zone_sync_ssl_name </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone_sync_ssl_name</strong> <code><i>name</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>zone_sync_ssl_name host from zone_sync_server;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.7.
+            </p></div><p>
+Allows overriding the server name used to
+<a href="#zone_sync_ssl_verify">verify</a>
+the certificate of a cluster server and to be
+<a href="#zone_sync_ssl_server_name">passed through SNI</a>
+when establishing a connection with the cluster server.
+</p><p>
+By default, the host part of the <a href="#zone_sync_server">zone_sync_server</a> address is used,
+or resolved IP address if the <a href="#resolve">resolve</a> parameter is specified.
+</p><a name="zone_sync_ssl_password_file"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_zone_sync_module.html#zone_sync_ssl_name">zone_sync_ssl_name</a>]</span>

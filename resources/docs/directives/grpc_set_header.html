@@ -1,0 +1,45 @@
+<h2><span class="mw-headline" id="grpc_set_header"> grpc_set_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_set_header</strong> <code><i>field</i></code> <code><i>value</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_set_header Content-Length $content_length;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Allows redefining or appending fields to the request header
+<a href="#grpc_pass_request_headers">passed</a> to the gRPC server.
+The <code><i>value</i></code> can contain text, variables, and their combinations.
+These directives are inherited from the previous level if and
+only if there are no
+<code>grpc_set_header</code>
+directives defined on the current level.
+</p><p>
+If the value of a header field is an empty string then this
+field will not be passed to a gRPC server:
+</p> <blockquote class="example"><pre>
+grpc_set_header Accept-Encoding "";
+</pre></blockquote><p> 
+</p><a name="grpc_socket_keepalive"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_set_header">grpc_set_header</a>]</span>

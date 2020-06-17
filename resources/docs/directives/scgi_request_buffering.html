@@ -1,0 +1,48 @@
+<h2><span class="mw-headline" id="scgi_request_buffering"> scgi_request_buffering </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_request_buffering</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_request_buffering on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.11.
+            </p></div><p>
+Enables or disables buffering of a client request body.
+</p><p>
+When buffering is enabled, the entire request body is
+<a href="ngx_http_core_module.html#client_body_buffer_size">read</a>
+from the client before sending the request to an SCGI server.
+</p><p>
+When buffering is disabled, the request body is sent to the SCGI server
+immediately as it is received.
+In this case, the request cannot be passed to the
+<a href="#scgi_next_upstream">next server</a>
+if nginx already started sending the request body.
+</p><p>
+When HTTP/1.1 chunked transfer encoding is used
+to send the original request body,
+the request body will be buffered regardless of the directive value.
+</p><a name="scgi_send_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_request_buffering">scgi_request_buffering</a>]</span>

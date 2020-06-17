@@ -1,0 +1,37 @@
+<h2><span class="mw-headline" id="limit_conn_dry_run"> limit_conn_dry_run </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>limit_conn_dry_run</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>limit_conn_dry_run off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.17.6.
+            </p></div><p>
+Enables the dry run mode.
+In this mode, the number of connections is not limited, however,
+in the shared memory zone, the number of excessive connections is accounted
+as usual.
+</p><a name="limit_conn_log_level"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_limit_conn_module.html#limit_conn_dry_run">limit_conn_dry_run</a>]</span>

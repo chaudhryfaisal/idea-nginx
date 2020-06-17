@@ -1,0 +1,48 @@
+<h2><span class="mw-headline" id="uwsgi_request_buffering"> uwsgi_request_buffering </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_request_buffering</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_request_buffering on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.11.
+            </p></div><p>
+Enables or disables buffering of a client request body.
+</p><p>
+When buffering is enabled, the entire request body is
+<a href="ngx_http_core_module.html#client_body_buffer_size">read</a>
+from the client before sending the request to a uwsgi server.
+</p><p>
+When buffering is disabled, the request body is sent to the uwsgi server
+immediately as it is received.
+In this case, the request cannot be passed to the
+<a href="#uwsgi_next_upstream">next server</a>
+if nginx already started sending the request body.
+</p><p>
+When HTTP/1.1 chunked transfer encoding is used
+to send the original request body,
+the request body will be buffered regardless of the directive value.
+</p><a name="uwsgi_send_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_request_buffering">uwsgi_request_buffering</a>]</span>

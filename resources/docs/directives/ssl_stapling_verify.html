@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="ssl_stapling_verify"> ssl_stapling_verify </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_stapling_verify</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_stapling_verify off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.3.7.
+            </p></div><p>
+Enables or disables verification of OCSP responses by the server.
+</p><p>
+For verification to work, the certificate of the server certificate
+issuer, the root certificate, and all intermediate certificates
+should be configured as trusted using the
+<a href="#ssl_trusted_certificate">ssl_trusted_certificate</a> directive.
+</p><a name="ssl_trusted_certificate"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_stapling_verify">ssl_stapling_verify</a>]</span>

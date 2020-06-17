@@ -1,0 +1,36 @@
+<h2><span class="mw-headline" id="uwsgi_force_ranges"> uwsgi_force_ranges </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_force_ranges</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_force_ranges off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.7.7.
+            </p></div><p>
+Enables byte-range support
+for both cached and uncached responses from the uwsgi server
+regardless of the “Accept-Ranges” field in these responses.
+</p><a name="uwsgi_hide_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_force_ranges">uwsgi_force_ranges</a>]</span>

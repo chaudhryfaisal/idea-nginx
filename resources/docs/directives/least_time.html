@@ -1,0 +1,65 @@
+<h2><span class="mw-headline" id="least_time"> least_time </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>least_time</strong> 
+    <code>connect</code> |
+    <code>first_byte</code> |
+    <code>last_byte</code>
+    [<code>inflight</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies that a group should use a load balancing method where a connection
+is passed to the server with the least average time and
+least number of active connections, taking into account weights of servers.
+If there are several such servers, they are tried in turn using a
+weighted round-robin balancing method.
+</p><p>
+If the <code>connect</code> parameter is specified,
+time to
+<a href="#var_upstream_connect_time">connect</a>
+to the upstream server is used.
+If the <code>first_byte</code> parameter is specified,
+time to receive the
+<a href="#var_upstream_first_byte_time">first byte</a> of data is used.
+If the <code>last_byte</code> is specified,
+time to receive the
+<a href="#var_upstream_session_time">last byte</a> of data is used.
+If the <code>inflight</code> parameter is specified (1.11.6),
+incomplete connections are also taken into account.
+</p> <blockquote class="note">
+Prior to version 1.11.6,
+incomplete connections were taken into account by default.
+</blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p><a name="random"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#least_time">least_time</a>]</span>

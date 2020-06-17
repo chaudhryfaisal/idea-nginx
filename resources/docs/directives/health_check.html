@@ -1,0 +1,115 @@
+<h2><span class="mw-headline" id="health_check"> health_check </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>health_check</strong> [<code><i>parameters</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables periodic health checks of the servers in a
+<a href="ngx_stream_upstream_module.html#upstream">group</a>.
+</p><p>
+The following optional parameters are supported:
+</p> <dl class="compact">
+<dt id="health_check_interval">
+<code>interval</code>=<code><i>time</i></code>
+</dt>
+<dd>
+sets the interval between two consecutive health checks,
+by default, 5 seconds.
+</dd>
+<dt id="health_check_jitter">
+<code>jitter</code>=<code><i>time</i></code>
+</dt>
+<dd>
+sets the time within which
+each health check will be randomly delayed,
+by default, there is no delay.
+</dd>
+<dt id="health_check_fails">
+<code>fails</code>=<code><i>number</i></code>
+</dt>
+<dd>
+sets the number of consecutive failed health checks of a particular server
+after which this server will be considered unhealthy,
+by default, 1.
+</dd>
+<dt id="health_check_passes">
+<code>passes</code>=<code><i>number</i></code>
+</dt>
+<dd>
+sets the number of consecutive passed health checks of a particular server
+after which the server will be considered healthy,
+by default, 1.
+</dd>
+<dt id="health_check_mandatory">
+<code>mandatory</code>
+</dt>
+<dd>
+sets the initial “checking” state for a server
+until the first health check is completed (1.11.7).
+Client connections are not passed to servers in the “checking” state.
+If the parameter is not specified,
+the server will be initially considered healthy.
+</dd>
+<dt id="health_check_match">
+<code>match</code>=<code><i>name</i></code>
+</dt>
+<dd>
+specifies the <code>match</code> block configuring the tests that a
+successful connection should pass in order for a health check to pass.
+By default, for TCP, only the ability
+to establish a TCP connection with the server is checked.
+For <a href="#health_check_udp">UDP</a>, the absence of
+ICMP “<code>Destination Unreachable</code>” message is expected
+in reply to the sent string “<code>nginx health check</code>”.
+<blockquote class="note">
+Prior to version 1.11.7, by default, UDP health check
+required a <a href="#hc_match">match</a> block with the
+<a href="#match_send">send</a> and <a href="#match_expect">expect</a>
+parameters.
+</blockquote>
+</dd>
+<dt id="health_check_port">
+<code>port</code>=<code><i>number</i></code>
+</dt>
+<dd>
+defines the port used when connecting to a server
+to perform a health check (1.9.7).
+By default, equals the
+<a href="ngx_stream_upstream_module.html#server">server</a> port.
+</dd>
+<dt id="health_check_udp">
+<code>udp</code>
+</dt>
+<dd>
+specifies that the <code>UDP</code> protocol should be used for
+health checks instead of the default <code>TCP</code> protocol (1.9.13).
+</dd>
+</dl><p> 
+</p><a name="health_check_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_hc_module.html#health_check">health_check</a>]</span>

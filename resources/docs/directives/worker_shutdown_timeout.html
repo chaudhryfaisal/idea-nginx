@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="worker_shutdown_timeout"> worker_shutdown_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>worker_shutdown_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.11.
+            </p></div><p>
+Configures a timeout for a graceful shutdown of worker processes.
+When the <code><i>time</i></code> expires,
+nginx will try to close all the connections currently open
+to facilitate shutdown.
+</p><a name="working_directory"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#worker_shutdown_timeout">worker_shutdown_timeout</a>]</span>

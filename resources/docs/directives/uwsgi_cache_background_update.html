@@ -1,0 +1,39 @@
+<h2><span class="mw-headline" id="uwsgi_cache_background_update"> uwsgi_cache_background_update </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache_background_update</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_cache_background_update off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.10.
+            </p></div><p>
+Allows starting a background subrequest
+to update an expired cache item,
+while a stale cached response is returned to the client.
+Note that it is necessary to
+<a href="#uwsgi_cache_use_stale_updating">allow</a>
+the usage of a stale cached response when it is being updated.
+</p><a name="uwsgi_cache_bypass"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache_background_update">uwsgi_cache_background_update</a>]</span>

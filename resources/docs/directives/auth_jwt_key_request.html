@@ -1,0 +1,56 @@
+<h2><span class="mw-headline" id="auth_jwt_key_request"> auth_jwt_key_request </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_jwt_key_request</strong> <code><i>uri</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>limit_except</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.15.6.
+            </p></div><p>
+Allows retrieving a
+<a href="https://tools.ietf.org/html/rfc7517#section-5">JSON Web Key Set</a>
+file from a subrequest for validating JWT signature and
+sets the URI where the subrequest will be sent to.
+To avoid validation overhead,
+it is recommended to cache the key file:
+</p> <blockquote class="example"><pre>
+proxy_cache_path /data/nginx/cache levels=1 keys_zone=foo:10m;
+server {
+    ...
+    location / {
+        auth_jwt             "closed site";
+        auth_jwt_key_request /jwks_uri;
+    }
+    location = /jwks_uri {
+        internal;
+        proxy_cache foo;
+        proxy_pass  http://idp.example.com/keys;
+    }
+}
+</pre></blockquote><p> 
+</p><a name="auth_jwt_leeway"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_auth_jwt_module.html#auth_jwt_key_request">auth_jwt_key_request</a>]</span>

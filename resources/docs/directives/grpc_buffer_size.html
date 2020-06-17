@@ -1,0 +1,35 @@
+<h2><span class="mw-headline" id="grpc_buffer_size"> grpc_buffer_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>grpc_buffer_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>grpc_buffer_size 4k|8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>size</i></code> of the buffer used for reading the response
+received from the gRPC server.
+The response is passed to the client synchronously, as soon as it is received.
+</p><a name="grpc_connect_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_grpc_module.html#grpc_buffer_size">grpc_buffer_size</a>]</span>

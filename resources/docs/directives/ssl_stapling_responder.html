@@ -1,0 +1,43 @@
+<h2><span class="mw-headline" id="ssl_stapling_responder"> ssl_stapling_responder </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_stapling_responder</strong> <code><i>url</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.3.7.
+            </p></div><p>
+Overrides the URL of the OCSP responder specified in the
+“<a href="https://tools.ietf.org/html/rfc5280#section-4.2.2.1">Authority
+Information Access</a>” certificate extension.
+</p><p>
+Only “<code>http://</code>” OCSP responders are supported:
+</p> <blockquote class="example"><pre>
+ssl_stapling_responder http://ocsp.example.com/;
+</pre></blockquote><p> 
+</p><a name="ssl_stapling_verify"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_stapling_responder">ssl_stapling_responder</a>]</span>

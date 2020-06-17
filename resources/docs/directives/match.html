@@ -1,0 +1,103 @@
+<h2><span class="mw-headline" id="match"> match </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>match</strong> <code><i>name</i></code>  { ... }</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the named test set used to verify server responses to health checks.
+</p><p>
+The following parameters can be configured:
+</p> <dl class="compact">
+<dt id="match_send">
+<code>send</code> <code><i>string</i></code>;
+</dt>
+<dd>
+sends a <code><i>string</i></code> to the server;
+</dd>
+<dt id="match_expect">
+<code>expect</code> <code><i>string</i></code> |
+<code>~</code> <code><i>regex</i></code>;
+</dt>
+<dd>
+a literal string (1.9.12) or a regular expression
+that the data obtained from the server should match.
+The regular expression is specified with the preceding
+“<code>~*</code>” modifier (for case-insensitive matching), or the
+“<code>~</code>” modifier (for case-sensitive matching).
+</dd>
+</dl><p> 
+Both <code>send</code> and <code>expect</code> parameters
+can contain hexadecimal literals with the prefix “<code>\x</code>”
+followed by two hex digits, for example, “<code>\x80</code>” (1.9.12).
+</p><p>
+Health check is passed if:
+</p> <ul class="compact">
+<li>
+the TCP connection was successfully established;
+</li>
+<li>
+the <code><i>string</i></code> from the <code>send</code> parameter,
+if specified, was sent;
+</li>
+<li>
+the data obtained from the server matched the string or regular expression
+from the <code>expect</code> parameter, if specified;
+</li>
+<li>
+the time elapsed does not exceed the value specified
+in the <a href="#health_check_timeout">health_check_timeout</a> directive.
+</li>
+</ul><p> 
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+upstream backend {
+    zone     upstream_backend 10m;
+    server   127.0.0.1:12345;
+}
+match http {
+    send     "GET / HTTP/1.0\r\nHost: localhost\r\n\r\n";
+    expect ~ "200 OK";
+}
+server {
+    listen       12346;
+    proxy_pass   backend;
+    health_check match=http;
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+Only the first
+<a href="ngx_stream_proxy_module.html#proxy_buffer_size">proxy_buffer_size</a>
+bytes of data obtained from the server are examined.
+</blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_hc_module.html#match">match</a>]</span>

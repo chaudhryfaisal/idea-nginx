@@ -1,0 +1,53 @@
+<h2><span class="mw-headline" id="ssl_stapling"> ssl_stapling </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_stapling</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ssl_stapling off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.3.7.
+            </p></div><p>
+Enables or disables
+<a href="https://tools.ietf.org/html/rfc6066#section-8">stapling
+of OCSP responses</a> by the server.
+Example:
+</p> <blockquote class="example"><pre>
+ssl_stapling on;
+resolver 192.0.2.1;
+</pre></blockquote><p> 
+</p><p>
+For the OCSP stapling to work, the certificate of the server certificate
+issuer should be known.
+If the <a href="#ssl_certificate">ssl_certificate</a> file does
+not contain intermediate certificates,
+the certificate of the server certificate issuer should be
+present in the
+<a href="#ssl_trusted_certificate">ssl_trusted_certificate</a> file.
+</p><p>
+For a resolution of the OCSP responder hostname,
+the <a href="ngx_http_core_module.html#resolver">resolver</a> directive
+should also be specified.
+</p><a name="ssl_stapling_file"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_stapling">ssl_stapling</a>]</span>

@@ -1,0 +1,53 @@
+<h2><span class="mw-headline" id="zone"> zone </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>zone</strong> <code><i>name</i></code> [<code><i>size</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the <code><i>name</i></code> and <code><i>size</i></code> of the shared
+memory zone that keeps the group’s configuration and run-time state that are
+shared between worker processes.
+Several groups may share the same zone.
+In this case, it is enough to specify the <code><i>size</i></code> only once.
+</p><p>
+Additionally,
+as part of our <a href="http://nginx.com/products/">commercial subscription</a>,
+such groups allow changing the group membership
+or modifying the settings of a particular server
+without the need of restarting nginx.
+The configuration is accessible via the
+<a href="../http/ngx_http_api_module.html">API</a> module (1.13.3).
+</p> <blockquote class="note">
+Prior to version 1.13.3,
+the configuration was accessible only via a special location
+handled by
+<a href="../http/ngx_http_upstream_conf_module.html#upstream_conf">upstream_conf</a>.
+</blockquote><p> 
+</p><a name="state"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#zone">zone</a>]</span>

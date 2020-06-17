@@ -1,0 +1,35 @@
+<h2><span class="mw-headline" id="smtp_client_buffer"> smtp_client_buffer </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>smtp_client_buffer</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>smtp_client_buffer 4k|8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>size</i></code> of the buffer used for reading SMTP commands.
+By default, the buffer size is equal to one memory page.
+This is either 4K or 8K, depending on a platform.
+</p><a name="smtp_greeting_delay"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_smtp_module.html#smtp_client_buffer">smtp_client_buffer</a>]</span>
