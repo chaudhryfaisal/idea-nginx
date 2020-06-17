@@ -1,1 +1,79 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=16" title="Edit section: uwsgi cache use stale">edit</a>]</span> <span class="mw-headline" id="uwsgi_cache_use_stale"> uwsgi_cache_use_stale </span></h2><p><b>syntax:</b> <i>uwsgi_cache_use_stale updating|error|timeout|invalid_header|http_500</i> </p><p><b>default:</b> <i>uwsgi_cache_use_stale off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Determines whether or not Nginx will serve stale cached data in case of gateway event such as error, timeout etc. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_cache_use_stale"> uwsgi_cache_use_stale </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache_use_stale</strong> 
+    <code>error</code> |
+    <code>timeout</code> |
+    <code>invalid_header</code> |
+    <code>updating</code> |
+    <code>http_500</code> |
+    <code>http_503</code> |
+    <code>http_403</code> |
+    <code>http_404</code> |
+    <code>http_429</code> |
+    <code>off</code>
+    ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_cache_use_stale off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Determines in which cases a stale cached response can be used
+when an error occurs during communication with the uwsgi server.
+The directive’s parameters match the parameters of the
+<a href="#uwsgi_next_upstream">uwsgi_next_upstream</a> directive.
+</p><p>
+The <code>error</code> parameter also permits
+using a stale cached response if a uwsgi server to process a request
+cannot be selected.
+</p><a name="uwsgi_cache_use_stale_updating"></a><p>
+Additionally, the <code>updating</code> parameter permits
+using a stale cached response if it is currently being updated.
+This allows minimizing the number of accesses to uwsgi servers
+when updating cached data.
+</p><p>
+Using a stale cached response
+can also be enabled directly in the response header
+for a specified number of seconds after the response became stale (1.11.10).
+This has lower priority than using the directive parameters.
+</p> <ul>
+<li>
+The
+“<a href="https://tools.ietf.org/html/rfc5861#section-3">stale-while-revalidate</a>”
+extension of the “Cache-Control” header field permits
+using a stale cached response if it is currently being updated.
+</li>
+<li>
+The
+“<a href="https://tools.ietf.org/html/rfc5861#section-4">stale-if-error</a>”
+extension of the “Cache-Control” header field permits
+using a stale cached response in case of an error.
+</li>
+</ul><p> 
+</p><p>
+To minimize the number of accesses to uwsgi servers when
+populating a new cache element, the <a href="#uwsgi_cache_lock">uwsgi_cache_lock</a>
+directive can be used.
+</p><a name="uwsgi_cache_valid"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache_use_stale">uwsgi_cache_use_stale</a>]</span>

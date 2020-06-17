@@ -1,31 +1,39 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=5" title="Edit section: least conn">edit</a>]</span> <span class="mw-headline" id="least_conn"> least_conn </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>least_conn</b> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> upstream</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.3.1<br />1.2.2</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#least_conn">least_conn</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 30/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpUpstreamModule</i>
+<h2><span class="mw-headline" id="least_conn"> least_conn </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>least_conn</strong>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies that a group should use a load balancing method where a connection
+is passed to the server with the least number of active connections,
+taking into account weights of servers.
+If there are several such servers, they are tried in turn using a
+weighted round-robin balancing method.
+</p><a name="least_time"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#least_conn">least_conn</a>]</span>

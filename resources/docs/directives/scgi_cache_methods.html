@@ -1,5 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=11" title="Edit section: scgi cache methods">edit</a>]</span> <span class="mw-headline" id="scgi_cache_methods"> scgi_cache_methods </span></h2><p><b>syntax:</b> <i>scgi_cache_methods [GET HEAD POST]</i> </p><p><b>default:</b> <i>scgi_cache_methods GET HEAD</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>GET/HEAD is syntax sugar, i.e. you can not disable GET/HEAD even if you set just </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">scgi_cache_methods POST<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_cache_methods"> scgi_cache_methods </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_cache_methods</strong> 
+    <code>GET</code> |
+    <code>HEAD</code> |
+    <code>POST</code>
+    ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_cache_methods GET HEAD;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If the client request method is listed in this directive then
+the response will be cached.
+“<code>GET</code>” and “<code>HEAD</code>” methods are always
+added to the list, though it is recommended to specify them explicitly.
+See also the <a href="#scgi_no_cache">scgi_no_cache</a> directive.
+</p><a name="scgi_cache_min_uses"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_cache_methods">scgi_cache_methods</a>]</span>

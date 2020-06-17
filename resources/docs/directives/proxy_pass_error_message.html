@@ -1,1 +1,49 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailProxyModule&amp;action=edit&amp;section=5" title="Edit section: proxy pass error message">edit</a>]</span> <span class="mw-headline" id="proxy_pass_error_message"> proxy_pass_error_message </span></h2><p><b>syntax:</b> <i>proxy_pass_error_message</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>With this directive you can pass authentification error messages obtained from the backend back to the client. Usually if authorization in nginx passed successfully then the backend cannot return errors back to the client. </p><p>But for some POP3 servers errors in response to correct password is a regular behavior. For example <a rel="nofollow" class="external text" href="http://www.stalker.com/">CommuniGatePro</a> notifies user about overcrowding of the mailbox (or other events) periodically issuing an error in authorization. In this case is worth indicating proxy_error_message on. </p><br><i>Module: MailProxyModule</i>
+<h2><span class="mw-headline" id="proxy_pass_error_message"> proxy_pass_error_message </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_pass_error_message</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_pass_error_message off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Indicates whether to pass the error message obtained during
+the authentication on the backend to the client.
+</p><p>
+Usually, if the authentication in nginx is a success,
+the backend cannot return an error.
+If it nevertheless returns an error,
+it means some internal error has occurred.
+In such case the backend message can contain information
+that should not be shown to the client.
+However, responding with an error for the correct password
+is a normal behavior for some POP3 servers.
+For example, CommuniGatePro informs a user about
+<a href="http://www.stalker.com/CommuniGatePro/Alerts.html#Quota">mailbox
+overflow</a> or other events by periodically outputting the
+<a href="http://www.stalker.com/CommuniGatePro/POP.html#Alerts">authentication
+error</a>.
+The directive should be enabled in this case.
+</p><a name="proxy_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_proxy_module.html#proxy_pass_error_message">proxy_pass_error_message</a>]</span>

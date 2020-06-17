@@ -19,6 +19,8 @@ package net.ishchenko.idea.nginx;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.BaseComponent;
 import com.intellij.util.Range;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,7 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -110,7 +111,7 @@ public class NginxKeywordsManager implements BaseComponent {
     // inner variables like $host
     private Set<String> variables = new HashSet<>();
 
-    private static Pattern COMPLEX_VARIABLES_PATTERN = Pattern.compile("(?:(?:arg)|(?:http)|(?:cookie)|(?:upstream_http))_\\w+");
+    private static Pattern COMPLEX_VARIABLES_PATTERN = Pattern.compile("(?:(?:arg)|(?:http)|(?:cookie)|(?:upstream_http)|(?:jwt_claim)|(?:jwt_header))_\\w+");
 
     //keyword -> [flags, flags, ...]
     private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<>();

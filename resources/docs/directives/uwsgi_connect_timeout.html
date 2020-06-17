@@ -1,1 +1,34 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=18" title="Edit section: uwsgi connect timeout">edit</a>]</span> <span class="mw-headline" id="uwsgi_connect_timeout"> uwsgi_connect_timeout </span></h2><p><b>syntax:</b> <i>uwsgi_connect_timeout time</i> </p><p><b>default:</b> <i>uwsgi_connect_timeout 60</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive sets timeout period for connection with uWSGI-server. It should be noted that this value can't exceed 75 seconds. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_connect_timeout"> uwsgi_connect_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_connect_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_connect_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a timeout for establishing a connection with a uwsgi server.
+It should be noted that this timeout cannot usually exceed 75 seconds.
+</p><a name="uwsgi_force_ranges"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_connect_timeout">uwsgi_connect_timeout</a>]</span>

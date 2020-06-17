@@ -1,27 +1,49 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=3" title="Edit section: memcached pass">edit</a>]</span> <span class="mw-headline" id="memcached_pass"> memcached_pass </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>memcached_pass</b> <i>address</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_pass">memcached_pass</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The backend should set the data in memcached. The memcached key is &quot;/uri?args&quot;. </p><p>Since 0.5.9 the memcached key is now in <code>$memcached_key</code>. </p><br><i>Module: HttpMemcachedModule</i>
+<h2><span class="mw-headline" id="memcached_pass"> memcached_pass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>memcached_pass</strong> <code><i>address</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the memcached server address.
+The address can be specified as a domain name or IP address,
+and a port:
+</p> <blockquote class="example"><pre>
+memcached_pass localhost:11211;
+</pre></blockquote><p> 
+or as a UNIX-domain socket path:
+</p> <blockquote class="example"><pre>
+memcached_pass unix:/tmp/memcached.socket;
+</pre></blockquote><p> 
+</p><p>
+If a domain name resolves to several addresses, all of them will be
+used in a round-robin fashion.
+In addition, an address can be specified as a
+<a href="ngx_http_upstream_module.html">server group</a>.
+</p><a name="memcached_read_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_pass">memcached_pass</a>]</span>

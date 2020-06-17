@@ -1,6 +1,42 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=27" title="Edit section: uwsgi no cache">edit</a>]</span> <span class="mw-headline" id="uwsgi_no_cache"> uwsgi_no_cache </span></h2><p><b>syntax:</b> <i>uwsgi_no_cache variable [...]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies in what cases the responses will not be stored, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">uwsgi_no_cache <span class="re0">$cookie_nocache</span>  <span class="re0">$arg_nocache</span><span class="re0">$arg_comment</span><span class="sy0">;</span>
-uwsgi_no_cache <span class="re0">$http_pragma</span>     <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
- </div>
-</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the response will not be stored if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_no_cache"> uwsgi_no_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_no_cache</strong> <code><i>string</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines conditions under which the response will not be saved to a cache.
+If at least one value of the string parameters is not empty and is not
+equal to “0” then the response will not be saved:
+</p> <blockquote class="example"><pre>
+uwsgi_no_cache $cookie_nocache $arg_nocache$arg_comment;
+uwsgi_no_cache $http_pragma    $http_authorization;
+</pre></blockquote><p> 
+Can be used along with the <a href="#uwsgi_cache_bypass">uwsgi_cache_bypass</a> directive.
+</p><a name="uwsgi_param"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_no_cache">uwsgi_no_cache</a>]</span>

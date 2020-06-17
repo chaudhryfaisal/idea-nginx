@@ -1,1 +1,42 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=19" title="Edit section: uwsgi hide header">edit</a>]</span> <span class="mw-headline" id="uwsgi_hide_header"> uwsgi_hide_header </span></h2><p><b>syntax:</b> <i>uwsgi_hide_header name</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>By default, Nginx does not pass &quot;X-Accel-...&quot; headers from the uWSGI process back to the client. This directive can be used to hide other headers as well. </p><p>If the &quot;X-Accel-...&quot; headers must be provided, then it is necessary to use directive <a href="#uwsgi_pass_header">uwsgi_pass_header</a> to force them to be returned to the client. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_hide_header"> uwsgi_hide_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_hide_header</strong> <code><i>field</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+By default,
+nginx does not pass the header fields “Status” and
+“X-Accel-...” from the response of a uwsgi
+server to a client.
+The <code>uwsgi_hide_header</code> directive sets additional fields
+that will not be passed.
+If, on the contrary, the passing of fields needs to be permitted,
+the <a href="#uwsgi_pass_header">uwsgi_pass_header</a> directive can be used.
+</p><a name="uwsgi_ignore_client_abort"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_hide_header">uwsgi_hide_header</a>]</span>

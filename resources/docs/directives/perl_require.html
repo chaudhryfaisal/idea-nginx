@@ -1,27 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=7" title="Edit section: perl require">edit</a>]</span> <span class="mw-headline" id="perl_require"> perl_require </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>perl_require</b> <i>module</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_perl_module.html#perl_require">perl_require</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 32/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> There can be multiple perl_require directives. </p><br><i>Module: HttpPerlModule</i>
+<h2><span class="mw-headline" id="perl_require"> perl_require </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>perl_require</strong> <code><i>module</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the name of a module that will be loaded during each
+reconfiguration.
+Several <code>perl_require</code> directives can be present.
+</p><a name="perl_set"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_perl_module.html#perl_require">perl_require</a>]</span>

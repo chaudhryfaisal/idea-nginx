@@ -1,1 +1,60 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=28" title="Edit section: uwsgi param">edit</a>]</span> <span class="mw-headline" id="uwsgi_param"> uwsgi_param </span></h2><p><b>syntax:</b> <i>uwsgi_param parameter value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns the parameter, which will be transferred to the uWSGI-server. </p><p>It is possible to use strings, variables and their combination as values. Directives not set are inherited from the outer level. Directives set in current level clear any previously defined directives for the current level. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_param"> uwsgi_param </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_param</strong> 
+    <code><i>parameter</i></code> <code><i>value</i></code>
+    [<code>if_not_empty</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a <code><i>parameter</i></code> that should be passed to the uwsgi server.
+The <code><i>value</i></code> can contain text, variables, and their combination.
+These directives are inherited from the previous level if and
+only if there are no
+<code>uwsgi_param</code>
+directives defined on the current level.
+</p><p>
+Standard
+<a href="https://tools.ietf.org/html/rfc3875#section-4.1">CGI
+environment variables</a>
+should be provided as uwsgi headers, see the <code>uwsgi_params</code> file
+provided in the distribution:
+</p> <blockquote class="example"><pre>
+location / {
+    include uwsgi_params;
+    ...
+}
+</pre></blockquote><p> 
+</p><p>
+If the directive is specified with <code>if_not_empty</code> (1.1.11) then
+such a parameter will be passed to the server only if its value is not empty:
+</p> <blockquote class="example"><pre>
+uwsgi_param HTTPS $https if_not_empty;
+</pre></blockquote><p> 
+</p><a name="uwsgi_pass"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_param">uwsgi_param</a>]</span>

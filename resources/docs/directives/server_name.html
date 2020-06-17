@@ -1,128 +1,49 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=63" title="Edit section: server name">edit</a>]</span> <span class="mw-headline" id="server_name"> server_name </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>server_name</b> <i>name</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>&quot;&quot;</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> server</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name">server_name</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 517/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive performs two actions: </p><ul>
- <li> Compares the <code>Host</code> header of the incoming HTTP request against the <a href="#server">server { ... }</a> blocks in the Nginx configuration files and selects the first one that matches. This is how <b>virtual servers</b> are defined. Server names are processed in the following order: </li>
-</ul><ol>
- <li> full, static names </li>
- <li> names with a wildcard at the start of the name — *.example.com </li>
- <li> names with a wildcard at the end of the name — www.example.* </li>
- <li> names with regular expressions </li>
-</ol><dl>
- <dd>
-   If there is no match, a 
-  <a href="#server">server { ... }</a> block in the configuration file will be used based on the following order: 
- </dd>
-</dl><ol>
- <li> the server block with a matching <code>listen</code> directive marked as <code>[default|default_server]</code> </li>
- <li> the first server block with a matching <code>listen</code> directive (or implicit <code>listen 80;</code>) </li>
-</ol><ul>
- <li> Sets the server name that will be used in HTTP redirects if <a href="#server_name_in_redirect">server_name_in_redirect</a> is set. </li>
-</ul><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  www.example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used. </p><p>It is possible to use &quot;*&quot; for replacing the first or the last part of the name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  *.example.com  www.example.*<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>The first two of the above names (example.com and *.example.com) can be combined into one: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>  .example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>It is also possible to use regular expressions in server names, prepending the name with a tilde &quot;~&quot; like so: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   www.example.com   <span class="sy0">~</span>^www\d+\.example\.com$<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Since nginx 0.7.12, an empty server name is supported to catch the requests without &quot;Host&quot; header, please note that most browsers will always send a Host header, if accessed by IP the Host header will contain the IP. To specify a catch-all block please see the default_server flag of the listen directive. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Since nginx 0.8.25 named captures can be used in server_name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>www\.<span class="br0">)</span>?<span class="br0">(</span>?<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>and multiple name captures: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>?<span class="re4">&lt;subdomain&gt;</span>.+?<span class="br0">)</span>\.<span class="br0">(</span>?<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span>/<span class="re0">$subdomain</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Some older versions of PCRE may have issues with this syntax. If any problems arise try this following syntax: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>www\.<span class="br0">)</span>?<span class="br0">(</span>?P<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Since nginx 0.9.4, <a href="#.24hostname">$hostname</a> can be used as a server_name argument: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> <span class="re0">$hostname</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=12" title="Edit section: server name">edit</a>]</span> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name</i> <i><b>fqdn_server_host</b></i> </p><p><b>default:</b> <i>The name of the host, obtained through gethostname()</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive assigns the names of virtual server, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  www.example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used. It is possible to use &quot;*&quot; for replacing the first part of the name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  *.example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Two of the given name of the above example can be combined into one: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>  .example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>The basic name of server is used in an HTTP redirects, if no a &quot;Host&quot; header was in client request or that header does not match any assigned server_name. You can also use just &quot;*&quot; to force Nginx to use the &quot;Host&quot; header in the HTTP redirect (note that &quot;*&quot; cannot be used as the first name, but you can use a dummy name such as &quot;_&quot; instead): </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> example.com *<span class="sy0">;</span>
-<span class="br0">}</span>
-<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> _ *<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><hr /><br><i>Module: MailCoreModule</i>
+<h2><span class="mw-headline" id="server_name"> server_name </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>server_name</strong> <code><i>name</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>server_name hostname;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the server name that is used:
+</p> <ul class="compact">
+<li>
+in the initial POP3/SMTP server greeting;
+</li>
+<li>
+in the salt during the SASL CRAM-MD5 authentication;
+</li>
+<li>
+in the <code>EHLO</code> command when connecting to the SMTP backend,
+if the passing of the
+<a href="ngx_mail_proxy_module.html#xclient">XCLIENT</a> command
+is enabled.
+</li>
+</ul><p> 
+</p><p>
+If the directive is not specified, the machine’s hostname is used.
+</p><a name="timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_core_module.html#server_name">server_name</a>]</span>

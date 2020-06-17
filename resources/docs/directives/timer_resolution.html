@@ -1,31 +1,58 @@
-<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=13" title="Edit section: timer resolution">edit</a>]</span> <span class="mw-headline" id="timer_resolution"> timer_resolution </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>timer_resolution</b> <i>interval</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> main</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#timer_resolution">timer_resolution</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 101/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#timer_resolution"><span class="kw1">timer_resolution</span></a>  100ms<span class="sy0">;</span></pre>
- </div>
-</div><p>The directive allows to decrease number gettimeofday() syscalls. By default gettimeofday() is called after each return from kevent(), epoll, /dev/poll, select(), poll(). </p><p>But if you need an exact time in logs when logging $upstream_response_time, or $msec variables, then you should use <code>timer_resolution</code>. </p><p><br /> </p><br><i>Module: CoreModule</i>
+<h2><span class="mw-headline" id="timer_resolution"> timer_resolution </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>timer_resolution</strong> <code><i>interval</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Reduces timer resolution in worker processes, thus reducing the
+number of <code>gettimeofday()</code> system calls made.
+By default, <code>gettimeofday()</code> is called each time
+a kernel event is received.
+With reduced resolution, <code>gettimeofday()</code> is only
+called once per specified <code><i>interval</i></code>.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+timer_resolution 100ms;
+</pre></blockquote><p> 
+</p><p>
+Internal implementation of the interval depends on the method used:
+</p> <ul class="compact">
+<li>
+the <code>EVFILT_TIMER</code> filter if <code>kqueue</code> is used;
+</li>
+<li>
+<code>timer_create()</code> if <code>eventport</code> is used;
+</li>
+<li>
+<code>setitimer()</code> otherwise.
+</li>
+</ul><p> 
+</p><a name="use"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#timer_resolution">timer_resolution</a>]</span>

@@ -1,27 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=26" title="Edit section: proxy ignore headers">edit</a>]</span> <span class="mw-headline" id="proxy_ignore_headers"> proxy_ignore_headers </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_ignore_headers</b> <i>field</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers">proxy_ignore_headers</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 195/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Prohibits the processing of the header lines from the proxy server's response. </p><p>It can specify the string as &quot;<a href="/XSendfile" title="XSendfile">X-Accel-Redirect</a>&quot;, &quot;X-Accel-Expires&quot;, &quot;Expires&quot;, &quot;Cache-Control&quot; or &quot;Set-Cookie&quot;. By default, nginx does not caches requests with Set-Cookie. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_ignore_headers"> proxy_ignore_headers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_ignore_headers</strong> <code><i>field</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Disables processing of certain response header fields from the proxied server.
+The following fields can be ignored: “X-Accel-Redirect”,
+“X-Accel-Expires”, “X-Accel-Limit-Rate” (1.1.6),
+“X-Accel-Buffering” (1.1.6),
+“X-Accel-Charset” (1.1.6), “Expires”,
+“Cache-Control”, “Set-Cookie” (0.8.44),
+and “Vary” (1.7.7).
+</p><p>
+If not disabled, processing of these header fields has the following
+effect:
+</p> <ul>
+<li>
+“X-Accel-Expires”, “Expires”,
+“Cache-Control”, “Set-Cookie”,
+and “Vary”
+set the parameters of response <a href="#proxy_cache_valid">caching</a>;
+</li>
+<li>
+“X-Accel-Redirect” performs an
+<a href="ngx_http_core_module.html#internal">internal
+redirect</a> to the specified URI;
+</li>
+<li>
+“X-Accel-Limit-Rate” sets the
+<a href="ngx_http_core_module.html#limit_rate">rate
+limit</a> for transmission of a response to a client;
+</li>
+<li>
+“X-Accel-Buffering” enables or disables
+<a href="#proxy_buffering">buffering</a> of a response;
+</li>
+<li>
+“X-Accel-Charset” sets the desired
+<a href="ngx_http_charset_module.html#charset">charset</a>
+of a response.
+</li>
+</ul><p> 
+</p><a name="proxy_intercept_errors"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers">proxy_ignore_headers</a>]</span>

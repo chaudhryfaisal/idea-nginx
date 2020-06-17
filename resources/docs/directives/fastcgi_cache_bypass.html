@@ -1,27 +1,42 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=8" title="Edit section: fastcgi cache bypass">edit</a>]</span> <span class="mw-headline" id="fastcgi_cache_bypass"> fastcgi_cache_bypass </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_cache_bypass</b> <i>string</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache_bypass">fastcgi_cache_bypass</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 54/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_cache_bypass"> fastcgi_cache_bypass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_cache_bypass</strong> <code><i>string</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines conditions under which the response will not be taken from a cache.
+If at least one value of the string parameters is not empty and is not
+equal to “0” then the response will not be taken from the cache:
+</p> <blockquote class="example"><pre>
+fastcgi_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+fastcgi_cache_bypass $http_pragma    $http_authorization;
+</pre></blockquote><p> 
+Can be used along with the <a href="#fastcgi_no_cache">fastcgi_no_cache</a> directive.
+</p><a name="fastcgi_cache_key"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache_bypass">fastcgi_cache_bypass</a>]</span>

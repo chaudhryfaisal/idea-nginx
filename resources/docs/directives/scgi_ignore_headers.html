@@ -1,1 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=19" title="Edit section: scgi ignore headers">edit</a>]</span> <span class="mw-headline" id="scgi_ignore_headers"> scgi_ignore_headers </span></h2><p><b>syntax:</b> <i>scgi_ignore_headers name [name...]</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive forbids processing of the named headers from the SCGI-server reply. It is possible to specify headers like &quot;X-Accel-Redirect&quot;, &quot;X-Accel-Expires&quot;, &quot;Expires&quot; or &quot;Cache-Control&quot;. </p><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_ignore_headers"> scgi_ignore_headers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_ignore_headers</strong> <code><i>field</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Disables processing of certain response header fields from the SCGI server.
+The following fields can be ignored: “X-Accel-Redirect”,
+“X-Accel-Expires”, “X-Accel-Limit-Rate” (1.1.6),
+“X-Accel-Buffering” (1.1.6),
+“X-Accel-Charset” (1.1.6), “Expires”,
+“Cache-Control”, “Set-Cookie” (0.8.44),
+and “Vary” (1.7.7).
+</p><p>
+If not disabled, processing of these header fields has the following
+effect:
+</p> <ul>
+<li>
+“X-Accel-Expires”, “Expires”,
+“Cache-Control”, “Set-Cookie”,
+and “Vary”
+set the parameters of response <a href="#scgi_cache_valid">caching</a>;
+</li>
+<li>
+“X-Accel-Redirect” performs an
+<a href="ngx_http_core_module.html#internal">internal
+redirect</a> to the specified URI;
+</li>
+<li>
+“X-Accel-Limit-Rate” sets the
+<a href="ngx_http_core_module.html#limit_rate">rate
+limit</a> for transmission of a response to a client;
+</li>
+<li>
+“X-Accel-Buffering” enables or disables
+<a href="#scgi_buffering">buffering</a> of a response;
+</li>
+<li>
+“X-Accel-Charset” sets the desired
+<a href="ngx_http_charset_module.html#charset">charset</a>
+of a response.
+</li>
+</ul><p> 
+</p><a name="scgi_intercept_errors"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_ignore_headers">scgi_ignore_headers</a>]</span>

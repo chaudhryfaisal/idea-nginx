@@ -1,1 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=8" title="Edit section: uwsgi cache">edit</a>]</span> <span class="mw-headline" id="uwsgi_cache"> uwsgi_cache </span></h2><p><b>syntax:</b> <i>uwsgi_cache zone|off</i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive specifies the area which actually is the share memory's name for caching. The same area can be used in several places. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_cache"> uwsgi_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache</strong> <code><i>zone</i></code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_cache off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a shared memory zone used for caching.
+The same zone can be used in several places.
+Parameter value can contain variables (1.7.9).
+The <code>off</code> parameter disables caching inherited
+from the previous configuration level.
+</p><a name="uwsgi_cache_background_update"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache">uwsgi_cache</a>]</span>

@@ -1,27 +1,38 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUseridModule&amp;action=edit&amp;section=5" title="Edit section: userid expires">edit</a>]</span> <span class="mw-headline" id="userid_expires"> userid_expires </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>userid_expires</b> <i>time</i> | <code>max</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid_expires">userid_expires</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 27/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Sets the expiration time for the cookie. </p><p>The parameter set &amp; send-out browser expiration time for cookie. Value &quot;max&quot; assigns the time on 31 December, 2037, 23:55:55 gmt. This is the maximum time that older browsers understand. </p><br><i>Module: HttpUseridModule</i>
+<h2><span class="mw-headline" id="userid_expires"> userid_expires </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>userid_expires</strong> <code><i>time</i></code> | <code>max</code> |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>userid_expires off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a time during which a browser should keep the cookie.
+The parameter <code>max</code> will cause the cookie to expire on
+“<code>31 Dec 2037 23:55:55 GMT</code>”.
+The parameter <code>off</code> will cause the cookie to expire at
+the end of a browser session.
+</p><a name="userid_mark"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid_expires">userid_expires</a>]</span>

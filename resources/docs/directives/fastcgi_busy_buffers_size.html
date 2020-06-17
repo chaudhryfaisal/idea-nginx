@@ -1,27 +1,40 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=6" title="Edit section: fastcgi busy buffers size">edit</a>]</span> <span class="mw-headline" id="fastcgi_busy_buffers_size"> fastcgi_busy_buffers_size </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_busy_buffers_size</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>8k|16k</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_busy_buffers_size">fastcgi_busy_buffers_size</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 40/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_busy_buffers_size"> fastcgi_busy_buffers_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_busy_buffers_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_busy_buffers_size 8k|16k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+When <a href="#fastcgi_buffering">buffering</a> of responses from the FastCGI
+server is enabled, limits the total <code><i>size</i></code> of buffers that
+can be busy sending a response to the client while the response is not
+yet fully read.
+In the meantime, the rest of the buffers can be used for reading the response
+and, if needed, buffering part of the response to a temporary file.
+By default, <code><i>size</i></code> is limited by the size of two buffers set by the
+<a href="#fastcgi_buffer_size">fastcgi_buffer_size</a> and <a href="#fastcgi_buffers">fastcgi_buffers</a> directives.
+</p><a name="fastcgi_cache"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_busy_buffers_size">fastcgi_busy_buffers_size</a>]</span>

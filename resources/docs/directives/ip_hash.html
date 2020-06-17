@@ -1,37 +1,65 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=3" title="Edit section: ip hash">edit</a>]</span> <span class="mw-headline" id="ip_hash"> ip_hash </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ip_hash</b> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> upstream</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash">ip_hash</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive causes requests to be distributed between upstreams based on the IP-address of the client. <br /> The key for the hash is the class-C network address or the entire IPv6-address of the client. IPv6 is supported for ip_hash since 1.3.2 or 1.2.2. This method guarantees that the client request will always be transferred to the same server. But if this server is considered inoperative, then the request of this client will be transferred to another server. This gives a high probability clients will always connect to the same server. </p><p>It is not possible to combine ip_hash and weight methods for connection distribution until nginx 1.3.1 or 1.2.2. If one of the servers must be removed for some time, you must mark that server as *down*. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend <span class="br0">{</span>
-  <a href="/NginxHttpUpstreamModule#ip_hash"><span class="kw4">ip_hash</span></a><span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   backend1.example.com weight<span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   backend2.example.com<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   backend3.example.com  down<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   backend4.example.com<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpUpstreamModule</i>
+<h2><span class="mw-headline" id="ip_hash"> ip_hash </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ip_hash</strong>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies that a group should use a load balancing method where requests
+are distributed between servers based on client IP addresses.
+The first three octets of the client IPv4 address, or the entire IPv6 address,
+are used as a hashing key.
+The method ensures that requests from the same client will always be
+passed to the same server except when this server is unavailable.
+In the latter case client requests will be passed to another server.
+Most probably, it will always be the same server as well.
+</p> <blockquote class="note">
+IPv6 addresses are supported starting from versions 1.3.2 and 1.2.2.
+</blockquote><p> 
+</p><p>
+If one of the servers needs to be temporarily removed, it should
+be marked with the <code>down</code> parameter in
+order to preserve the current hashing of client IP addresses.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+upstream backend {
+    ip_hash;
+    server backend1.example.com;
+    server backend2.example.com;
+    server backend3.example.com <strong>down</strong>;
+    server backend4.example.com;
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+Until versions 1.3.1 and 1.2.2, it was not possible to specify a weight for
+servers using the <code>ip_hash</code> load balancing method.
+</blockquote><p> 
+</p><a name="keepalive"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash">ip_hash</a>]</span>

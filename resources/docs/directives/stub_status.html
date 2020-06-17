@@ -1,13 +1,104 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpStubStatusModule&amp;action=edit&amp;section=3" title="Edit section: stub status">edit</a>]</span> <span class="mw-headline" id="stub_status"> stub_status </span></h2><p><b>syntax:</b> <i>stub_status</i> on </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>location</i> </p><p>Enables the status handler in this location. </p><p>The stub status module reports status similar to <a rel="nofollow" class="external text" href="http://www.mathopd.org/">mathopd's</a> status page. It is plain text information like </p><pre>
-Active connections: 291
-server accepts handled requests
-  16630948 16630948 31070465
-Reading: 6 Writing: 179 Waiting: 106
-</pre><p><code>active connections</code> -- number of all open connections <s>including connections to backends</s> </p><p><code>server accepts handled requests</code> -- nginx accepted 16630948 connections, handled 16630948 connections (no one was closed just it was accepted), and handles 31070465 requests (1.8 requests per connection) </p><p><code>reading</code> -- nginx reads request header </p><p><code>writing</code> -- nginx reads request body, processes request, or writes response to a client </p><p><code>waiting</code> -- keep-alive connections, actually it is <code>active - (reading + writing)</code> </p><h1><span class="editsection">[<a href="/index.php?title=HttpStubStatusModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><ul>
- <li> <a rel="nofollow" class="external text" href="http://blog.kovyrin.net/2006/04/29/monitoring-nginx-with-rrdtool/">Monitoring Nginx with RRDtool</a> </li>
- <li> <a rel="nofollow" class="external text" href="http://dev.2xlp.com/svn/nginx_config/trunk/conf/_rrd/__README__.txt">RRDtool README</a> </li>
- <li> <a rel="nofollow" class="external text" href="http://exchange.munin-monitoring.org">Munin Plugin Exchange</a> (containing plugins for Nginx) </li>
- <li> <a rel="nofollow" class="external text" href="http://github.com/perusio/nginx-munin">Nginx Munin plugins on Github with howto instructions</a> </li>
- <li> <a rel="nofollow" class="external text" href="http://aouyar.github.com/PyMunin/">PyMunin - Multigraph Munin Plugins in Python</a> - PyMunin includes a Multigraph Munin Plugin for monitoring Nginx using http_stub_status module. Graphs active connections, connection rate, request rate and average requests per connection. </li>
- <li> <a rel="nofollow" class="external text" href="https://collectd.org/wiki/index.php/Plugin:nginx">Collectd - high-resolution RRD statistics client-server software</a> </li>
-</ul><br><i>Module: HttpStubStatusModule</i>
+<h2><span class="mw-headline" id="stub_status"> stub_status </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>stub_status</strong>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+The basic status information will be accessible from the surrounding location.
+</p><p>
+</p> <blockquote class="note">
+In versions prior to 1.7.5,
+the directive syntax required an arbitrary argument, for example,
+“<code>stub_status on</code>”.
+</blockquote><p> 
+</p>
+<a name="data"></a><center><h4>Data</h4></center><p>
+The following status information is provided:
+</p> <dl class="compact">
+<dt id="stubstat_active"><code>Active connections</code></dt>
+<dd>
+The current number of active client connections
+including <code>Waiting</code> connections.
+</dd>
+<dt id="stubstat_accepts"><code>accepts</code></dt>
+<dd>
+The total number of accepted client connections.
+</dd>
+<dt id="stubstat_handled"><code>handled</code></dt>
+<dd>
+The total number of handled connections.
+Generally, the parameter value is the same as <code>accepts</code>
+unless some resource limits have been reached
+(for example, the
+<a href="../ngx_core_module.html#worker_connections">worker_connections</a> limit).
+</dd>
+<dt id="stubstat_requests"><code>requests</code></dt>
+<dd>
+The total number of client requests.
+</dd>
+<dt id="stubstat_reading"><code>Reading</code></dt>
+<dd>
+The current number of connections where nginx is reading the request header.
+</dd>
+<dt id="stubstat_writing"><code>Writing</code></dt>
+<dd>
+The current number of connections
+where nginx is writing the response back to the client.
+</dd>
+<dt id="stubstat_waiting"><code>Waiting</code></dt>
+<dd>
+The current number of idle client connections waiting for a request.
+</dd>
+</dl><p> 
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_http_stub_status_module</code> module
+supports the following embedded variables (1.3.14):
+</p> <dl class="compact">
+<dt id="var_connections_active"><code>$connections_active</code></dt>
+<dd>
+same as the <code>Active connections</code> value;
+</dd>
+<dt id="var_connections_reading"><code>$connections_reading</code></dt>
+<dd>
+same as the <code>Reading</code> value;
+</dd>
+<dt id="var_connections_writing"><code>$connections_writing</code></dt>
+<dd>
+same as the <code>Writing</code> value;
+</dd>
+<dt id="var_connections_waiting"><code>$connections_waiting</code></dt>
+<dd>
+same as the <code>Waiting</code> value.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_stub_status_module.html#stub_status">stub_status</a>]</span>

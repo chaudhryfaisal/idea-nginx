@@ -1,35 +1,42 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=45" title="Edit section: proxy store access">edit</a>]</span> <span class="mw-headline" id="proxy_store_access"> proxy_store_access </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_store_access</b> <i>users</i>&nbsp;: <i>permissions</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>user:rw</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_store_access">proxy_store_access</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 373/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive assigns the permissions for the created files and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>  <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span></pre>
- </div>
-</div><p>If any rights for groups or all are assigned, then it is not necessary to assign rights for user: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>  group:rw  all:r<span class="sy0">;</span></pre>
- </div>
-</div><p><br /> </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_store_access"> proxy_store_access </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_store_access</strong> <code><i>users</i></code>:<code><i>permissions</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_store_access user:rw;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets access permissions for newly created files and directories, e.g.:
+</p> <blockquote class="example"><pre>
+proxy_store_access user:rw group:rw all:r;
+</pre></blockquote><p> 
+</p><p>
+If any <code>group</code> or <code>all</code> access permissions
+are specified then <code>user</code> permissions may be omitted:
+</p> <blockquote class="example"><pre>
+proxy_store_access group:rw all:r;
+</pre></blockquote><p> 
+</p><a name="proxy_temp_file_write_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_store_access">proxy_store_access</a>]</span>

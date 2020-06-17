@@ -1,65 +1,91 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=44" title="Edit section: proxy store">edit</a>]</span> <span class="mw-headline" id="proxy_store"> proxy_store </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_store</b> <code>on</code> | <code>off</code> | <i>string</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_store">proxy_store</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 357/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the path in which upstream files are stored. The parameter &quot;on&quot; preserves files in accordance with path specified in directives <i>alias</i> or <i>root</i>. The parameter &quot;off&quot; forbids storing. Furthermore, the name of the path can be clearly assigned with the aid of the line with the variables: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_store"><span class="kw21">proxy_store</span></a>   /data/www<span class="re0">$uri</span><span class="sy0">;</span></pre>
- </div>
-</div><p>The time of modification for the file will be set to the date of &quot;Last-Modified&quot; header in the response. To be able to safe files in this directory it is necessary that the path is under the directory with temporary files, given by directive proxy_temp_path for the data location. </p><p>This directive can be used for creating the local copies for dynamic output of the backend which is not very often changed, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /images/ <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>                 /data/www<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>           <span class="nu0">404</span> <span class="sy0">=</span> /fetch<span class="re0">$uri</span><span class="sy0">;</span>
-<span class="br0">}</span>
-&nbsp;
-<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /fetch <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>           <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://backend<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_store"><span class="kw21">proxy_store</span></a>          on<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>   <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_temp_path"><span class="kw21">proxy_temp_path</span></a>      /data/temp<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a>                /data/www<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>or this way: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /images/ <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>                 /data/www<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>           <span class="nu0">404</span> <span class="sy0">=</span> <span class="re0">@fetch</span><span class="sy0">;</span>
-<span class="br0">}</span>
-&nbsp;
-<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@fetch</span> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
-&nbsp;
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>           <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://backend<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_store"><span class="kw21">proxy_store</span></a>          on<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>   <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_temp_path"><span class="kw21">proxy_temp_path</span></a>      /data/temp<span class="sy0">;</span>
-&nbsp;
-  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>                 /data/www<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>To be clear proxy_store is not a cache, it's rather mirror on demand. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_store"> proxy_store </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_store</strong> 
+    <code>on</code> |
+    <code>off</code> |
+    <code><i>string</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_store off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables saving of files to a disk.
+The <code>on</code> parameter saves files with paths
+corresponding to the directives
+<a href="ngx_http_core_module.html#alias">alias</a> or
+<a href="ngx_http_core_module.html#root">root</a>.
+The <code>off</code> parameter disables saving of files.
+In addition, the file name can be set explicitly using the
+<code><i>string</i></code> with variables:
+</p> <blockquote class="example"><pre>
+proxy_store /data/www$original_uri;
+</pre></blockquote><p> 
+</p><p>
+The modification time of files is set according to the received
+“Last-Modified” response header field.
+The response is first written to a temporary file,
+and then the file is renamed.
+Starting from version 0.8.9, temporary files and the persistent store
+can be put on different file systems.
+However, be aware that in this case a file is copied
+across two file systems instead of the cheap renaming operation.
+It is thus recommended that for any given location both saved files and a
+directory holding temporary files, set by the <a href="#proxy_temp_path">proxy_temp_path</a>
+directive, are put on the same file system.
+</p><p>
+This directive can be used to create local copies of static unchangeable
+files, e.g.:
+</p> <blockquote class="example"><pre>
+location /images/ {
+    root               /data/www;
+    error_page         404 = /fetch$uri;
+}
+location /fetch/ {
+    internal;
+    proxy_pass         http://backend/;
+    proxy_store        on;
+    proxy_store_access user:rw group:rw all:r;
+    proxy_temp_path    /data/temp;
+    alias              /data/www/;
+}
+</pre></blockquote><p> 
+</p><p>
+or like this:
+</p> <blockquote class="example"><pre>
+location /images/ {
+    root               /data/www;
+    error_page         404 = @fetch;
+}
+location @fetch {
+    internal;
+    proxy_pass         http://backend;
+    proxy_store        on;
+    proxy_store_access user:rw group:rw all:r;
+    proxy_temp_path    /data/temp;
+    root               /data/www;
+}
+</pre></blockquote><p> 
+</p><a name="proxy_store_access"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_store">proxy_store</a>]</span>

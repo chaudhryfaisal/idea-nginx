@@ -1,27 +1,34 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=17" title="Edit section: fastcgi connect timeout">edit</a>]</span> <span class="mw-headline" id="fastcgi_connect_timeout"> fastcgi_connect_timeout </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_connect_timeout</b> <i>time</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>60s</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_connect_timeout">fastcgi_connect_timeout</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 132/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive sets timeout period for connection with FastCGI-server. It should be noted that this value can't exceed 75 seconds. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_connect_timeout"> fastcgi_connect_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_connect_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_connect_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a timeout for establishing a connection with a FastCGI server.
+It should be noted that this timeout cannot usually exceed 75 seconds.
+</p><a name="fastcgi_force_ranges"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_connect_timeout">fastcgi_connect_timeout</a>]</span>

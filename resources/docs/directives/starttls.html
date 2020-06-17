@@ -1,5 +1,53 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=11" title="Edit section: starttls">edit</a>]</span> <span class="mw-headline" id="starttls"> starttls </span></h2><p><b>syntax:</b> <i>starttls <b>on | off | only</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><ul>
- <li> on - permit the use of commands STLS for POP3 and STARTTLS for IMAP/SMTP </li>
- <li> off - do not allow command STLS/STARTTLS </li>
- <li> only - announce STLS/STARTTLS support and require that clients use TLS encryption </li>
-</ul><h1><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=12" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><br><i>Module: MailSslModule</i>
+<h2><span class="mw-headline" id="starttls"> starttls </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>starttls</strong> 
+  <code>on</code> |
+  <code>off</code> |
+  <code>only</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>starttls off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+</p> <dl class="compact">
+<dt><code>on</code></dt>
+<dd>
+allow usage of the <code>STLS</code> command for the POP3
+and the <code>STARTTLS</code> command for the IMAP and SMTP;
+</dd>
+<dt><code>off</code></dt>
+<dd>
+deny usage of the <code>STLS</code>
+and <code>STARTTLS</code> commands;
+</dd>
+<dt><code>only</code></dt>
+<dd>
+require preliminary TLS transition.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_ssl_module.html#starttls">starttls</a>]</span>

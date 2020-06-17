@@ -1,36 +1,45 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=29" title="Edit section: limit rate after">edit</a>]</span> <span class="mw-headline" id="limit_rate_after"> limit_rate_after </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>limit_rate_after</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>0</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 0.8.0</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after">limit_rate_after</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 237/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive limits speed only after the first part was sent. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#limit_rate_after"><span class="kw3">limit_rate_after</span></a> 1m<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a> 100k<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="limit_rate_after"> limit_rate_after </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>limit_rate_after</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>limit_rate_after 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 0.8.0.
+            </p></div><p>
+Sets the initial amount after which the further transmission
+of a response to a client will be rate limited.
+Parameter value can contain variables (1.17.0).
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+location /flv/ {
+    flv;
+    limit_rate_after 500k;
+    limit_rate       50k;
+}
+</pre></blockquote><p> 
+</p><a name="lingering_close"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after">limit_rate_after</a>]</span>

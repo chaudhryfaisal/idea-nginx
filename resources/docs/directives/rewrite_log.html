@@ -1,1 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=7" title="Edit section: rewrite log">edit</a>]</span> <span class="mw-headline" id="rewrite_log"> rewrite_log </span></h2><p><b>syntax:</b> rewrite_log <i>on | off</i> </p><p><b>default:</b> rewrite_log off </p><p><b>context:</b> <i>http, server, if-in-server, location, if-in-location</i> </p><p><b>variables:</b> <i>no</i> </p><p><br /> When enabled, outputs information about rewrites to the error log at <i>notice</i> level. </p><br><i>Module: HttpRewriteModule</i>
+<h2><span class="mw-headline" id="rewrite_log"> rewrite_log </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>rewrite_log</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>rewrite_log off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables logging of <code>ngx_http_rewrite_module</code>
+module directives processing results
+into the <a href="../ngx_core_module.html#error_log">error_log</a> at
+the <code>notice</code> level.
+</p><a name="set"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite_log">rewrite_log</a>]</span>

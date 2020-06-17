@@ -1,1 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=11" title="Edit section: multi accept">edit</a>]</span> <span class="mw-headline" id="multi_accept"> multi_accept </span></h2><p><b>Syntax:</b> <i>multi_accept [ on | off ] </i> </p><p><b>Default:</b> <i>off</i> </p><p><code>multi_accept</code> tries to accept() as many connections as possible after nginx gets notification about a new connection. </p><p><br /> </p><p><br /> </p><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="multi_accept"> multi_accept </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>multi_accept</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>multi_accept off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If <code>multi_accept</code> is disabled, a worker process
+will accept one new connection at a time.
+Otherwise, a worker process
+will accept all new connections at a time.
+</p> <blockquote class="note">
+The directive is ignored if <a href="events.html#kqueue">kqueue</a>
+connection processing method is used, because it reports
+the number of new connections waiting to be accepted.
+</blockquote><p> 
+</p><a name="pcre_jit"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#multi_accept">multi_accept</a>]</span>

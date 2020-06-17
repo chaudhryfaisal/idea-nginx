@@ -1,55 +1,118 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=3" title="Edit section: aio">edit</a>]</span> <span class="mw-headline" id="aio"> aio </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>aio</b> <code>on</code> | <code>off</code> | <code>sendfile</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 0.8.11</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#aio">aio</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 10/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive is usable as of Linux kernel 2.6.22. For Linux it is required to use directio, this automatically disables sendfile support. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /video <span class="br0">{</span>
-    aio on<span class="sy0">;</span> 
-    directio <span class="nu0">512</span><span class="sy0">;</span> 
-    output_buffers <span class="nu0">1</span> 128k<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>In FreeBSD before 5.2.1 and Nginx 0.8.12 you must disable sendfile support. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /video <span class="br0">{</span>
-    aio on<span class="sy0">;</span> 
-    <a href="/NginxHttpCoreModule#sendfile"><span class="kw3">sendfile</span></a> off<span class="sy0">;</span>
-    output_buffers <span class="nu0">1</span> 128k<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>As of FreeBSD 5.2.1 and Nginx 0.8.12 you can use it along with sendfile. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /video <span class="br0">{</span>
-    aio <a href="/NginxHttpCoreModule#sendfile"><span class="kw3">sendfile</span></a><span class="sy0">;</span> 
-    <a href="/NginxHttpCoreModule#sendfile"><span class="kw3">sendfile</span></a> on<span class="sy0">;</span>
-    <a href="/NginxHttpCoreModule#tcp_nopush"><span class="kw3">tcp_nopush</span></a> on<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="aio"> aio </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>aio</strong> 
+    <code>on</code> |
+    <code>off</code> |
+    <code>threads</code>[<code>=</code><code><i>pool</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>aio off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 0.8.11.
+            </p></div><p>
+Enables or disables the use of asynchronous file I/O (AIO)
+on FreeBSD and Linux:
+</p> <blockquote class="example"><pre>
+location /video/ {
+    aio            on;
+    output_buffers 1 64k;
+}
+</pre></blockquote><p> 
+</p><p>
+On FreeBSD, AIO can be used starting from FreeBSD 4.3.
+Prior to FreeBSD 11.0,
+AIO can either be linked statically into a kernel:
+</p> <blockquote class="example"><pre>
+options VFS_AIO
+</pre></blockquote><p> 
+or loaded dynamically as a kernel loadable module:
+</p> <blockquote class="example"><pre>
+kldload aio
+</pre></blockquote><p> 
+</p><p>
+On Linux, AIO can be used starting from kernel version 2.6.22.
+Also, it is necessary to enable
+<a href="#directio">directio</a>,
+or otherwise reading will be blocking:
+</p> <blockquote class="example"><pre>
+location /video/ {
+    aio            on;
+    directio       512;
+    output_buffers 1 128k;
+}
+</pre></blockquote><p> 
+</p><p>
+On Linux,
+<a href="#directio">directio</a>
+can only be used for reading blocks that are aligned on 512-byte
+boundaries (or 4K for XFS).
+File’s unaligned end is read in blocking mode.
+The same holds true for byte range requests and for FLV requests
+not from the beginning of a file: reading of unaligned data at the
+beginning and end of a file will be blocking.
+</p><p>
+When both AIO and <a href="#sendfile">sendfile</a> are enabled on Linux,
+AIO is used for files that are larger than or equal to
+the size specified in the <a href="#directio">directio</a> directive,
+while <a href="#sendfile">sendfile</a> is used for files of smaller sizes
+or when <a href="#directio">directio</a> is disabled.
+</p> <blockquote class="example"><pre>
+location /video/ {
+    sendfile       on;
+    aio            on;
+    directio       8m;
+}
+</pre></blockquote><p> 
+</p><p>
+Finally, files can be read and <a href="#sendfile">sent</a>
+using multi-threading (1.7.11),
+without blocking a worker process:
+</p> <blockquote class="example"><pre>
+location /video/ {
+    sendfile       on;
+    aio            threads;
+}
+</pre></blockquote><p> 
+Read and send file operations are offloaded to threads of the specified
+<a href="../ngx_core_module.html#thread_pool">pool</a>.
+If the pool name is omitted,
+the pool with the name “<code>default</code>” is used.
+The pool name can also be set with variables:
+</p> <blockquote class="example"><pre>
+aio threads=pool$disk;
+</pre></blockquote><p> 
+By default, multi-threading is disabled, it should be
+enabled with the
+<code>--with-threads</code> configuration parameter.
+Currently, multi-threading is compatible only with the
+<a href="../events.html#epoll">epoll</a>,
+<a href="../events.html#kqueue">kqueue</a>,
+and
+<a href="../events.html#eventport">eventport</a> methods.
+Multi-threaded sending of files is only supported on Linux.
+</p><p>
+See also the <a href="#sendfile">sendfile</a> directive.
+</p><a name="aio_write"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#aio">aio</a>]</span>

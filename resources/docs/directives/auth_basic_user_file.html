@@ -1,34 +1,76 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpAuthBasicModule&amp;action=edit&amp;section=4" title="Edit section: auth basic user file">edit</a>]</span> <span class="mw-headline" id="auth_basic_user_file"> auth_basic_user_file </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>auth_basic_user_file</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />limit_except</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file">auth_basic_user_file</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 20/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the htpasswd filename for the authentication realm. Since version 0.6.7 the filename path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory. </p><p>The format of file is the following: </p><pre>
-user:pass
-user2:pass2:comment
-user3:pass3
-</pre><p>Passwords must be encoded by function crypt(3). If Apache is installed, you can create the password file using the htpasswd program included. Note: Apache uses MD5 for encryption. </p><p>As of version 1.0.3 nginx supports &quot;$apr1&quot;, &quot;{PLAIN}&quot; and &quot;{SSHA}&quot; password encryption methods. </p><p>As of version 1.3.13 nginx supports &quot;{SHA}&quot; encryption as well. Plain SHA1 encryption should be considered for migration purposes only and should whenever possible be avoided for security reasons. </p><p>This file should be readable by workers, running from unprivileged <a href="/CoreModule#user" title="CoreModule">user</a>. E. g. when nginx run from <i>www</i> you can set permissions as </p><pre>
-chown root:nobody htpasswd_file
-chmod 640 htpasswd_file
-</pre><p>See also: <a href="/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F" title="Faq">How do I generate an htpasswd file without having Apache tools installed?</a> </p><h1><span class="editsection">[<a href="/index.php?title=HttpAuthBasicModule&amp;action=edit&amp;section=5" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html">Original Documentation</a> </p><p><a rel="nofollow" class="external text" href="http://kbeezie.com/view/protecting-folders-with-nginx/">Protecting Folders with Auth_Basic</a> </p><br><i>Module: HttpAuthBasicModule</i>
+<h2><span class="mw-headline" id="auth_basic_user_file"> auth_basic_user_file </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_basic_user_file</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>limit_except</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a file that keeps user names and passwords,
+in the following format:
+</p> <blockquote class="example"><pre>
+# comment
+name1:password1
+name2:password2:comment
+name3:password3
+</pre></blockquote><p> 
+The <code><i>file</i></code> name can contain variables.
+</p><p>
+The following password types are supported:
+</p> <ul class="compact">
+<li>
+encrypted with the <code>crypt()</code> function; can be generated using
+the “<code>htpasswd</code>” utility from the Apache HTTP Server
+distribution or the “<code>openssl passwd</code>” command;
+</li>
+<li>
+hashed with the Apache variant of the MD5-based password algorithm (apr1);
+can be generated with the same tools;
+</li>
+<li>
+specified by the
+“<code>{</code><code><i>scheme</i></code><code>}</code><code><i>data</i></code>”
+syntax (1.0.3+) as described in
+<a href="https://tools.ietf.org/html/rfc2307#section-5.3">RFC 2307</a>;
+currently implemented schemes include <code>PLAIN</code> (an example one,
+should not be used), <code>SHA</code> (1.3.13) (plain SHA-1
+hashing, should not be used) and <code>SSHA</code> (salted SHA-1 hashing,
+used by some software packages, notably OpenLDAP and Dovecot).
+<blockquote class="note">
+Support for <code>SHA</code> scheme was added only to aid
+in migration from other web servers.
+It should not be used for new passwords, since unsalted SHA-1 hashing
+that it employs is vulnerable to
+<a href="http://en.wikipedia.org/wiki/Rainbow_attack">rainbow table</a>
+attacks.
+</blockquote>
+</li>
+</ul><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file">auth_basic_user_file</a>]</span>

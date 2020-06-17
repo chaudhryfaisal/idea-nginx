@@ -1,1 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpSecureLinkModule&amp;action=edit&amp;section=5" title="Edit section: secure link md5">edit</a>]</span> <span class="mw-headline" id="secure_link_md5"> secure_link_md5 </span></h2><p><b>syntax:</b> secure_link_md5 <i>secret_token_concatenated_with_protected_uri</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>location</i> </p><p><b>variables:</b> <i>yes</i> </p><p><br /> This directive specifies the string you want to be hashed by MD5. The string can be obtained using variables like in the example above. This hash value is compared with the md5_hash given in the <b>secure_link</b> directive. If they match then $secure_link is set to <b>1</b>, otherwise it's the null string. </p><br><i>Module: HttpSecureLinkModule</i>
+<h2><span class="mw-headline" id="secure_link_md5"> secure_link_md5 </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>secure_link_md5</strong> <code><i>expression</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines an expression for which the MD5 hash value will
+be computed and compared with the value passed in a request.
+</p><p>
+The expression should contain the secured part of a link (resource)
+and a secret ingredient.
+If the link has a limited lifetime,
+the expression should also contain <code>$secure_link_expires</code>.
+</p><p>
+To prevent unauthorized access, the expression may contain some
+information about the client, such as its address and browser version.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+location /s/ {
+    secure_link $arg_md5,$arg_expires;
+    secure_link_md5 "$secure_link_expires$uri$remote_addr secret";
+    if ($secure_link = "") {
+        return 403;
+    }
+    if ($secure_link = "0") {
+        return 410;
+    }
+    ...
+}
+</pre></blockquote><p> 
+The
+“<code>/s/link?md5=_e4Nc3iduzkWRm01TBBNYw&amp;expires=2147483647</code>”
+link
+restricts access to “<code>/s/link</code>” for the client with the
+IP address 127.0.0.1.
+The link also has the limited lifetime until January 19, 2038 (GMT).
+</p><p>
+On UNIX, the <code><i>md5</i></code> request argument value can be obtained as:
+</p> <blockquote class="example"><pre>
+echo -n '2147483647/s/link127.0.0.1 secret' | \
+    openssl md5 -binary | openssl base64 | tr +/ -_ | tr -d =
+</pre></blockquote><p> 
+</p><a name="secure_link_secret"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5">secure_link_md5</a>]</span>

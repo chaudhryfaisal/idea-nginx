@@ -1,11 +1,11 @@
 <idea-plugin url="https://github.com/ishchenko/idea-nginx">
 
-  <id>ideanginx9</id>
-  <name>nginx Support</name>
-  <vendor url="https://github.com/ishchenko/idea-nginx">Max Ishchenko</vendor>
+    <id>ideanginx9</id>
+    <name>nginx Support</name>
+    <vendor url="https://github.com/ishchenko/idea-nginx">Max Ishchenko</vendor>
 
-  <description>
-    <![CDATA[
+    <description>
+        <![CDATA[
         nginx server support for IntelliJ IDEA<br>
         Runs/reloads configuration/stops nginx server from IDEA.<br>
         Configuration file syntax highlighting, auto-completion and inspections.
@@ -14,11 +14,30 @@
 
         If you have the Lua extension installed Lua syntax highlighting will be enabled for *_by_lua_block directives used by the lua-nginx-module.
     ]]>
-  </description>
+    </description>
 
-  <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.lang</depends>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
+        <b>0.1.9-fic</b>
+        <ul>
+            <li>Update list of keywords with latest from NGINX repository.</li>
+            <li>re generated document for all nginx modules from nginx docs.</li>
+            <li>Added keywords for additional modules</li>
+            <ul>
+                <li>ngx_http_auth_jwt_module</li>
+                <li>ngx_http_keyval_module</li>
+                <li>ngx_stream_zone_sync_module</li>
+                <li>ngx_http_js_module</li>
+                <li>ngx_stream_js_module</li>
+                <li>set-misc-nginx-module</li>
+                <li>headers-more-nginx-module</li>
+                <li>replace-filter-nginx-module</li>
+                <li>echo-nginx-module</li>
+                <li>redis2-nginx-module</li>
+                <li>ngx_http_substitutions_filter_module</li>
+            </ul>
+        </ul>
         <b>0.1.9</b>
         <ul>
             <li>Fix file type error in 2019.3 (<a href="https://github.com/ishchenko/idea-nginx/issues/73">issue 73</a>).</li>
@@ -142,49 +161,49 @@
             <li>Basic autocompletion and inspections.</li>
         </ul>
     ]]>
-  </change-notes>
+    </change-notes>
 
-  <idea-version since-build="142.3304"/>
+    <idea-version since-build="142.3304"/>
 
-  <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
+    <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <lang.parserDefinition language="nginx" implementationClass="net.ishchenko.idea.nginx.parser.NginxParserDefinition"/>
-    <lang.commenter language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCommenter"/>
-    <lang.braceMatcher language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxBraceMatcher"/>
-    <lang.foldingBuilder language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFoldingBuilder"/>
-    <lang.documentationProvider language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxDocumentationProvider"/>
-    <lang.formatter language="nginx" implementationClass="net.ishchenko.idea.nginx.formatter.NginxFormattingModelBuilder"/>
-    <lang.elementManipulator forClass="net.ishchenko.idea.nginx.psi.impl.NginxDirectiveValueImpl" implementationClass="net.ishchenko.idea.nginx.psi.impl.NginxDirectiveValueManipulator"/>
-    <annotator language="nginx" implementationClass="net.ishchenko.idea.nginx.annotator.NginxAnnotatingVisitor"/>
-    <configurationType implementation="net.ishchenko.idea.nginx.run.NginxConfigurationType"/>
-    <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
-    <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
-    <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
-    <fileType name="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFileType" language="nginx" extensions="nginx" fieldName="INSTANCE" />
-    <languageInjector implementation="net.ishchenko.idea.nginx.injection.LuaInjector" />
-    <lang.findUsagesProvider language="nginx"
-                             implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.parserDefinition language="nginx" implementationClass="net.ishchenko.idea.nginx.parser.NginxParserDefinition"/>
+        <lang.commenter language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCommenter"/>
+        <lang.braceMatcher language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxBraceMatcher"/>
+        <lang.foldingBuilder language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFoldingBuilder"/>
+        <lang.documentationProvider language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxDocumentationProvider"/>
+        <lang.formatter language="nginx" implementationClass="net.ishchenko.idea.nginx.formatter.NginxFormattingModelBuilder"/>
+        <lang.elementManipulator forClass="net.ishchenko.idea.nginx.psi.impl.NginxDirectiveValueImpl" implementationClass="net.ishchenko.idea.nginx.psi.impl.NginxDirectiveValueManipulator"/>
+        <annotator language="nginx" implementationClass="net.ishchenko.idea.nginx.annotator.NginxAnnotatingVisitor"/>
+        <configurationType implementation="net.ishchenko.idea.nginx.run.NginxConfigurationType"/>
+        <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
+        <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
+        <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
+        <fileType name="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFileType" language="nginx" extensions="nginx" fieldName="INSTANCE"/>
+        <languageInjector implementation="net.ishchenko.idea.nginx.injection.LuaInjector"/>
+        <lang.findUsagesProvider language="nginx"
+                                 implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
 
-    <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.LinuxSpecificTools" os="unix"/>
-    <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.WindowsSpecificTools" os="windows"/>
-  </extensions>
+        <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.LinuxSpecificTools" os="unix"/>
+        <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.WindowsSpecificTools" os="windows"/>
+    </extensions>
 
-  <application-components>
-    <component>
-      <implementation-class>net.ishchenko.idea.nginx.NginxKeywordsManager</implementation-class>
-    </component>
-    <component>
-      <implementation-class>net.ishchenko.idea.nginx.configurator.NginxConfigurationManager</implementation-class>
-    </component>
-    <component>
-      <implementation-class>net.ishchenko.idea.nginx.configurator.NginxServersConfiguration</implementation-class>
-    </component>
-  </application-components>
+    <application-components>
+        <component>
+            <implementation-class>net.ishchenko.idea.nginx.NginxKeywordsManager</implementation-class>
+        </component>
+        <component>
+            <implementation-class>net.ishchenko.idea.nginx.configurator.NginxConfigurationManager</implementation-class>
+        </component>
+        <component>
+            <implementation-class>net.ishchenko.idea.nginx.configurator.NginxServersConfiguration</implementation-class>
+        </component>
+    </application-components>
 
-  <actions>
-    <action id="nginx.reload" class="net.ishchenko.idea.nginx.run.NginxReloadAction"
-            text="Reload nginx configuration files" description="Reloads nginx configuration files" icon="/actions/sync.png"/>
-  </actions>
+    <actions>
+        <action id="nginx.reload" class="net.ishchenko.idea.nginx.run.NginxReloadAction"
+                text="Reload nginx configuration files" description="Reloads nginx configuration files" icon="/actions/sync.png"/>
+    </actions>
 
 </idea-plugin>

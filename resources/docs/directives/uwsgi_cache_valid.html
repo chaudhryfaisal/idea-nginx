@@ -1,17 +1,88 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=17" title="Edit section: uwsgi cache valid">edit</a>]</span> <span class="mw-headline" id="uwsgi_cache_valid"> uwsgi_cache_valid </span></h2><p><b>syntax:</b> <i>uwsgi_cache_valid [http_return_code [...]] time</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive sets caching period for the specified http return codes. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">uwsgi_cache_valid  <span class="nu0">200</span> <span class="nu0">302</span>  10m<span class="sy0">;</span>
-uwsgi_cache_valid  <span class="nu0">404</span>      1m<span class="sy0">;</span></pre>
- </div>
-</div><p>sets caching period of 10 minutes for return codes 200 and 302 and 1 minute for the 404 code. </p><p>In case only caching period is specified: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">uwsgi_cache_valid  5m<span class="sy0">;</span></pre>
- </div>
-</div><p>the default behavior is to cache only replies with the codes 200, 301 and 302. </p><p>It's also possible to cache all the replies by specifying code &quot;any&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">&nbsp;
-uwsgi_cache_valid  <span class="nu0">200</span> <span class="nu0">302</span> 10m<span class="sy0">;</span>
-uwsgi_cache_valid  <span class="nu0">301</span> 1h<span class="sy0">;</span>
-uwsgi_cache_valid  any 1m<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_cache_valid"> uwsgi_cache_valid </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache_valid</strong> [<code><i>code</i></code> ...] <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets caching time for different response codes.
+For example, the following directives
+</p> <blockquote class="example"><pre>
+uwsgi_cache_valid 200 302 10m;
+uwsgi_cache_valid 404      1m;
+</pre></blockquote><p> 
+set 10 minutes of caching for responses with codes 200 and 302
+and 1 minute for responses with code 404.
+</p><p>
+If only caching <code><i>time</i></code> is specified
+</p> <blockquote class="example"><pre>
+uwsgi_cache_valid 5m;
+</pre></blockquote><p> 
+then only 200, 301, and 302 responses are cached.
+</p><p>
+In addition, the <code>any</code> parameter can be specified
+to cache any responses:
+</p> <blockquote class="example"><pre>
+uwsgi_cache_valid 200 302 10m;
+uwsgi_cache_valid 301      1h;
+uwsgi_cache_valid any      1m;
+</pre></blockquote><p> 
+</p><p>
+Parameters of caching can also be set directly
+in the response header.
+This has higher priority than setting of caching time using the directive.
+</p> <ul>
+<li>
+The “X-Accel-Expires” header field sets caching time of a
+response in seconds.
+The zero value disables caching for a response.
+If the value starts with the <code>@</code> prefix, it sets an absolute
+time in seconds since Epoch, up to which the response may be cached.
+</li>
+<li>
+If the header does not include the “X-Accel-Expires” field,
+parameters of caching may be set in the header fields
+“Expires” or “Cache-Control”.
+</li>
+<li>
+If the header includes the “Set-Cookie” field, such a
+response will not be cached.
+</li>
+<li>
+If the header includes the “Vary” field
+with the special value “<code>*</code>”, such a
+response will not be cached (1.7.7).
+If the header includes the “Vary” field
+with another value, such a response will be cached
+taking into account the corresponding request header fields (1.7.7).
+</li>
+</ul><p> 
+Processing of one or more of these response header fields can be disabled
+using the <a href="#uwsgi_ignore_headers">uwsgi_ignore_headers</a> directive.
+</p><a name="uwsgi_connect_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache_valid">uwsgi_cache_valid</a>]</span>

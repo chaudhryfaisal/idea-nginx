@@ -1,5 +1,61 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=3" title="Edit section: fastcgi bind">edit</a>]</span> <span class="mw-headline" id="fastcgi_bind"> fastcgi_bind </span></h2><p><b>syntax:</b> <i>fastcgi_bind address</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> <i>≥ 0.8.22</i> </p><p><b>example:</b> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">fastcgi_bind  192.168.1.1<span class="sy0">;</span></pre>
- </div>
-</div><p>This directive binds each upstream socket to a local address before calling connect(). It may be useful if host has several interfaces/aliases and you want to pass outgoing connections from specific interface/address. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_bind"> fastcgi_bind </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_bind</strong> 
+    <code><i>address</i></code>
+    [<code>transparent</code>] |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 0.8.22.
+            </p></div><p>
+Makes outgoing connections to a FastCGI server originate
+from the specified local IP address with an optional port (1.11.2).
+Parameter value can contain variables (1.3.12).
+The special value <code>off</code> (1.3.12) cancels the effect
+of the <code>fastcgi_bind</code> directive
+inherited from the previous configuration level, which allows the
+system to auto-assign the local IP address and port.
+</p><a name="fastcgi_bind_transparent"></a><p>
+The <code>transparent</code> parameter (1.11.0) allows
+outgoing connections to a FastCGI server originate
+from a non-local IP address,
+for example, from a real IP address of a client:
+</p> <blockquote class="example"><pre>
+fastcgi_bind $remote_addr transparent;
+</pre></blockquote><p> 
+In order for this parameter to work,
+it is usually necessary to run nginx worker processes with the
+<a href="../ngx_core_module.html#user">superuser</a> privileges.
+On Linux it is not required (1.13.8) as if
+the <code>transparent</code> parameter is specified, worker processes
+inherit the <code>CAP_NET_RAW</code> capability from the master process.
+It is also necessary to configure kernel routing table
+to intercept network traffic from the FastCGI server.
+</p><a name="fastcgi_buffer_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_bind">fastcgi_bind</a>]</span>

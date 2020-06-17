@@ -33,7 +33,7 @@ public class KeywordsFromSourcesGenerator {
 
     private static final Pattern DIRECTIVE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_command_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern DIRECTIVE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
-    private static final Pattern DIRECTIVE_NAME_PATTERN = Pattern.compile("ngx_string\\(\"([\\w_]+)\"\\)");
+    private static final Pattern DIRECTIVE_NAME_PATTERN = Pattern.compile("ngx_string ?\\(\"([\\w_]+)\"\\)");
 
     private static final Pattern VARIABLE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_\\w+_variable_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
@@ -82,8 +82,11 @@ public class KeywordsFromSourcesGenerator {
             String directiveBlock = directiveBlockMatcher.group(1);
 
             directiveBlock = directiveBlock.substring(directiveBlock.indexOf('{') + 1, directiveBlock.lastIndexOf('}') - 1);
-            directiveBlock = directiveBlock.substring(0, directiveBlock.lastIndexOf("ngx_null_command") - 1).trim();
-
+            if (directiveBlock.contains("ngx_null_command")) {
+                directiveBlock = directiveBlock.substring(0, directiveBlock.lastIndexOf("ngx_null_command") - 1).trim();
+            } else {
+                directiveBlock = directiveBlock.substring(0, directiveBlock.lastIndexOf("NULL") - 1).trim();
+            }
             //some ad hoc magic
             directiveBlock = directiveBlock.replace("#ifdef SSL_OP_CIPHER_SERVER_PREFERENCE\n", "");
             directiveBlock = directiveBlock.replace("ngx_mail_ssl_nosupported, 0, 0, ngx_mail_ssl_openssl097 },", "");
@@ -119,7 +122,8 @@ public class KeywordsFromSourcesGenerator {
             String variableBlock = variableBlockMatcher.group(1);
 
             variableBlock = variableBlock.substring(variableBlock.indexOf('{') + 1, variableBlock.lastIndexOf('}') - 1);
-            int end = Math.max(variableBlock.lastIndexOf("ngx_stream_null_variable"),variableBlock.lastIndexOf("ngx_http_null_variable"));
+            int end = Math.max(variableBlock.lastIndexOf("ngx_stream_null_variable"), variableBlock.lastIndexOf("ngx_http_null_variable"));
+            end = Math.max(end, variableBlock.lastIndexOf("ngx_null_string"));
             variableBlock = variableBlock.substring(0, end - 1).trim();
 
             variableBlock = PREPROCESSOR_DIRECTIVE_PATTERN.matcher(variableBlock).replaceAll("").trim();

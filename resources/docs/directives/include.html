@@ -1,52 +1,44 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=7" title="Edit section: include">edit</a>]</span> <span class="mw-headline" id="include"> include </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>include</b> <i>file</i> | <i>mask</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#include">include</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 50/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> You can include any configuration files for what ever purpose you want. </p><p>Since 0.4.4, the <code>include</code> directive also supports filename globbing: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#include"><span class="kw1">include</span></a> vhosts/*.conf<span class="sy0">;</span></pre>
- </div>
-</div><p>Note that until version 0.6.7, paths are relative to what was specified to <code>configure</code> via the <code>--prefix=&lt;PATH&gt;</code> directive, which by default is <code>/usr/local/nginx</code>. If you didn't set this when you compiled Nginx, then use absolute paths. </p><p>Since version 0.6.7, paths are relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory. </p><br><i>Module: CoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSsiModule&amp;action=edit&amp;section=12" title="Edit section: include">edit</a>]</span> <span class="mw-headline" id="include"> include </span></h2><p>Include a document from another source. </p><ul>
- <li> <code>file</code> — include a file, e.g. </li>
-</ul><pre>
-  &lt;!--# include file=&quot;footer.html&quot; --&gt;
-</pre><ul>
- <li> <code>virtual</code> — include a request, e.g. </li>
-</ul><pre>
-  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; --&gt;
-</pre><p>The target of &quot;file&quot; or &quot;virtual&quot; must be a location in the server configuration. </p><p>The distinction between &quot;file&quot; and &quot;virtual&quot; is mostly historical. &quot;file&quot; is the same as &quot;virtual&quot; with implied &quot;wait&quot; option. At one point the directives mirrored the Apache equivalents but now they are basically the same operation. Both can handle a URI and both can serve a static file. </p><p>Multiple requests will be issued in parallel. If you need them issued sequentially, use the &quot;wait&quot; option. </p><ul>
- <li> <code>stub</code> — The name of the block to use as a default if the request is empty or returns an error. </li>
-</ul><pre>
-  &lt;!--# block name=&quot;one&quot; --&gt;&nbsp;&lt;!--# endblock --&gt;
-  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; stub=&quot;one&quot; --&gt;
-</pre><ul>
- <li> <code>wait</code> — when set to yes, the rest of the SSI will not be evaluated until the current request is finished. Example: </li>
-</ul><pre>
-  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; wait=&quot;yes&quot; --&gt;
-</pre><ul>
- <li> <code>set</code> — when set to a variable name, the output of the SSI will not be sent to the output, instead the output is set to the variable. Example: </li>
-</ul><pre>
-  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; set=&quot;body&quot; --&gt;
-</pre><br><i>Module: HttpSsiModule</i>
+<h2><span class="mw-headline" id="include"> include </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>include</strong> <code><i>file</i></code> | <code><i>mask</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>any</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Includes another <code><i>file</i></code>, or files matching the
+specified <code><i>mask</i></code>, into configuration.
+Included files should consist of
+syntactically correct directives and blocks.
+</p><p>
+Usage example:
+</p> <blockquote class="example"><pre>
+include mime.types;
+include vhosts/*.conf;
+</pre></blockquote><p> 
+</p><a name="load_module"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#include">include</a>]</span>

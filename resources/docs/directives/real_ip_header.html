@@ -1,27 +1,49 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRealipModule&amp;action=edit&amp;section=4" title="Edit section: real ip header">edit</a>]</span> <span class="mw-headline" id="real_ip_header"> real_ip_header </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>real_ip_header</b> <i>field</i> | <code>X-Real-IP</code> | <code>X-Forwarded-For</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>X-Real-IP</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_header">real_ip_header</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 23/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the name of the header used for transferring the replacement IP address. </p><p>In case of X-Forwarded-For, this module uses the last ip in the X-Forwarded-For header for replacement. </p><br><i>Module: HttpRealipModule</i>
+<h2><span class="mw-headline" id="real_ip_header"> real_ip_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>real_ip_header</strong> 
+    <code><i>field</i></code> |
+    <code>X-Real-IP</code> |
+    <code>X-Forwarded-For</code> |
+    <code>proxy_protocol</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>real_ip_header X-Real-IP;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the request header field
+whose value will be used to replace the client address.
+</p><p>
+The request header field value that contains an optional port
+is also used to replace the client port (1.11.0).
+The address and port should be specified according to
+<a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>.
+</p><p>
+The <code>proxy_protocol</code> parameter (1.5.12) changes
+the client address to the one from the PROXY protocol header.
+The PROXY protocol must be previously enabled by setting the
+<code>proxy_protocol</code> parameter
+in the <a href="ngx_http_core_module.html#listen">listen</a> directive.
+</p><a name="real_ip_recursive"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_header">real_ip_header</a>]</span>

@@ -1,1 +1,42 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=17" title="Edit section: worker connections">edit</a>]</span> <span class="mw-headline" id="worker_connections"> worker_connections </span></h2><p><b>Syntax:</b> <i>worker_connections number</i> </p><p><b>Default:</b> <i> </i> </p><p>The worker_connections and worker_processes from the main section allows you to calculate max clients you can handle: </p><p>max clients = worker_processes * worker_connections </p><p>In a reverse proxy situation, max clients becomes </p><p>max clients = worker_processes * worker_connections/4 </p><p>Since a browser opens 2 connections by default to a server and nginx uses the fds (file descriptors) from the same pool to connect to the upstream backend </p><h1><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=18" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="worker_connections"> worker_connections </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>worker_connections</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>worker_connections 512;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the maximum number of simultaneous connections that
+can be opened by a worker process.
+</p><p>
+It should be kept in mind that this number includes all connections
+(e.g. connections with proxied servers, among others),
+not only connections with clients.
+Another consideration is that the actual number of simultaneous
+connections cannot exceed the current limit on
+the maximum number of open files, which can be changed by
+<a href="#worker_rlimit_nofile">worker_rlimit_nofile</a>.
+</p><a name="worker_cpu_affinity"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#worker_connections">worker_connections</a>]</span>

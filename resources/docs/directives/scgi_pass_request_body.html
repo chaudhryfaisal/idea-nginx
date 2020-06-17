@@ -1,1 +1,35 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=27" title="Edit section: scgi pass request body">edit</a>]</span> <span class="mw-headline" id="scgi_pass_request_body"> scgi_pass_request_body </span></h2><p><b>syntax:</b> <i>scgi_pass_request_body on|off</i> </p><p><b>default:</b> <i>scgi_pass_request_body on</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Defines whether or not the request body should be passed to the scgi. Should usually be left on. </p><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_pass_request_body"> scgi_pass_request_body </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_pass_request_body</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_pass_request_body on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Indicates whether the original request body is passed
+to the SCGI server.
+See also the <a href="#scgi_pass_request_headers">scgi_pass_request_headers</a> directive.
+</p><a name="scgi_pass_request_headers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_pass_request_body">scgi_pass_request_body</a>]</span>

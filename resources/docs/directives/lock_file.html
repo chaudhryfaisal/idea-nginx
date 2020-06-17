@@ -1,5 +1,38 @@
-<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=8" title="Edit section: lock file">edit</a>]</span> <span class="mw-headline" id="lock_file"> lock_file </span></h2><p><b>Syntax:</b> <i>lock_file file</i> </p><p><b>Default:</b> <i>compile-time option</i> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#lock_file"><span class="kw1">lock_file</span></a>  /var/log/<a href="/NginxHttpCoreModule#lock_file"><span class="kw1">lock_file</span></a><span class="sy0">;</span></pre>
- </div>
-</div><p>nginx uses accept mutex to serialize accept() syscalls. If nginx is built by gcc, Intel C++, or SunPro C++ compilers on i386, amd64, sparc64, and ppc64, then nginx uses the atomic instructions to implement the mutex. In other cases the lock file would be used. </p><p><br /> </p><br><i>Module: CoreModule</i>
+<h2><span class="mw-headline" id="lock_file"> lock_file </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>lock_file</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>lock_file logs/nginx.lock;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+nginx uses the locking mechanism to implement <a href="#accept_mutex">accept_mutex</a>
+and serialize access to shared memory.
+On most systems the locks are implemented using atomic operations,
+and this directive is ignored.
+On other systems the “lock file” mechanism is used.
+This directive specifies a prefix for the names of lock files.
+</p><a name="master_process"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#lock_file">lock_file</a>]</span>

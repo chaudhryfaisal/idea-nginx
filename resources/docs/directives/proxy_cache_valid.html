@@ -1,50 +1,88 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=17" title="Edit section: proxy cache valid">edit</a>]</span> <span class="mw-headline" id="proxy_cache_valid"> proxy_cache_valid </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_cache_valid</b> [ <i>code</i> ...] <i>time</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid">proxy_cache_valid</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 126/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the time for caching different replies. Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">200</span> <span class="nu0">302</span>  10m<span class="sy0">;</span>
-<a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">404</span>      1m<span class="sy0">;</span></pre>
- </div>
-</div><p>sets 10 minutes cache time for replies with code 200 and 302, and 1 minute for 404s. </p><p>If only time is specified: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a> 5m<span class="sy0">;</span></pre>
- </div>
-</div><p>then only replies with codes 200, 301 and 302 will be cached. </p><p>Also it is possible to cache any replies with parameter &quot;any&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">200</span> <span class="nu0">302</span> 10m<span class="sy0">;</span>
-<a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">301</span> 1h<span class="sy0">;</span>
-<a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  any 1m<span class="sy0">;</span></pre>
- </div>
-</div><p>Upstream cache-related directives have priority over proxy_cache_valid value, in particular the order is (<a rel="nofollow" class="external text" href="http://forum.nginx.org/read.php?2,2182,2185#msg-2185">from Igor</a>): </p><ol>
- <li> X-Accel-Expires </li>
- <li> Expires/Cache-Control </li>
- <li> proxy_cache_valid </li>
-</ol><p>The order in which your backend return HTTP headers change cache behaviour. Read <a rel="nofollow" class="external text" href="http://www.ruby-forum.com/topic/3707266">this post</a> for details. </p><p>You may ignore the headers using </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">proxy_ignore_headers X-Accel-<a href="/NginxHttpHeadersModule#Expires"><span class="kw14">Expires</span></a> <a href="/NginxHttpHeadersModule#Expires"><span class="kw14">Expires</span></a> Cache-Control<span class="sy0">;</span></pre>
- </div>
-</div><p>Concerning If-Modified / Last-Modified since behaviour, please remember that by default nginx sends 304 only if L-M == I-M-S. Controlled by directive <a href="/HttpCoreModule#if_modified_since" title="HttpCoreModule">if_modified_since</a> [off|exact|before] </p><p>Note: you must set this option for any persistent caching to occur. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_cache_valid"> proxy_cache_valid </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_valid</strong> [<code><i>code</i></code> ...] <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets caching time for different response codes.
+For example, the following directives
+</p> <blockquote class="example"><pre>
+proxy_cache_valid 200 302 10m;
+proxy_cache_valid 404      1m;
+</pre></blockquote><p> 
+set 10 minutes of caching for responses with codes 200 and 302
+and 1 minute for responses with code 404.
+</p><p>
+If only caching <code><i>time</i></code> is specified
+</p> <blockquote class="example"><pre>
+proxy_cache_valid 5m;
+</pre></blockquote><p> 
+then only 200, 301, and 302 responses are cached.
+</p><p>
+In addition, the <code>any</code> parameter can be specified
+to cache any responses:
+</p> <blockquote class="example"><pre>
+proxy_cache_valid 200 302 10m;
+proxy_cache_valid 301      1h;
+proxy_cache_valid any      1m;
+</pre></blockquote><p> 
+</p><p>
+Parameters of caching can also be set directly
+in the response header.
+This has higher priority than setting of caching time using the directive.
+</p> <ul>
+<li>
+The “X-Accel-Expires” header field sets caching time of a
+response in seconds.
+The zero value disables caching for a response.
+If the value starts with the <code>@</code> prefix, it sets an absolute
+time in seconds since Epoch, up to which the response may be cached.
+</li>
+<li>
+If the header does not include the “X-Accel-Expires” field,
+parameters of caching may be set in the header fields
+“Expires” or “Cache-Control”.
+</li>
+<li>
+If the header includes the “Set-Cookie” field, such a
+response will not be cached.
+</li>
+<li>
+If the header includes the “Vary” field
+with the special value “<code>*</code>”, such a
+response will not be cached (1.7.7).
+If the header includes the “Vary” field
+with another value, such a response will be cached
+taking into account the corresponding request header fields (1.7.7).
+</li>
+</ul><p> 
+Processing of one or more of these response header fields can be disabled
+using the <a href="#proxy_ignore_headers">proxy_ignore_headers</a> directive.
+</p><a name="proxy_connect_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid">proxy_cache_valid</a>]</span>

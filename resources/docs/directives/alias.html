@@ -1,39 +1,72 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=4" title="Edit section: alias">edit</a>]</span> <span class="mw-headline" id="alias"> alias </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>alias</b> <i>path</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#alias">alias</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 26/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive assigns a path to be used as the basis for serving requests for the indicated location. Note that it may look similar to the <code>root</code> directive at first sight, but the document root doesn't change, just the file system path used for the request. The location part of the request is <b>dropped</b> in the request Nginx issues. Let's see this in action. Consider the following example. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  /i/ <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a>  /spool/w3/images/<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>A request for &quot;/i/top.gif&quot; will instruct Nginx to serve the file &quot;/spool/w3/images/top.gif&quot;. As you can see, <b>only</b> the part of the URI <b>after</b> the location is appended. The location itself, in this case &quot;/i/&quot;, is dropped. With a <code>root</code> directive the <b>full</b> path is appended, i.e., in the above example it would have been, &quot;/spool/w3/images/i/top.gif&quot; — hence including <b>also</b> the location &quot;/i/&quot;. </p><p>Aliases can also be used in a location specified by a regex. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> ^/download/<span class="br0">(</span>.*<span class="br0">)</span>$ <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a> /home/website/files/$<span class="nu0">1</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>The request &quot;/download/book.pdf&quot; will return the file &quot;/home/website/files/book.pdf&quot;. Note again that only part of the request URI <b>after</b> the location is appended to the path defined by <code>alias</code>. </p><p>It is possible to use variables in the replacement path. </p><p>Note that there is a <a rel="nofollow" class="external text" href="http://trac.nginx.org/nginx/ticket/97">longstanding bug</a> that <code>alias</code> and <code>try_files</code> don't work together. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="alias"> alias </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>alias</strong> <code><i>path</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a replacement for the specified location.
+For example, with the following configuration
+</p> <blockquote class="example"><pre>
+location /i/ {
+    alias /data/w3/images/;
+}
+</pre></blockquote><p> 
+on request of
+“<code>/i/top.gif</code>”, the file
+<code>/data/w3/images/top.gif</code> will be sent.
+</p><p>
+The <code><i>path</i></code> value can contain variables,
+except <code>$document_root</code> and <code>$realpath_root</code>.
+</p><p>
+If <code>alias</code> is used inside a location defined
+with a regular expression then such regular expression should
+contain captures and <code>alias</code> should refer to
+these captures (0.7.40), for example:
+</p> <blockquote class="example"><pre>
+location ~ ^/users/(.+\.(?:gif|jpe?g|png))$ {
+    alias /data/w3/images/$1;
+}
+</pre></blockquote><p> 
+</p><p>
+When location matches the last part of the directive’s value:
+</p> <blockquote class="example"><pre>
+location /images/ {
+    alias /data/w3/images/;
+}
+</pre></blockquote><p> 
+it is better to use the
+<a href="#root">root</a>
+directive instead:
+</p> <blockquote class="example"><pre>
+location /images/ {
+    root /data/w3;
+}
+</pre></blockquote><p> 
+</p><a name="auth_delay"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#alias">alias</a>]</span>

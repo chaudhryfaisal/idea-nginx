@@ -1,27 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpImageFilterModule&amp;action=edit&amp;section=6" title="Edit section: image filter jpeg quality">edit</a>]</span> <span class="mw-headline" id="image_filter_jpeg_quality"> image_filter_jpeg_quality </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>image_filter_jpeg_quality</b> <i>quality</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>75</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter_jpeg_quality">image_filter_jpeg_quality</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 37/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Sets the rate of loss of information when processing the images as <b>JPEG</b>. The maximum recommended value is <b>95</b>. </p><br><i>Module: HttpImageFilterModule</i>
+<h2><span class="mw-headline" id="image_filter_jpeg_quality"> image_filter_jpeg_quality </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>image_filter_jpeg_quality</strong> <code><i>quality</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>image_filter_jpeg_quality 75;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the desired <code><i>quality</i></code> of the transformed JPEG images.
+Acceptable values are in the range from 1 to 100.
+Lesser values usually imply both lower image quality and less data to transfer.
+The maximum recommended value is 95.
+Parameter value can contain variables.
+</p><a name="image_filter_sharpen"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter_jpeg_quality">image_filter_jpeg_quality</a>]</span>

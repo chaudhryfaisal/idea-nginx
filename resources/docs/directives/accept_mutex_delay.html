@@ -1,1 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=4" title="Edit section: accept mutex delay">edit</a>]</span> <span class="mw-headline" id="accept_mutex_delay"> accept_mutex_delay </span></h2><p><b>Syntax:</b> <i>accept_mutex_delay Nms;</i> </p><p><b>Default:</b> <i>500ms</i> </p><p>If a worker process does not have accept mutex it will try to aquire it at least after this delay. By default delay is 500ms. </p><p><br /> </p><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="accept_mutex_delay"> accept_mutex_delay </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>accept_mutex_delay</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>accept_mutex_delay 500ms;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If <a href="#accept_mutex">accept_mutex</a> is enabled, specifies the maximum time
+during which a worker process will try to restart accepting new
+connections if another worker process is currently accepting
+new connections.
+</p><a name="daemon"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#accept_mutex_delay">accept_mutex_delay</a>]</span>

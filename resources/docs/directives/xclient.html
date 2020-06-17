@@ -1,5 +1,77 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailProxyModule&amp;action=edit&amp;section=7" title="Edit section: xclient">edit</a>]</span> <span class="mw-headline" id="xclient"> xclient </span></h2><p><b>syntax:</b> <i>xclient</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>on</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>With this directive you can enable or disable the command XCLIENT with the connection to SMTP backend. This allows the backend to enforce limitations on the client based on IP/HELO/LOGIN. </p><p>If xclient is enabled then nginx first transfers to the backend: </p><pre>
-EHLO server_name
-</pre><p>Then: </p><pre>
-XCLIENT PROTO=ESMTP HELO=client_helo ADDR=client_ip LOGIN=authentificated_user NAME=[UNAVAILABLE] 
-</pre><h1><span class="editsection">[<a href="/index.php?title=MailProxyModule&amp;action=edit&amp;section=8" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><br><i>Module: MailProxyModule</i>
+<h2><span class="mw-headline" id="xclient"> xclient </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>xclient</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>xclient on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables the passing of the
+<a href="http://www.postfix.org/XCLIENT_README.html">XCLIENT</a>
+command with client parameters when connecting to the SMTP backend.
+</p><p>
+With <code>XCLIENT</code>, the MTA is able to write client information
+to the log and apply various limitations based on this data.
+</p><p>
+If <code>XCLIENT</code> is enabled
+then nginx passes the following commands when connecting to the backend:
+</p> <ul class="compact">
+<li>
+<code>EHLO</code> with the
+<a href="ngx_mail_core_module.html#server_name">server name</a>
+</li>
+<li>
+<code>
+XCLIENT
+</code>
+</li>
+<li>
+<code>EHLO</code> or <code>HELO</code>,
+as passed by the client
+</li>
+</ul><p> 
+</p><p>
+If the name
+<a href="ngx_mail_core_module.html#resolver">found</a>
+by the client IP address points to the same address,
+it is passed in the <code>NAME</code> parameter
+of the <code>XCLIENT</code> command.
+If the name could not be found, points to a different address,
+or <a href="ngx_mail_core_module.html#resolver">resolver</a> is not specified,
+the <code>[UNAVAILABLE]</code> is passed
+in the <code>NAME</code> parameter.
+If an error has occurred in the process of resolving,
+the <code>[TEMPUNAVAIL]</code> value is used.
+</p><p>
+If <code>XCLIENT</code> is disabled
+then nginx passes the <code>EHLO</code> command with the
+<a href="ngx_mail_core_module.html#server_name">server name</a>
+when connecting to the backend if the client has passed
+<code>EHLO</code>,
+or <code>HELO</code> with the server name, otherwise.
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_proxy_module.html#xclient">xclient</a>]</span>

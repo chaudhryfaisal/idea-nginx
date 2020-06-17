@@ -1,31 +1,55 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpGeoipModule&amp;action=edit&amp;section=3" title="Edit section: geoip country">edit</a>]</span> <span class="mw-headline" id="geoip_country"> geoip_country </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>geoip_country</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_geoip_module.html#geoip_country">geoip_country</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 37/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive specifies the full path to the Geo IP database .dat file that associates IP addresses with country geolocation information. This allows you to get the country corresponding to the given IP. It can be used to determine the visitor's country from the IP address of the client. When set the following variables are available: </p><ul>
- <li> $geoip_country_code — two-letter country code, for example, &quot;RU&quot;, &quot;US&quot;. </li>
- <li> $geoip_country_code3 — three-letter country code, for example, &quot;RUS&quot;, &quot;USA&quot;. </li>
- <li> $geoip_country_name — the (verbose) name of the country, for example, &quot;Russian Federation&quot;, &quot;United States&quot;, &amp;c. </li>
-</ul><p>Nginx caches all supplied databases in memory. The country database is small, roughly 1.4M, therefore there's very little penalty in caching it. The city database is much bigger. Hence its memory footprint is larger. </p><br><i>Module: HttpGeoipModule</i>
+<h2><span class="mw-headline" id="geoip_country"> geoip_country </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>geoip_country</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a database used to determine the country
+depending on the client IP address.
+The following variables are available when using this database:
+</p> <dl class="compact">
+<dt id="var_geoip_country_code"><code>$geoip_country_code</code></dt>
+<dd>
+two-letter country code, for example,
+“<code>RU</code>”, “<code>US</code>”.
+</dd>
+<dt id="var_geoip_country_code3"><code>$geoip_country_code3</code>
+</dt>
+<dd>
+three-letter country code, for example,
+“<code>RUS</code>”, “<code>USA</code>”.
+</dd>
+<dt id="var_geoip_country_name"><code>$geoip_country_name</code></dt>
+<dd>
+country name, for example,
+“<code>Russian Federation</code>”, “<code>United States</code>”.
+</dd>
+</dl><p> 
+</p><a name="geoip_city"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_geoip_module.html#geoip_country">geoip_country</a>]</span>

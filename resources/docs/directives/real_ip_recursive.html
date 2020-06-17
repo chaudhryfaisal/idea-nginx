@@ -1,31 +1,58 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRealipModule&amp;action=edit&amp;section=5" title="Edit section: real ip recursive">edit</a>]</span> <span class="mw-headline" id="real_ip_recursive"> real_ip_recursive </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>real_ip_recursive</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.3.0<br />1.2.1</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_recursive">real_ip_recursive</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 30/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><h1><span class="editsection">[<a href="/index.php?title=HttpRealipModule&amp;action=edit&amp;section=6" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_realip_module.html">Original Documentation</a> </p><p><a rel="nofollow" class="external text" href="http://trac.nginx.org/nginx/ticket/2">trac ticket #2</a> </p><br><i>Module: HttpRealipModule</i>
+<h2><span class="mw-headline" id="real_ip_recursive"> real_ip_recursive </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>real_ip_recursive</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>real_ip_recursive off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table>
+                        <p>
+                    This directive appeared in versions 1.3.0 and 1.2.1.
+                    
+                        </p>
+                    </div><p>
+If recursive search is disabled, the original client address that
+matches one of the trusted addresses is replaced by the last
+address sent in the request header field defined by the
+<a href="#real_ip_header">real_ip_header</a> directive.
+If recursive search is enabled, the original client address that
+matches one of the trusted addresses is replaced by the last
+non-trusted address sent in the request header field.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+</p> <dl class="compact">
+<dt id="var_realip_remote_addr"><code>$realip_remote_addr</code></dt>
+<dd>
+keeps the original client address (1.9.7)
+</dd>
+<dt id="var_realip_remote_port"><code>$realip_remote_port</code></dt>
+<dd>
+keeps the original client port (1.11.0)
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_realip_module.html#real_ip_recursive">real_ip_recursive</a>]</span>

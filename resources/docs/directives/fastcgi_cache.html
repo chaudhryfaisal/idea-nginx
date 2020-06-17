@@ -1,27 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=7" title="Edit section: fastcgi cache">edit</a>]</span> <span class="mw-headline" id="fastcgi_cache"> fastcgi_cache </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_cache</b> <i>zone</i> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache">fastcgi_cache</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 47/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive specifies the area which actually is the share memory's name for caching. The same area can be used in several places. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_cache"> fastcgi_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_cache</strong> <code><i>zone</i></code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_cache off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a shared memory zone used for caching.
+The same zone can be used in several places.
+Parameter value can contain variables (1.7.9).
+The <code>off</code> parameter disables caching inherited
+from the previous configuration level.
+</p><a name="fastcgi_cache_background_update"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache">fastcgi_cache</a>]</span>

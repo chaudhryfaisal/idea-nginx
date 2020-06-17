@@ -1,1 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=30" title="Edit section: uwsgi pass header">edit</a>]</span> <span class="mw-headline" id="uwsgi_pass_header"> uwsgi_pass_header </span></h2><p><b>syntax:</b> <i>uwsgi_pass_header name</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive explicitly allows to pass named headers to the client. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_pass_header"> uwsgi_pass_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_pass_header</strong> <code><i>field</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Permits passing <a href="#uwsgi_hide_header">otherwise disabled</a> header
+fields from a uwsgi server to a client.
+</p><a name="uwsgi_pass_request_body"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_pass_header">uwsgi_pass_header</a>]</span>

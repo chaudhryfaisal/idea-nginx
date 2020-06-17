@@ -1,27 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=64" title="Edit section: server name in redirect">edit</a>]</span> <span class="mw-headline" id="server_name_in_redirect"> server_name_in_redirect </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>server_name_in_redirect</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name_in_redirect">server_name_in_redirect</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 551/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> If <code>server_name_in_redirect</code> is on, then Nginx will use the first value of the <a href="#server_name">server_name</a> directive for redirects. If <code>server_name_in_redirect</code> is off, then nginx will use the requested <code>Host</code> header. </p><p>Note: for Location headers coming from an upstream proxy (via proxy_pass for example) this may not be the only directive you need. In fact, it seems to be ignored a lot of the time. If you are seeing the upstream's server name come through and not be rewritten, you will need to use <a href="/NginxHttpProxyModule#proxy_redirect" title="NginxHttpProxyModule" class="mw-redirect">proxy_redirect</a> to rewrite the upstream's provided hostname to what you want. Something like <code>proxy_redirect <a rel="nofollow" class="external free" href="http://some.upstream.url/">http://some.upstream.url/</a> /</code> - you will want to rewrite it to a / relative path. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="server_name_in_redirect"> server_name_in_redirect </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>server_name_in_redirect</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>server_name_in_redirect off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables the use of the primary server name, specified by the
+<a href="#server_name">server_name</a> directive,
+in <a href="#absolute_redirect">absolute</a> redirects issued by nginx.
+When the use of the primary server name is disabled, the name from the
+“Host” request header field is used.
+If this field is not present, the IP address of the server is used.
+</p><p>
+The use of a port in redirects is controlled by
+the <a href="#port_in_redirect">port_in_redirect</a> directive.
+</p><a name="server_names_hash_bucket_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name_in_redirect">server_name_in_redirect</a>]</span>

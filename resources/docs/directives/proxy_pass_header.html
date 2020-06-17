@@ -1,33 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=33" title="Edit section: proxy pass header">edit</a>]</span> <span class="mw-headline" id="proxy_pass_header"> proxy_pass_header </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_pass_header</b> <i>field</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header">proxy_pass_header</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 268/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive allows transferring header-lines forbidden for response. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-  <a href="/NginxHttpProxyModule#proxy_pass_header"><span class="kw21">proxy_pass_header</span></a> X-Accel-Redirect<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p><br /> </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_pass_header"> proxy_pass_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_pass_header</strong> <code><i>field</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Permits passing <a href="#proxy_hide_header">otherwise disabled</a> header
+fields from a proxied server to a client.
+</p><a name="proxy_pass_request_body"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header">proxy_pass_header</a>]</span>

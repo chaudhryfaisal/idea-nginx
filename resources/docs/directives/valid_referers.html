@@ -1,31 +1,97 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRefererModule&amp;action=edit&amp;section=3" title="Edit section: valid referers">edit</a>]</span> <span class="mw-headline" id="valid_referers"> valid_referers </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>valid_referers</b> <code>none</code> | <code>blocked</code> | <code>server_names</code> | <i>string</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers">valid_referers</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive assigns a value of 0 or 1 to the variable <code>$invalid_referer</code> based on the contents of the <code>referer</code> header. </p><p>You can use this to help reduce deep-linking from outside sites. If <code>Referer</code> header is not accounted for in the list of <code>valid_referers</code>, then <code>$invalid_referer</code> will be set to 1 (see example above). </p><p>The parameters can be as follows: </p><ul>
- <li> <code>none</code> means the absence of &quot;Referer&quot; header. </li>
- <li> <code>blocked</code> means masked <code>Referer</code> header by firewall, for example, &quot;Referer: XXXXXXX&quot;. </li>
- <li> server_names is a list of one or more servers. From version 0.5.33 onwards, * wildcards can be used in the server names. </li>
-</ul><h1><span class="editsection">[<a href="/index.php?title=HttpRefererModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_referer_module.html">Original Documentation</a> </p><br><i>Module: HttpRefererModule</i>
+<h2><span class="mw-headline" id="valid_referers"> valid_referers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>valid_referers</strong> 
+    <code>none</code> |
+    <code>blocked</code> |
+    <code>server_names</code> |
+    <code><i>string</i></code>
+    ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies the “Referer” request header field values
+that will cause the embedded <code>$invalid_referer</code> variable to
+be set to an empty string.
+Otherwise, the variable will be set to “<code>1</code>”.
+Search for a match is case-insensitive.
+</p><p>
+Parameters can be as follows:
+</p> <dl class="compact">
+<dt><code>none</code></dt>
+<dd>
+the “Referer” field is missing in the request header;
+</dd>
+<dt><code>blocked</code></dt>
+<dd>
+the “Referer” field is present in the request header,
+but its value has been deleted by a firewall or proxy server;
+such values are strings that do not start with
+“<code>http://</code>” or “<code>https://</code>”;
+</dd>
+<dt><code>server_names</code></dt>
+<dd>
+the “Referer” request header field contains
+one of the server names;
+</dd>
+<dt>arbitrary string</dt>
+<dd>
+defines a server name and an optional URI prefix.
+A server name can have an “<code>*</code>” at the beginning or end.
+During the checking, the server’s port in the “Referer” field
+is ignored;
+</dd>
+<dt>regular expression</dt>
+<dd>
+the first symbol should be a “<code>~</code>”.
+It should be noted that an expression will be matched against
+the text starting after the “<code>http://</code>”
+or “<code>https://</code>”.
+</dd>
+</dl><p> 
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+valid_referers none blocked server_names
+               *.example.com example.* www.example.org/galleries/
+               ~\.google\.;
+</pre></blockquote><p> 
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+</p> <dl class="compact">
+<dt id="var_invalid_referer"><code>$invalid_referer</code></dt>
+<dd>
+Empty string, if the “Referer” request header field
+value is considered
+<a href="#valid_referers">valid</a>, otherwise “<code>1</code>”.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers">valid_referers</a>]</span>

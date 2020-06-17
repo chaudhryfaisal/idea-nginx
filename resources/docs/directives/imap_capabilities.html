@@ -1,5 +1,49 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=5" title="Edit section: imap capabilities">edit</a>]</span> <span class="mw-headline" id="imap_capabilities"> imap_capabilities </span></h2><p><b>syntax:</b> <i>imap_capabilities</i> <i><b>&quot;capability1&quot; [&quot;capability2&quot; .. &quot;capabilityN&quot;] </b></i> </p><p><b>default:</b> <i>&quot;IMAP4&quot; &quot;IMAP4rev1&quot; &quot;UIDPLUS&quot;</i> </p><p><b>context:</b> <i>main, server</i> </p><p><br /> With this directive you can set the list of <a rel="nofollow" class="external text" href="http://ietf.org/rfc/rfc3501.txt">IMAP protocol</a> extensions presented to the client upon issuing the IMAP command CAPABILITY. <a rel="nofollow" class="external text" href="http://ietf.org/rfc/rfc2595.txt">STARTTLS</a> is automatically added if you enable the <a href="/NginxMailSslModule#starttls" title="NginxMailSslModule" class="mw-redirect"> starttls</a> directive. </p><p>The current list of standardized IMAP expansions is published on <a rel="nofollow" class="external text" href="http://www.iana.org/assignments/imap4-capabilities">www.iana.org</a>. </p><pre>
-mail {
-  imap_capabilities NAMESPACE SORT QUOTA;
-}
-</pre><p>Will the defaults be also set, I haven't see this in the source?! (al 2007-05-11) </p><br><i>Module: MailCoreModule</i>
+<h2><span class="mw-headline" id="imap_capabilities"> imap_capabilities </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>imap_capabilities</strong> <code><i>extension</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>imap_capabilities IMAP4 IMAP4rev1 UIDPLUS;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the
+<a href="https://tools.ietf.org/html/rfc3501">IMAP protocol</a>
+extensions list that is passed to the client in response to
+the <code>CAPABILITY</code> command.
+The authentication methods specified in the <a href="#imap_auth">imap_auth</a> directive and
+<a href="https://tools.ietf.org/html/rfc2595">STARTTLS</a>
+are automatically added to this list depending on the
+<a href="ngx_mail_ssl_module.html#starttls">starttls</a> directive value.
+</p><p>
+It makes sense to specify the extensions
+supported by the IMAP backends
+to which the clients are proxied (if these extensions are related to commands
+used after the authentication, when nginx transparently proxies a client
+connection to the backend).
+</p><p>
+The current list of standardized extensions is published at
+<a href="http://www.iana.org/assignments/imap4-capabilities">www.iana.org</a>.
+</p><a name="imap_client_buffer"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_imap_module.html#imap_capabilities">imap_capabilities</a>]</span>

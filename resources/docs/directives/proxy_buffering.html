@@ -1,27 +1,54 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=5" title="Edit section: proxy buffering">edit</a>]</span> <span class="mw-headline" id="proxy_buffering"> proxy_buffering </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_buffering</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering">proxy_buffering</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 24/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive activate response buffering of the proxied server. </p><p>If buffering is activated, then nginx reads the answer from the proxied server as fast as possible, saving it in the buffer as configured by directives <code>proxy_buffer_size</code> and <code>proxy_buffers</code>. If the response does not fit into memory, then parts of it will be written to disk. </p><p>If buffering is switched off, then the response is synchronously transferred to client immediately as it is received. nginx does not attempt to read the entire answer from the proxied server, the maximum size of data which nginx can accept from the server is set by directive <code>proxy_buffer_size</code>. </p><p>Also note that caching upstream proxy responses won't work if proxy_buffering is set to off. </p><p>For Comet applications based on long-polling it is important to set proxy_buffering to off, otherwise the asynchronous response is buffered and the Comet does not work. </p><p>Buffering can be set on a per-request basis by setting the <a href="/X-accel#X-Accel-Buffering" title="X-accel">X-Accel-Buffering</a> header in the proxy response. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_buffering"> proxy_buffering </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_buffering</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_buffering on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables buffering of responses from the proxied server.
+</p><p>
+When buffering is enabled, nginx receives a response from the proxied server
+as soon as possible, saving it into the buffers set by the
+<a href="#proxy_buffer_size">proxy_buffer_size</a> and <a href="#proxy_buffers">proxy_buffers</a> directives.
+If the whole response does not fit into memory, a part of it can be saved
+to a <a href="#proxy_temp_path">temporary file</a> on the disk.
+Writing to temporary files is controlled by the
+<a href="#proxy_max_temp_file_size">proxy_max_temp_file_size</a> and
+<a href="#proxy_temp_file_write_size">proxy_temp_file_write_size</a> directives.
+</p><p>
+When buffering is disabled, the response is passed to a client synchronously,
+immediately as it is received.
+nginx will not try to read the whole response from the proxied server.
+The maximum size of the data that nginx can receive from the server
+at a time is set by the <a href="#proxy_buffer_size">proxy_buffer_size</a> directive.
+</p><p>
+Buffering can also be enabled or disabled by passing
+“<code>yes</code>” or “<code>no</code>” in the
+“X-Accel-Buffering” response header field.
+This capability can be disabled using the
+<a href="#proxy_ignore_headers">proxy_ignore_headers</a> directive.
+</p><a name="proxy_buffers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering">proxy_buffering</a>]</span>

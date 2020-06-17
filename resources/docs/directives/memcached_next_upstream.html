@@ -1,27 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=8" title="Edit section: memcached next upstream">edit</a>]</span> <span class="mw-headline" id="memcached_next_upstream"> memcached_next_upstream </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>memcached_next_upstream</b> <code>error</code> | <code>timeout</code> | <code>invalid_response</code> | <code>not_found</code> | <code>off</code> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>error timeout</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_next_upstream">memcached_next_upstream</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 48/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Which failure conditions should cause the request to be forwarded to another upstream server? Applies only when the value in memcached_pass is an upstream with two or more servers. </p><h1><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=9" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpMemcachedModule</i>
+<h2><span class="mw-headline" id="memcached_next_upstream"> memcached_next_upstream </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>memcached_next_upstream</strong> 
+    <code>error</code> |
+    <code>timeout</code> |
+    <code>invalid_response</code> |
+    <code>not_found</code> |
+    <code>off</code>
+    ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>memcached_next_upstream error timeout;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies in which cases a request should be passed to the next server:
+</p> <dl class="compact">
+<dt><code>error</code></dt>
+<dd>an error occurred while establishing a connection with the
+server, passing a request to it, or reading the response header;</dd>
+<dt><code>timeout</code></dt>
+<dd>a timeout has occurred while establishing a connection with the
+server, passing a request to it, or reading the response header;</dd>
+<dt><code>invalid_response</code></dt>
+<dd>a server returned an empty or invalid response;</dd>
+<dt><code>not_found</code></dt>
+<dd>a response was not found on the server;</dd>
+<dt><code>off</code></dt>
+<dd>disables passing a request to the next server.</dd>
+</dl><p> 
+</p><p>
+One should bear in mind that passing a request to the next server is
+only possible if nothing has been sent to a client yet.
+That is, if an error or timeout occurs in the middle of the
+transferring of a response, fixing this is impossible.
+</p><p>
+The directive also defines what is considered an
+<a href="ngx_http_upstream_module.html#max_fails">unsuccessful
+attempt</a> of communication with a server.
+The cases of <code>error</code>, <code>timeout</code> and
+<code>invalid_response</code> are always considered unsuccessful attempts,
+even if they are not specified in the directive.
+The case of <code>not_found</code>
+is never considered an unsuccessful attempt.
+</p><p>
+Passing a request to the next server can be limited by
+<a href="#memcached_next_upstream_tries">the number of tries</a>
+and by <a href="#memcached_next_upstream_timeout">time</a>.
+</p><a name="memcached_next_upstream_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_next_upstream">memcached_next_upstream</a>]</span>

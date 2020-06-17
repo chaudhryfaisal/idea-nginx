@@ -1,17 +1,56 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=25" title="Edit section: scgi pass">edit</a>]</span> <span class="mw-headline" id="scgi_pass"> scgi_pass </span></h2><p><b>syntax:</b> <i>scgi_pass scgi-server</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>location, if in location</i> </p><p>Directive assigns the port or socket on which the SCGI-server is listening. Port can be indicated by itself or as an address and port, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  scgi_pass   localhost:<span class="nu0">9000</span><span class="sy0">;</span></pre>
- </div>
-</div><p>using a Unix domain socket: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  scgi_pass   unix:/tmp/scgi.socket<span class="sy0">;</span></pre>
- </div>
-</div><p>You may also use an upstream block. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend  <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   localhost:<span class="nu0">1234</span><span class="sy0">;</span>
-<span class="br0">}</span>
-&nbsp;
-scgi_pass   backend<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_pass"> scgi_pass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_pass</strong> <code><i>address</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the address of an SCGI server.
+The address can be specified as a domain name or IP address,
+and a port:
+</p> <blockquote class="example"><pre>
+scgi_pass localhost:9000;
+</pre></blockquote><p> 
+or as a UNIX-domain socket path:
+</p> <blockquote class="example"><pre>
+scgi_pass unix:/tmp/scgi.socket;
+</pre></blockquote><p> 
+</p><p>
+If a domain name resolves to several addresses, all of them will be
+used in a round-robin fashion.
+In addition, an address can be specified as a
+<a href="ngx_http_upstream_module.html">server group</a>.
+</p><p>
+Parameter value can contain variables.
+In this case, if an address is specified as a domain name,
+the name is searched among the described
+<a href="ngx_http_upstream_module.html">server groups</a>,
+and, if not found, is determined using a
+<a href="ngx_http_core_module.html#resolver">resolver</a>.
+</p><a name="scgi_pass_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_pass">scgi_pass</a>]</span>

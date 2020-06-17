@@ -1,35 +1,97 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=39" title="Edit section: fastcgi temp path">edit</a>]</span> <span class="mw-headline" id="fastcgi_temp_path"> fastcgi_temp_path </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_temp_path</b> <i>path</i> [ <i>level1</i> [ <i>level2</i> [ <i>level3</i> ]]]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>fastcgi_temp</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_temp_path">fastcgi_temp_path</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 366/1000000
-Post-expand include size: 401/2097152 bytes
-Template argument size: 178/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the path where to store temporary files received from another server. It is possible to use up to 3 levels of subdirectories to create hashed storage. Level value specifies how many symbols will be used for hashing. For example, in the following configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_temp_path"><span class="kw11">fastcgi_temp_path</span></a>  /spool/nginx/fastcgi_temp <span class="nu0">1</span> <span class="nu0">2</span><span class="sy0">;</span></pre>
- </div>
-</div><p>Temporary file name may look like: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">/spool/nginx/fastcgi_temp/<span class="nu0">7</span>/<span class="nu0">45</span>/00000123457</pre>
- </div>
-</div><h1><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=40" title="Edit section: Parameters, transferred to FastCGI-server.">edit</a>]</span> <span class="mw-headline" id="Parameters.2C_transferred_to_FastCGI-server."> Parameters, transferred to FastCGI-server. </span></h1><p>The request headers are transferred to the FastCGI-server in the form of parameters. In the applications and the scripts run from the FastCGI-server, these parameters are usually accessible in the form of environment variables. For example, the header &quot;User-agent&quot; is transferred as parameter HTTP_USER_AGENT. Besides the headers of the HTTP request, it is possible to transfer arbitrary parameters with the aid of directive fastcgi_param. </p><h1><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=41" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_temp_path"> fastcgi_temp_path </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_temp_path</strong> 
+    <code><i>path</i></code>
+    [<code><i>level1</i></code>
+    [<code><i>level2</i></code>
+    [<code><i>level3</i></code>]]];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_temp_path fastcgi_temp;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a directory for storing temporary files
+with data received from FastCGI servers.
+Up to three-level subdirectory hierarchy can be used underneath the specified
+directory.
+For example, in the following configuration
+</p> <blockquote class="example"><pre>
+fastcgi_temp_path /spool/nginx/fastcgi_temp 1 2;
+</pre></blockquote><p> 
+a temporary file might look like this:
+</p> <blockquote class="example"><pre>
+/spool/nginx/fastcgi_temp/<strong>7</strong>/<strong>45</strong>/00000123<strong>457</strong>
+</pre></blockquote><p> 
+</p><p>
+See also the <code>use_temp_path</code> parameter of the
+<a href="#fastcgi_cache_path">fastcgi_cache_path</a> directive.
+</p>
+<a name="parameters"></a><center><h4>Parameters Passed to a FastCGI Server</h4></center><p>
+HTTP request header fields are passed to a FastCGI server as parameters.
+In applications and scripts running as FastCGI servers,
+these parameters are usually made available as environment variables.
+For example, the “User-Agent” header field is passed as the
+<code>HTTP_USER_AGENT</code> parameter.
+In addition to HTTP request header fields, it is possible to pass arbitrary
+parameters using the <a href="#fastcgi_param">fastcgi_param</a> directive.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_http_fastcgi_module</code> module supports embedded
+variables that can be used to set parameters using the
+<a href="#fastcgi_param">fastcgi_param</a> directive:
+</p> <dl class="compact">
+<dt id="var_fastcgi_script_name"><code>$fastcgi_script_name</code>
+</dt>
+<dd>
+request URI or, if a URI ends with a slash, request URI with an index file
+name configured by the <a href="#fastcgi_index">fastcgi_index</a> directive appended to it.
+This variable can be used to set the
+<code>SCRIPT_FILENAME</code> and <code>PATH_TRANSLATED</code>
+parameters that determine the script name in PHP.
+For example, for the “<code>/info/</code>” request with the
+following directives
+<blockquote class="example"><pre>
+fastcgi_index index.php;
+fastcgi_param SCRIPT_FILENAME /home/www/scripts/php$fastcgi_script_name;
+</pre></blockquote>
+the <code>SCRIPT_FILENAME</code> parameter will be equal to
+“<code>/home/www/scripts/php/info/index.php</code>”.
+<p>
+When using the <a href="#fastcgi_split_path_info">fastcgi_split_path_info</a> directive,
+the <code>$fastcgi_script_name</code> variable equals the value of
+the first capture set by the directive.
+</p>
+</dd>
+<dt id="var_fastcgi_path_info"><code>$fastcgi_path_info</code></dt>
+<dd>the value of the second capture set by the
+<a href="#fastcgi_split_path_info">fastcgi_split_path_info</a> directive.
+This variable can be used to set the
+<code>PATH_INFO</code> parameter.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_temp_path">fastcgi_temp_path</a>]</span>

@@ -1,27 +1,38 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpBrowserModule&amp;action=edit&amp;section=3" title="Edit section: ancient browser">edit</a>]</span> <span class="mw-headline" id="ancient_browser"> ancient_browser </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ancient_browser</b> <i>string</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_browser_module.html#ancient_browser">ancient_browser</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 16/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns the substrings, during presence of which in the line &quot;User-agent&quot;, browser are considered as <b>old</b>.<br /> Special line &quot;netscape4&quot; corresponds to regular expression &quot;^Mozilla/[1-4] &quot;. </p><br><i>Module: HttpBrowserModule</i>
+<h2><span class="mw-headline" id="ancient_browser"> ancient_browser </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ancient_browser</strong> <code><i>string</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If any of the specified substrings is found in the “User-Agent”
+request header field, the browser will be considered ancient.
+The special string “<code>netscape4</code>” corresponds to the
+regular expression “<code>^Mozilla/[1-4]</code>”.
+</p><a name="ancient_browser_value"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_browser_module.html#ancient_browser">ancient_browser</a>]</span>

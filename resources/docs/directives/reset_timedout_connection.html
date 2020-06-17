@@ -1,27 +1,47 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=52" title="Edit section: reset timedout connection">edit</a>]</span> <span class="mw-headline" id="reset_timedout_connection"> reset_timedout_connection </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>reset_timedout_connection</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#reset_timedout_connection">reset_timedout_connection</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 428/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive enables or disables resetting the connection on timeout. When resetting the connection, before the socket is closed, the socket SO_LINGER option is set with a 0 timeout, which forces the RST packet to be sent to the client upon closing the socket, thus freeing all memory associated with it. This prevents the socket in the FIN_WAIT1 state, along with the buffers associated with it from lying around. </p><p>Note that sockets with keepalive connections, after the defined timeout, are closed in the usual way. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="reset_timedout_connection"> reset_timedout_connection </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>reset_timedout_connection</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>reset_timedout_connection off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables resetting timed out connections
+and connections
+<a href="ngx_http_rewrite_module.html#return">closed</a>
+with the non-standard code 444 (1.15.2).
+The reset is performed as follows.
+Before closing a socket, the
+<code>SO_LINGER</code>
+option is set on it with a timeout value of 0.
+When the socket is closed, TCP RST is sent to the client, and all memory
+occupied by this socket is released.
+This helps avoid keeping an already closed socket with filled buffers
+in a FIN_WAIT1 state for a long time.
+</p><p>
+It should be noted that timed out keep-alive connections are
+closed normally.
+</p><a name="resolver"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#reset_timedout_connection">reset_timedout_connection</a>]</span>

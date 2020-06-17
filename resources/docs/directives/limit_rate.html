@@ -1,35 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=28" title="Edit section: limit rate">edit</a>]</span> <span class="mw-headline" id="limit_rate"> limit_rate </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>limit_rate</b> <i>rate</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>0</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate">limit_rate</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 227/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns the speed of transmission of the answer to client. Speed is assigned in the bytes per second. Limitation works only for one connection, i.e., if client opens 2 connections, then total velocity will be 2 times higher then the limit set. </p><p>If it is necessary to limit speed for the part of the clients at the <i>server</i> level, based on some kind of condition - then this directive does not apply. Instead you should specify the limit by assigning the value to the $limit_rate variable, as shown below: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
-    <a href="/NginxHttpRewriteModule#set"><span class="kw22">set</span></a> <span class="re0">$limit_rate</span>  4k<span class="sy0">;</span>
-  <span class="br0">}</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>You can also control the rate of individual responses returned by a <code>proxy_pass</code> response (<a href="/HttpProxyModule" title="HttpProxyModule">HttpProxyModule</a>) by setting the <code>X-Accel-Limit-Rate</code> header (<a href="/XSendfile" title="XSendfile">XSendfile</a>). This can be done without a <code>X-Accel-Redirect</code> header. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="limit_rate"> limit_rate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>limit_rate</strong> <code><i>rate</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>limit_rate 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Limits the rate of response transmission to a client.
+The <code><i>rate</i></code> is specified in bytes per second.
+The zero value disables rate limiting.
+The limit is set per a request, and so if a client simultaneously opens
+two connections, the overall rate will be twice as much
+as the specified limit.
+</p><p>
+Parameter value can contain variables (1.17.0).
+It may be useful in cases where rate should be limited
+depending on a certain condition:
+</p> <blockquote class="example"><pre>
+map $slow $rate {
+    1     4k;
+    2     8k;
+}
+limit_rate $rate;
+</pre></blockquote><p> 
+</p><p>
+Rate limit can also be set in the
+<a href="#var_limit_rate"><code>$limit_rate</code></a> variable,
+however, since version 1.17.0, this method is not recommended:
+</p> <blockquote class="example"><pre>
+server {
+    if ($slow) {
+        set $limit_rate 4k;
+    }
+    ...
+}
+</pre></blockquote><p> 
+</p><p>
+Rate limit can also be set in the
+“X-Accel-Limit-Rate” header field of a proxied server response.
+This capability can be disabled using the
+<a href="ngx_http_proxy_module.html#proxy_ignore_headers">proxy_ignore_headers</a>,
+<a href="ngx_http_fastcgi_module.html#fastcgi_ignore_headers">fastcgi_ignore_headers</a>,
+<a href="ngx_http_uwsgi_module.html#uwsgi_ignore_headers">uwsgi_ignore_headers</a>,
+and
+<a href="ngx_http_scgi_module.html#scgi_ignore_headers">scgi_ignore_headers</a>
+directives.
+</p><a name="limit_rate_after"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate">limit_rate</a>]</span>

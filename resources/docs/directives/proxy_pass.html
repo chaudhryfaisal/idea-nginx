@@ -1,85 +1,58 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=32" title="Edit section: proxy pass">edit</a>]</span> <span class="mw-headline" id="proxy_pass"> proxy_pass </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_pass</b> <i>URL</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> location<br />if in location<br />limit_except</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">proxy_pass</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 237/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets the address of the proxied server and the URI to which location will be mapped. Address may be given as hostname or address and port, for example, </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/uri/<span class="sy0">;</span></pre>
- </div>
-</div><p>or as unix socket path: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://unix:/path/to/backend.socket:/uri/<span class="sy0">;</span></pre>
- </div>
-</div><p>path is given after the word <code>unix</code> between two colons. </p><p>By default, the Host header from the request is not forwarded, but is set based on the proxy_pass statement. To forward the requested Host header, it is necessary to use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$host</span><span class="sy0">;</span></pre>
- </div>
-</div><p>While passing request nginx replaces URI part which corresponds to location with one indicated in proxy_pass directive. But there are two exceptions from this rule when it is not possible to determine what to replace: </p><ul>
- <li> if the location is given by regular expression; </li>
- <li> if inside proxied location URI is changed by rewrite directive, and this configuration will be used to process request (break): </li>
-</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  /name/ <span class="br0">{</span>
-  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>      /name/<span class="br0">(</span><span class="br0">[</span>^/<span class="br0">]</span> +<span class="br0">)</span>  /users?name<span class="sy0">=</span>$<span class="nu0">1</span>  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://127.0.0.1<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>For these cases of URI it is transferred without the mapping. </p><p>Furthermore, it is possible to indicate so that URI should be transferred in the same form as sent by client, not in processed form. During processing: </p><ul>
- <li> two or by more slashes are converted into one slash: &quot;//&quot; -- &quot;/&quot;; </li>
- <li> references to the current directory are removed: &quot;/./&quot; -- &quot;/&quot;; </li>
- <li> references to the previous catalog are removed: &quot;/dir /../&quot; -- &quot;/&quot;. </li>
-</ul><p>If it is necessary to transmit URI in the unprocessed form then directive proxy_pass should be used without URI part: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  /some/path/ <span class="br0">{</span>
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://127.0.0.1<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>A special case is using variables in the proxy_pass statement: The requested URL is not used and you are fully responsible to construct the target URL yourself. </p><p>This means, the following is not what you want for rewriting into a zope virtual host monster, as it will proxy always to the same URL (within one server specification): </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://127.0.0.1:<span class="nu0">8080</span>/VirtualHostBase/https/<span class="re0">$server_name</span>:<span class="nu0">443</span>/some/path/VirtualHostRoot<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>Instead use a combination of rewrite and proxy_pass: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^<span class="br0">(</span>.*<span class="br0">)</span>$ /VirtualHostBase/https/<span class="re0">$server_name</span>:<span class="nu0">443</span>/some/path/VirtualHostRoot$<span class="nu0">1</span> <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
-  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://127.0.0.1:<span class="nu0">8080</span><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>In this case URL sanitizing is done already as part of the rewriting process, i.e. a trailing slash with the proxy_pass statement has no further effect. </p><p>If you need the proxy connection to an upstream server group to use SSL, your proxy_pass rule should use https:// and you will also have to set your SSL port explicitly in the upstream definition. Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend-secure <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> 10.0.0.20:<span class="nu0">443</span><span class="sy0">;</span>
-<span class="br0">}</span>
-&nbsp;
-<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 10.0.0.1:<span class="nu0">443</span><span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-    <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> https://backend-secure<span class="sy0">;</span>
-  <span class="br0">}</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_pass"> proxy_pass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_pass</strong> <code><i>address</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the address of a proxied server.
+The address can be specified as a domain name or IP address,
+and a port:
+</p> <blockquote class="example"><pre>
+proxy_pass localhost:12345;
+</pre></blockquote><p> 
+or as a UNIX-domain socket path:
+</p> <blockquote class="example"><pre>
+proxy_pass unix:/tmp/stream.socket;
+</pre></blockquote><p> 
+</p><p>
+If a domain name resolves to several addresses, all of them will be
+used in a round-robin fashion.
+In addition, an address can be specified as a
+<a href="ngx_stream_upstream_module.html">server group</a>.
+</p><p>
+The address can also be specified using variables (1.11.3):
+</p> <blockquote class="example"><pre>
+proxy_pass $upstream;
+</pre></blockquote><p> 
+In this case, the server name is searched among the described
+<a href="ngx_stream_upstream_module.html">server groups</a>,
+and, if not found, is determined using a
+<a href="ngx_stream_core_module.html#resolver">resolver</a>.
+</p><a name="proxy_protocol"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_pass">proxy_pass</a>]</span>

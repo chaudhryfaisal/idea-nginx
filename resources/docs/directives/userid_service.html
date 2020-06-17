@@ -1,27 +1,62 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUseridModule&amp;action=edit&amp;section=9" title="Edit section: userid service">edit</a>]</span> <span class="mw-headline" id="userid_service"> userid_service </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>userid_service</b> <i>number</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>IP address of the server</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid_service">userid_service</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 55/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns the IP address of the server which gave out cookie. If not set, version 1 cookies set to zero, and for version 2 cookies the IP address of server. </p><h1><span class="editsection">[<a href="/index.php?title=HttpUseridModule&amp;action=edit&amp;section=10" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_userid_module.html">Original Documentation</a> </p><br><i>Module: HttpUseridModule</i>
+<h2><span class="mw-headline" id="userid_service"> userid_service </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>userid_service</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>userid_service IP address of the server;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If identifiers are issued by multiple servers (services),
+each service should be assigned its own <code><i>number</i></code>
+to ensure that client identifiers are unique.
+For version 1 cookies, the default value is zero.
+For version 2 cookies, the default value is the number composed from the last
+four octets of the server’s IP address.
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_http_userid_module</code> module
+supports the following embedded variables:
+</p> <dl class="compact">
+<dt id="var_uid_got"><code>$uid_got</code></dt>
+<dd>
+The cookie name and received client identifier.
+</dd>
+<dt id="var_uid_reset"><code>$uid_reset</code></dt>
+<dd>
+If the variable is set to a non-empty string that is not “<code>0</code>”,
+the client identifiers are reset.
+The special value “<code>log</code>” additionally leads to the output of
+messages about the reset identifiers to the
+<a href="../ngx_core_module.html#error_log">error_log</a>.
+</dd>
+<dt id="var_uid_set"><code>$uid_set</code></dt>
+<dd>
+The cookie name and sent client identifier.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid_service">userid_service</a>]</span>

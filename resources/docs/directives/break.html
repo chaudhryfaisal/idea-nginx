@@ -1,34 +1,48 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=3" title="Edit section: break">edit</a>]</span> <span class="mw-headline" id="break"> break </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>break</b> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> server<br />location<br />if</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break">break</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 10/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Completes the current set of rules. Continue processing within the current location block but do not process any more rewrite directives. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a>  10k<span class="sy0">;</span>
-  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpRewriteModule</i>
+<h2><span class="mw-headline" id="break"> break </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>break</strong>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>server</code>, <code>location</code>, <code>if</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Stops processing the current set of
+<code>ngx_http_rewrite_module</code> directives.
+</p><p>
+If a directive is specified inside the
+<a href="ngx_http_core_module.html#location">location</a>,
+further processing of the request continues in this location.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+if ($slow) {
+    limit_rate 10k;
+    break;
+}
+</pre></blockquote><p> 
+</p><a name="if"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break">break</a>]</span>

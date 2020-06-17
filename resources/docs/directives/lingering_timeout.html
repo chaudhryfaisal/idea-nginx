@@ -1,27 +1,39 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=32" title="Edit section: lingering timeout">edit</a>]</span> <span class="mw-headline" id="lingering_timeout"> lingering_timeout </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>lingering_timeout</b> <i>time</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>5s</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_timeout">lingering_timeout</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 261/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Sets SO_LINGER on sockets. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="lingering_timeout"> lingering_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>lingering_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>lingering_timeout 5s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+When <a href="#lingering_close">lingering_close</a> is in effect, this directive specifies
+the maximum waiting time for more client data to arrive.
+If data are not received during this time, the connection is closed.
+Otherwise, the data are read and ignored, and nginx starts waiting
+for more data again.
+The “wait-read-ignore” cycle is repeated, but no longer than specified by the
+<a href="#lingering_time">lingering_time</a> directive.
+</p><a name="listen"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_timeout">lingering_timeout</a>]</span>

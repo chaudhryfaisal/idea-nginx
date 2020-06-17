@@ -1,40 +1,63 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpXsltModule&amp;action=edit&amp;section=6" title="Edit section: xslt stylesheet">edit</a>]</span> <span class="mw-headline" id="xslt_stylesheet"> xslt_stylesheet </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>xslt_stylesheet</b> <i>stylesheet</i> [ <i>parameter</i> = <i>value</i> ...]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_xslt_module.html#xslt_stylesheet">xslt_stylesheet</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 40/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Specifies the XSLT template with its parameters. Template is compiled at the stage of configuration. The parameters are assigned as shown: </p><pre>
-  param=value
-</pre><p>You can specify parameters either one per line, or separate multiple parameters with colon (“: ”) If the parameter itself contains the character “:”, escape it as “%3A”. Furthermore, libxslt requires that string parameters should be quoted by the single or dual quotation marks if they contain non-alphanumeric characters, for example: </p><pre>
-  param1='http%3A//www.example.com': param2=value2
-</pre><p>It's possible to use variables as parameters, for example, the entire line of the parameters can be substituted with one variable: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-    <a href="/NginxHttpXsltModule#xslt_stylesheet"><span class="kw36">xslt_stylesheet</span></a> /site/xslt/one.xslt
-    <span class="re0">$arg_xslt_params</span>
-    param1<span class="sy0">=</span><span class="st0">'$value1'</span>: param2<span class="sy0">=</span>value2
-    param3<span class="sy0">=</span>value3<span class="sy0">;</span>
-  <span class="br0">}</span></pre>
- </div>
-</div><p>It is possible to specify several templates, in which case they would be chained together in the order of their declaration. </p><br><i>Module: HttpXsltModule</i>
+<h2><span class="mw-headline" id="xslt_stylesheet"> xslt_stylesheet </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>xslt_stylesheet</strong> 
+    <code><i>stylesheet</i></code>
+    [<code><i>parameter</i></code>=<code><i>value</i></code> ...];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the XSLT stylesheet and its optional parameters.
+A stylesheet is compiled at the configuration stage.
+</p><p>
+Parameters can either be specified separately, or grouped in a
+single line using the “<code>:</code>” delimiter.
+If a parameter includes the “<code>:</code>” character,
+it should be escaped as “<code>%3A</code>”.
+Also, <code>libxslt</code> requires to enclose parameters
+that contain non-alphanumeric characters into single or double quotes,
+for example:
+</p> <blockquote class="example"><pre>
+param1='http%3A//www.example.com':param2=value2
+</pre></blockquote><p> 
+</p><p>
+The parameters description can contain variables, for example,
+the whole line of parameters can be taken from a single variable:
+</p> <blockquote class="example"><pre>
+location / {
+    xslt_stylesheet /site/xslt/one.xslt
+                    $arg_xslt_params
+                    param1='$value1':param2=value2
+                    param3=value3;
+}
+</pre></blockquote><p> 
+</p><p>
+It is possible to specify several stylesheets.
+They will be applied sequentially in the specified order.
+</p><a name="xslt_types"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_xslt_module.html#xslt_stylesheet">xslt_stylesheet</a>]</span>

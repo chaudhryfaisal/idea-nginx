@@ -1,27 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=9" title="Edit section: ssl client certificate">edit</a>]</span> <span class="mw-headline" id="ssl_client_certificate"> ssl_client_certificate </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ssl_client_certificate</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_client_certificate">ssl_client_certificate</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 79/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive specifies the file containing the CA (root) certificate, in PEM format, that is used for validating client certificates. </p><br><i>Module: HttpSslModule</i>
+<h2><span class="mw-headline" id="ssl_client_certificate"> ssl_client_certificate </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_client_certificate</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.8.
+            </p></div><p>
+Specifies a <code><i>file</i></code> with trusted CA certificates in the PEM format
+used to <a href="#ssl_verify_client">verify</a> client certificates.
+</p><p>
+The list of certificates will be sent to clients.
+If this is not desired, the <a href="#ssl_trusted_certificate">ssl_trusted_certificate</a>
+directive can be used.
+</p><a name="ssl_crl"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_client_certificate">ssl_client_certificate</a>]</span>

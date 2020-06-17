@@ -1,1 +1,61 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpSecureLinkModule&amp;action=edit&amp;section=4" title="Edit section: secure link">edit</a>]</span> <span class="mw-headline" id="secure_link"> secure_link </span></h2><p><b>syntax:</b> secure_link <i>md5_hash[,expiration_time]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>location</i> </p><p><b>variables:</b> <i>yes</i> </p><p><br /> This directive specifies the MD5 hash value and the expiration time of this link URI. The md5_hash <b>must</b> be encoded using <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/Base64#URL_applications">Base64 for URLs</a>. expiration_time is the <a rel="nofollow" class="external text" href="https://secure.wikimedia.org/wikipedia/en/wiki/Unix_epoch">Unix epoch</a>. </p><p>If no expiration_time is specified then the link <b>never</b> expires. </p><br><i>Module: HttpSecureLinkModule</i>
+<h2><span class="mw-headline" id="secure_link"> secure_link </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>secure_link</strong> <code><i>expression</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a string with variables from which the
+checksum value and lifetime of a link will be extracted.
+</p><p>
+Variables used in an <code><i>expression</i></code> are usually associated
+with a request; see <a href="#secure_link_md5">example</a> below.
+</p><p>
+The checksum value extracted from the string is compared with
+the MD5 hash value of the expression defined by the
+<a href="#secure_link_md5">secure_link_md5</a> directive.
+If the checksums are different, the <code>$secure_link</code> variable
+is set to an empty string.
+If the checksums are the same, the link lifetime is checked.
+If the link has a limited lifetime and the time has expired,
+the <code>$secure_link</code> variable is set to “<code>0</code>”.
+Otherwise, it is set to “<code>1</code>”.
+The MD5 hash value passed in a request is encoded in
+<a href="https://tools.ietf.org/html/rfc4648#section-5">base64url</a>.
+</p><p>
+If a link has a limited lifetime, the expiration time
+is set in seconds since Epoch (Thu, 01 Jan 1970 00:00:00 GMT).
+The value is specified in the expression after the MD5 hash,
+and is separated by a comma.
+The expiration time passed in a request is available through
+the <code>$secure_link_expires</code> variable for a use in
+the <a href="#secure_link_md5">secure_link_md5</a> directive.
+If the expiration time is not specified, a link has the unlimited
+lifetime.
+</p><a name="secure_link_md5"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link">secure_link</a>]</span>

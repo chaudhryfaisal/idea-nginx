@@ -1,27 +1,47 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=23" title="Edit section: keepalive disable">edit</a>]</span> <span class="mw-headline" id="keepalive_disable"> keepalive_disable </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>keepalive_disable</b> <code>none</code> | <i>browser</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>msie6</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_disable">keepalive_disable</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 189/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Disable keepalive for certain user agents (0.9.0+). By default keepalive is disabled for MS Internet Explorer (older than 6.0 service pack 2) after <code>POST</code> requests, and for Safari. This is because both browsers have issues with handling <code>POST</code> requests with keepalives. If you are running a site that does not use <code>POST</code> anywhere, you may optionally choose to enable keepalive in these browsers. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="keepalive_disable"> keepalive_disable </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>keepalive_disable</strong> <code>none</code> | <code><i>browser</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>keepalive_disable msie6;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Disables keep-alive connections with misbehaving browsers.
+The <code><i>browser</i></code> parameters specify which
+browsers will be affected.
+The value <code>msie6</code> disables keep-alive connections
+with old versions of MSIE, once a POST request is received.
+The value <code>safari</code> disables keep-alive connections
+with Safari and Safari-like browsers on macOS and macOS-like
+operating systems.
+The value <code>none</code> enables keep-alive connections
+with all browsers.
+</p> <blockquote class="note">
+Prior to version 1.1.18, the value <code>safari</code> matched
+all Safari and Safari-like browsers on all operating systems, and
+keep-alive connections with them were disabled by default.
+</blockquote><p> 
+</p><a name="keepalive_requests"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_disable">keepalive_disable</a>]</span>

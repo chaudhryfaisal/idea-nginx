@@ -1,31 +1,117 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=4" title="Edit section: keepalive">edit</a>]</span> <span class="mw-headline" id="keepalive"> keepalive </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>keepalive</b> <i>connections</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> upstream</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.1.4</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive">keepalive</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 23/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpUpstreamModule</i>
+<h2><span class="mw-headline" id="keepalive"> keepalive </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>keepalive</strong> <code><i>connections</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.4.
+            </p></div><p>
+Activates the cache for connections to upstream servers.
+</p><p>
+The <code><i>connections</i></code> parameter sets the maximum number of
+idle keepalive connections to upstream servers that are preserved in
+the cache of each worker process.
+When this number is exceeded, the least recently used connections
+are closed.
+</p> <blockquote class="note">
+It should be particularly noted that the <code>keepalive</code> directive
+does not limit the total number of connections to upstream servers
+that an nginx worker process can open.
+The <code><i>connections</i></code> parameter should be set to a number small enough
+to let upstream servers process new incoming connections as well.
+</blockquote><p> 
+</p><p>
+Example configuration of memcached upstream with keepalive connections:
+</p> <blockquote class="example"><pre>
+upstream memcached_backend {
+    server 127.0.0.1:11211;
+    server 10.0.0.2:11211;
+    keepalive 32;
+}
+server {
+    ...
+    location /memcached/ {
+        set $memcached_key $uri;
+        memcached_pass memcached_backend;
+    }
+}
+</pre></blockquote><p> 
+</p><p>
+For HTTP, the <a href="ngx_http_proxy_module.html#proxy_http_version">proxy_http_version</a>
+directive should be set to “<code>1.1</code>”
+and the “Connection” header field should be cleared:
+</p> <blockquote class="example"><pre>
+upstream http_backend {
+    server 127.0.0.1:8080;
+    keepalive 16;
+}
+server {
+    ...
+    location /http/ {
+        proxy_pass http://http_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        ...
+    }
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+Alternatively, HTTP/1.0 persistent connections can be used by passing the
+“Connection: Keep-Alive” header field to an upstream server,
+though this method is not recommended.
+</blockquote><p> 
+</p><p>
+For FastCGI servers, it is required to set
+<a href="ngx_http_fastcgi_module.html#fastcgi_keep_conn">fastcgi_keep_conn</a>
+for keepalive connections to work:
+</p> <blockquote class="example"><pre>
+upstream fastcgi_backend {
+    server 127.0.0.1:9000;
+    keepalive 8;
+}
+server {
+    ...
+    location /fastcgi/ {
+        fastcgi_pass fastcgi_backend;
+        fastcgi_keep_conn on;
+        ...
+    }
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+When using load balancer methods other than the default
+round-robin method, it is necessary to activate them before
+the <code>keepalive</code> directive.
+</blockquote><p> 
+</p> <blockquote class="note">
+SCGI and uwsgi protocols do not have a notion of keepalive connections.
+</blockquote><p> 
+</p><a name="keepalive_requests"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive">keepalive</a>]</span>

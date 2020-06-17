@@ -1,27 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpGzipModule&amp;action=edit&amp;section=10" title="Edit section: gzip types">edit</a>]</span> <span class="mw-headline" id="gzip_types"> gzip_types </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>gzip_types</b> <i>mime-type</i> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>text/html</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types">gzip_types</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 68/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Enables compression for additional MIME-types besides &quot;text/html&quot;. &quot;text/html&quot; is always compressed. </p><br><i>Module: HttpGzipModule</i>
+<h2><span class="mw-headline" id="gzip_types"> gzip_types </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>gzip_types</strong> <code><i>mime-type</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>gzip_types text/html;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables gzipping of responses for the specified MIME types in addition
+to “<code>text/html</code>”.
+The special value “<code>*</code>” matches any MIME type (0.8.29).
+Responses with the “<code>text/html</code>” type are always compressed.
+</p><a name="gzip_vary"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types">gzip_types</a>]</span>

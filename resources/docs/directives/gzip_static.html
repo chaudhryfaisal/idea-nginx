@@ -1,27 +1,55 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpGzipStaticModule&amp;action=edit&amp;section=3" title="Edit section: gzip static">edit</a>]</span> <span class="mw-headline" id="gzip_static"> gzip_static </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>gzip_static</b> <code>on</code> | <code>off</code> | <code>always</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html#gzip_static">gzip_static</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 16/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Enables the module. You should ensure that the timestamps of the compressed and uncompressed files match. </p><br><i>Module: HttpGzipStaticModule</i>
+<h2><span class="mw-headline" id="gzip_static"> gzip_static </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>gzip_static</strong> 
+    <code>on</code> |
+    <code>off</code> |
+    <code>always</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>gzip_static off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables (“<code>on</code>”) or disables (“<code>off</code>”)
+checking the existence of precompressed files.
+The following directives are also taken into account:
+<a href="ngx_http_gzip_module.html#gzip_http_version">gzip_http_version</a>,
+<a href="ngx_http_gzip_module.html#gzip_proxied">gzip_proxied</a>,
+<a href="ngx_http_gzip_module.html#gzip_disable">gzip_disable</a>,
+and <a href="ngx_http_gzip_module.html#gzip_vary">gzip_vary</a>.
+</p><p>
+With the “<code>always</code>” value (1.3.6), gzipped file is used
+in all cases, without checking if the client supports it.
+It is useful if there are no uncompressed files on the disk anyway
+or the <a href="ngx_http_gunzip_module.html">ngx_http_gunzip_module</a>
+is used.
+</p><p>
+The files can be compressed using the <code>gzip</code> command,
+or any other compatible one.
+It is recommended that the modification date and time of original and
+compressed files be the same.
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html#gzip_static">gzip_static</a>]</span>

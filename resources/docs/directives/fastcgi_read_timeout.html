@@ -1,27 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=32" title="Edit section: fastcgi read timeout">edit</a>]</span> <span class="mw-headline" id="fastcgi_read_timeout"> fastcgi_read_timeout </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_read_timeout</b> <i>time</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>60s</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_read_timeout">fastcgi_read_timeout</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 308/1000000
-Post-expand include size: 401/2097152 bytes
-Template argument size: 178/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive sets the amount of time for upstream to wait for a fastcgi process to send data. Change this directive if you have long running fastcgi processes that do not produce output until they have finished processing. If you are seeing an upstream timed out error in the error log, then increase this parameter to something more appropriate. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_read_timeout"> fastcgi_read_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_read_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_read_timeout 60s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a timeout for reading a response from the FastCGI server.
+The timeout is set only between two successive read operations,
+not for the transmission of the whole response.
+If the FastCGI server does not transmit anything within this time,
+the connection is closed.
+</p><a name="fastcgi_request_buffering"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_read_timeout">fastcgi_read_timeout</a>]</span>

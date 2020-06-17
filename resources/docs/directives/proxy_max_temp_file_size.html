@@ -1,27 +1,47 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=28" title="Edit section: proxy max temp file size">edit</a>]</span> <span class="mw-headline" id="proxy_max_temp_file_size"> proxy_max_temp_file_size </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_max_temp_file_size</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>1024m</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size">proxy_max_temp_file_size</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 209/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The maximum size of a temporary file when the content is larger than the proxy buffer. If file is larger than this size, it will be served synchronously from upstream server rather than buffered to disk. </p><p>If proxy_max_temp_file_size is equal to zero, temporary files usage will be disabled. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_max_temp_file_size"> proxy_max_temp_file_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_max_temp_file_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_max_temp_file_size 1024m;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+When <a href="#proxy_buffering">buffering</a> of responses from the proxied
+server is enabled, and the whole response does not fit into the buffers
+set by the <a href="#proxy_buffer_size">proxy_buffer_size</a> and <a href="#proxy_buffers">proxy_buffers</a>
+directives, a part of the response can be saved to a temporary file.
+This directive sets the maximum <code><i>size</i></code> of the temporary file.
+The size of data written to the temporary file at a time is set
+by the <a href="#proxy_temp_file_write_size">proxy_temp_file_write_size</a> directive.
+</p><p>
+The zero value disables buffering of responses to temporary files.
+</p><p>
+</p> <blockquote class="note">
+This restriction does not apply to responses
+that will be <a href="#proxy_cache">cached</a>
+or <a href="#proxy_store">stored</a> on disk.
+</blockquote><p> 
+</p><a name="proxy_method"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_max_temp_file_size">proxy_max_temp_file_size</a>]</span>

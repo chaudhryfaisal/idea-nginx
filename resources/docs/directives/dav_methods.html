@@ -1,27 +1,54 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpDavModule&amp;action=edit&amp;section=4" title="Edit section: dav methods">edit</a>]</span> <span class="mw-headline" id="dav_methods"> dav_methods </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>dav_methods</b> <code>off</code> | <code>put</code> | <code>delete</code> | <code>mkcol</code> | <code>copy</code> | <code>move</code> ...</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_dav_module.html#dav_methods">dav_methods</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 29/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive enables specified HTTP and WebDAV methods. Setting it to <code>off</code> disables all methods, ignoring the remaining parameters. </p><p>For the PUT method the destination file must reside on the same partition as the directory where the temporary file is stored (given by directive <code>client_body_temp_path</code> in the <code>location</code> section). </p><p>When a file is created using the PUT method it is possible to assign the modification date by setting the <code>Date</code> header. </p><br><i>Module: HttpDavModule</i>
+<h2><span class="mw-headline" id="dav_methods"> dav_methods </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>dav_methods</strong> 
+    <code>off</code> | <code><i>method</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>dav_methods off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Allows the specified HTTP and WebDAV methods.
+The parameter <code>off</code> denies all methods processed
+by this module.
+The following methods are supported:
+<code>PUT</code>, <code>DELETE</code>, <code>MKCOL</code>,
+<code>COPY</code>, and <code>MOVE</code>.
+</p><p>
+A file uploaded with the PUT method is first written to a temporary file,
+and then the file is renamed.
+Starting from version 0.8.9, temporary files and the persistent store
+can be put on different file systems.
+However, be aware that in this case a file is copied
+across two file systems instead of the cheap renaming operation.
+It is thus recommended that for any given location both saved files and a
+directory holding temporary files, set by the
+<a href="ngx_http_core_module.html#client_body_temp_path">client_body_temp_path</a>
+directive, are put on the same file system.
+</p><p>
+When creating a file with the PUT method, it is possible to specify
+the modification date by passing it in the “Date”
+header field.
+</p><a name="min_delete_depth"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_dav_module.html#dav_methods">dav_methods</a>]</span>

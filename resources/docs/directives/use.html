@@ -1,1 +1,38 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=16" title="Edit section: use">edit</a>]</span> <span class="mw-headline" id="use"> use </span></h2><p><b>Syntax:</b> <i>use [ kqueue | rtsig | epoll | /dev/poll | select | poll | eventport ] </i> </p><p><b>Default:</b> <i> </i> </p><p><br /> If you have more than one event-model specified at the <code>./configure</code> script, then you can tell nginx which one do you want to use. By default nginx looks for the most suitable method for your OS at <code>./configure</code> time. </p><p>You can see the available event-models and how you can activate it at the <code>./configure</code> state <a href="/NginxOptimizations" title="NginxOptimizations" class="mw-redirect"> here</a> </p><p><br /> </p><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="use"> use </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>use</strong> <code><i>method</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies the <a href="events.html">connection processing</a>
+<code><i>method</i></code> to use.
+There is normally no need to specify it explicitly, because nginx will
+by default use the most efficient method.
+</p><a name="user"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#use">use</a>]</span>

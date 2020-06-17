@@ -1,1 +1,34 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=14" title="Edit section: uwsgi cache min uses">edit</a>]</span> <span class="mw-headline" id="uwsgi_cache_min_uses"> uwsgi_cache_min_uses </span></h2><p><b>syntax:</b> <i>uwsgi_cache_min_uses the_number</i> </p><p><b>default:</b> <i>uwsgi_cache_min_uses 1</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive specifies after how many requests to the same URL in will be cached. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_cache_min_uses"> uwsgi_cache_min_uses </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_cache_min_uses</strong> <code><i>number</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_cache_min_uses 1;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>number</i></code> of requests after which the response
+will be cached.
+</p><a name="uwsgi_cache_path"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_cache_min_uses">uwsgi_cache_min_uses</a>]</span>

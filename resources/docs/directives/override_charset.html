@@ -1,27 +1,44 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCharsetModule&amp;action=edit&amp;section=6" title="Edit section: override charset">edit</a>]</span> <span class="mw-headline" id="override_charset"> override_charset </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>override_charset</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#override_charset">override_charset</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 37/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive determines, to carry out reencoding for the response, obtained from the proxied server or from FastCGI-server, if in the response-header a &quot;Content-Type&quot; header already is. If reencoding is permitted, then as the initial encoding the encoding, indicated in the obtained answer, is used. </p><p>It is necessary to note that if the response was obtained in the subquery then, independent of directive override_charset, is always carried out reencoding from encoding of the response into encoding of basic demand. </p><br><i>Module: HttpCharsetModule</i>
+<h2><span class="mw-headline" id="override_charset"> override_charset </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>override_charset</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>override_charset off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Determines whether a conversion should be performed for answers
+received from a proxied or a FastCGI/uwsgi/SCGI/gRPC server
+when the answers already carry a charset in the “Content-Type”
+response header field.
+If conversion is enabled, a charset specified in the received
+response is used as a source charset.
+</p> <blockquote class="note">
+It should be noted that if a response is received in a subrequest
+then the conversion from the response charset to the main request charset
+is always performed, regardless of the <code>override_charset</code>
+directive setting.
+</blockquote><p> 
+</p><a name="source_charset"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#override_charset">override_charset</a>]</span>

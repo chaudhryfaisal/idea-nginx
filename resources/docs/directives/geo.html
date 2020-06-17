@@ -1,72 +1,122 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpGeoModule&amp;action=edit&amp;section=3" title="Edit section: geo">edit</a>]</span> <span class="mw-headline" id="geo"> geo </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>geo</b> [ <i>$address</i> ] <i>$variable</i> { ... }</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_geo_module.html#geo">geo</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive describes the dependency of the value of the defined variable on the client's IP address. By default, the IP address used for doing the lookup is $remote_addr, but since version 0.7.27 it is possible to specify an another variable. </p><p>Note that in the case of an invalid IP address, the value <b>255.255.255.255</b> is used. </p><p>Here we're using <code>$arg_remote_addr</code>: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"> <a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>  <span class="re0">$arg_remote_addr</span> <span class="re0">$geo</span> <span class="br0">{</span>
-   <span class="br0">(</span>...<span class="br0">)</span>
- <span class="br0">}</span></pre>
- </div>
-</div><p>IP addresses are enumerated in CIDR notation. There are four parameters for this directive: </p><ul>
- <li> delete – deletes the specified network (0.7.23). </li>
- <li> default - the value of the defined variable, if the client address does not correspond to any of the enumerated addresses in the directive clauses. Any IP address not matching the enumerated IP adresses is matched by this clause that sets the value of the defined variable. </li>
- <li> include - specifies a file mapping addresses to values of the defined variable. </li>
-</ul><p>Multiple files can be included. </p><ul>
- <li> proxy - specifies the address of a proxy server (requires Nginx version ≥ 0.8.7). NEED MORE DESCRIPTION... </li>
- <li> ranges – specifies that the IP addresses enumerated are in the form of ranges (requires Nginx version ≥ 0.7.23) instead of CIDR notation. This directive must <b>precede</b> all other . </li>
-</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"> <a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>  <span class="re0">$country</span>  <span class="br0">{</span>
-   default          no<span class="sy0">;</span> <span class="co1"># Sets the default value (client doesn't match any of the enumerated IP addresses) to &quot;no&quot;</span>
-   <a href="/NginxHttpCoreModule#include"><span class="kw1">include</span></a>          conf/<a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>.conf<span class="sy0">;</span>
-   127.0.0.0/<span class="nu0">24</span>     us<span class="sy0">;</span>
-   127.0.0.1/<span class="nu0">32</span>     ru<span class="sy0">;</span>
-   10.1.0.0/<span class="nu0">16</span>      ru<span class="sy0">;</span>
-   192.168.1.0/<span class="nu0">24</span>   uk<span class="sy0">;</span>
- <span class="br0">}</span></pre>
- </div>
-</div><p>In the file conf/geo.conf: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"> 10.2.0.0/<span class="nu0">16</span>      ru<span class="sy0">;</span>
- 192.168.2.0/<span class="nu0">24</span>   ru<span class="sy0">;</span></pre>
- </div>
-</div><p>The value will be the the one with maximum agreement. For example, the IP address 127.0.0.1 will get the value &quot;ru&quot;, but not &quot;us&quot;. </p><p>Example with ranges: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"> <a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>  <span class="re0">$country</span>  <span class="br0">{</span>
-   ranges<span class="sy0">;</span>
-   default                    no<span class="sy0">;</span> <span class="co1"># note that ranges precedes all other directives</span>
-   127.0.0.0-127.0.0.0        us<span class="sy0">;</span>
-   127.0.0.1-127.0.0.1        ru<span class="sy0">;</span>
-   127.0.0.1-127.0.0.255      us<span class="sy0">;</span>
-   10.1.0.0-10.1.255.255      ru<span class="sy0">;</span>
-   192.168.1.0-192.168.1.255  uk<span class="sy0">;</span> 
- <span class="br0">}</span></pre>
- </div>
-</div><h1><span class="editsection">[<a href="/index.php?title=HttpGeoModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><ul>
- <li> <a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_geo_module.html">Original Documentation</a> </li>
- <li> <a href="/HWLoadbalancerCheckErrors" title="HWLoadbalancerCheckErrors">HWLoadbalancerCheckErrors</a> </li>
- <li> <a rel="nofollow" class="external text" href="http://www.ruby-forum.com/topic/125810">Creating geo.conf From MaxMind GeoIP Country Database</a> </li>
-</ul><br><i>Module: HttpGeoModule</i>
+<h2><span class="mw-headline" id="geo"> geo </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>geo</strong> [<code><i>$address</i></code>] <code><i>$variable</i></code> { ... }</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Describes the dependency of values of the specified variable
+on the client IP address.
+By default, the address is taken from the <code>$remote_addr</code> variable,
+but it can also be taken from another variable, for example:
+</p> <blockquote class="example"><pre>
+geo $arg_remote_addr $geo {
+    ...;
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+Since variables are evaluated only when used, the mere existence
+of even a large number of declared “<code>geo</code>” variables
+does not cause any extra costs for connection processing.
+</blockquote><p> 
+</p><p>
+If the value of a variable does not represent a valid IP address
+then the “<code>255.255.255.255</code>” address is used.
+</p><p>
+Addresses are specified either as prefixes in CIDR notation
+(including individual addresses) or as ranges.
+</p><p>
+The following special parameters are also supported:
+</p> <dl class="compact">
+<dt><code>delete</code></dt>
+<dd>
+deletes the specified network.
+</dd>
+<dt><code>default</code></dt>
+<dd>
+a value set to the variable if the client address does not
+match any of the specified addresses.
+When addresses are specified in CIDR notation,
+“<code>0.0.0.0/0</code>” and “<code>::/0</code>”
+can be used instead of <code>default</code>.
+When <code>default</code> is not specified, the default
+value will be an empty string.
+</dd>
+<dt><code>include</code></dt>
+<dd>
+includes a file with addresses and values.
+There can be several inclusions.
+</dd>
+<dt><code>ranges</code></dt>
+<dd>
+indicates that addresses are specified as ranges.
+This parameter should be the first.
+To speed up loading of a geo base, addresses should be put in ascending order.
+</dd>
+</dl><p> 
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+geo $country {
+    default        ZZ;
+    include        conf/geo.conf;
+    delete         127.0.0.0/16;
+    127.0.0.0/24   US;
+    127.0.0.1/32   RU;
+    10.1.0.0/16    RU;
+    192.168.1.0/24 UK;
+}
+</pre></blockquote><p> 
+</p><p>
+The <code>conf/geo.conf</code> file could contain the following lines:
+</p> <blockquote class="example"><pre>
+10.2.0.0/16    RU;
+192.168.2.0/24 RU;
+</pre></blockquote><p> 
+</p><p>
+A value of the most specific match is used.
+For example, for the 127.0.0.1 address the value “<code>RU</code>”
+will be chosen, not “<code>US</code>”.
+</p><p>
+Example with ranges:
+</p> <blockquote class="example"><pre>
+geo $country {
+    ranges;
+    default                   ZZ;
+    127.0.0.0-127.0.0.0       US;
+    127.0.0.1-127.0.0.1       RU;
+    127.0.0.1-127.0.0.255     US;
+    10.1.0.0-10.1.255.255     RU;
+    192.168.1.0-192.168.1.255 UK;
+}
+</pre></blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_geo_module.html#geo">geo</a>]</span>

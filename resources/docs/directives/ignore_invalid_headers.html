@@ -1,27 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=21" title="Edit section: ignore invalid headers">edit</a>]</span> <span class="mw-headline" id="ignore_invalid_headers"> ignore_invalid_headers </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ignore_invalid_headers</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#ignore_invalid_headers">ignore_invalid_headers</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 172/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="ignore_invalid_headers"> ignore_invalid_headers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ignore_invalid_headers</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>ignore_invalid_headers on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Controls whether header fields with invalid names should be ignored.
+Valid names are composed of English letters, digits, hyphens, and possibly
+underscores (as controlled by the <a href="#underscores_in_headers">underscores_in_headers</a>
+directive).
+</p><p>
+If the directive is specified on the <a href="#server">server</a> level,
+its value is only used if a server is a default one.
+The value specified also applies to all virtual servers
+listening on the same address and port.
+</p><a name="internal"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#ignore_invalid_headers">ignore_invalid_headers</a>]</span>

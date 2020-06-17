@@ -1,1 +1,35 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=18" title="Edit section: scgi ignore client abort">edit</a>]</span> <span class="mw-headline" id="scgi_ignore_client_abort"> scgi_ignore_client_abort </span></h2><p><b>syntax:</b> <i>scgi_ignore_client_abort on|off</i> </p><p><b>default:</b> <i>scgi_ignore_client_abort off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive determines if current request to the SCGI-server must be aborted in case the client aborts the request to the server. </p><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_ignore_client_abort"> scgi_ignore_client_abort </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_ignore_client_abort</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_ignore_client_abort off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Determines whether the connection with an SCGI server should be
+closed when a client closes the connection without waiting
+for a response.
+</p><a name="scgi_ignore_headers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_ignore_client_abort">scgi_ignore_client_abort</a>]</span>

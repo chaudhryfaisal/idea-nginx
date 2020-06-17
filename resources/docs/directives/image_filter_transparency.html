@@ -1,27 +1,36 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpImageFilterModule&amp;action=edit&amp;section=8" title="Edit section: image filter transparency">edit</a>]</span> <span class="mw-headline" id="image_filter_transparency"> image_filter_transparency </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>image_filter_transparency</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter_transparency">image_filter_transparency</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 51/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive allows you to disable image transparency in GIF and palette-based PNG to improve image resampling quality. </p><p>True color PNG alpha-channels are always preserved despite this setting. </p><p>Note: Grayscale PNG's are untested, but should be handled as truecolor PNGs. </p><h1><span class="editsection">[<a href="/index.php?title=HttpImageFilterModule&amp;action=edit&amp;section=9" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html">Original Documentation</a> </p><br><i>Module: HttpImageFilterModule</i>
+<h2><span class="mw-headline" id="image_filter_transparency"> image_filter_transparency </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>image_filter_transparency</strong> <code>on</code>|<code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>image_filter_transparency on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines whether transparency should be preserved when transforming
+GIF images or PNG images with colors specified by a palette.
+The loss of transparency results in images of a better quality.
+The alpha channel transparency in PNG is always preserved.
+</p><a name="image_filter_webp_quality"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter_transparency">image_filter_transparency</a>]</span>

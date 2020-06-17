@@ -1,31 +1,38 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=10" title="Edit section: ssl crl">edit</a>]</span> <span class="mw-headline" id="ssl_crl"> ssl_crl </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ssl_crl</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 0.8.7</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_crl">ssl_crl</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 86/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive, introduced in Nginx version 0.8.7, specifies the filename of a Certificate Revocation List, in PEM format, which is used to check the revocation status of certificates. </p><br><i>Module: HttpSslModule</i>
+<h2><span class="mw-headline" id="ssl_crl"> ssl_crl </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_crl</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.11.8.
+            </p></div><p>
+Specifies a <code><i>file</i></code> with revoked certificates (CRL)
+in the PEM format used to <a href="#ssl_verify_client">verify</a>
+client certificates.
+</p><a name="ssl_dhparam"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_crl">ssl_crl</a>]</span>

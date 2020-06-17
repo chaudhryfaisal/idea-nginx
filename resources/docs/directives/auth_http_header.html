@@ -1,3 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailAuthModule&amp;action=edit&amp;section=4" title="Edit section: auth http header">edit</a>]</span> <span class="mw-headline" id="auth_http_header"> auth_http_header </span></h2><p><b>syntax:</b> <i>auth_http_header</i> <i><b>header value</b></i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>With this directive you can add a HTTP header and value during the identification process. This makes it possible to use a shared secret to ensure that the request was answered by nginx. </p><p>For example: </p><pre>
-auth_http_header X-NGX-Auth-Key &quot;secret_string&quot;;
-</pre><br><i>Module: MailAuthModule</i>
+<h2><span class="mw-headline" id="auth_http_header"> auth_http_header </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>auth_http_header</strong> <code><i>header</i></code> <code><i>value</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Appends the specified header to requests sent to the authentication server.
+This header can be used as the shared secret to verify
+that the request comes from nginx.
+For example:
+</p> <blockquote class="example"><pre>
+auth_http_header X-Auth-Key "secret_string";
+</pre></blockquote><p> 
+</p><a name="auth_http_pass_client_cert"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_auth_http_module.html#auth_http_header">auth_http_header</a>]</span>

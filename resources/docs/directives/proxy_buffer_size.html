@@ -1,27 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=4" title="Edit section: proxy buffer size">edit</a>]</span> <span class="mw-headline" id="proxy_buffer_size"> proxy_buffer_size </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_buffer_size</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>4k|8k</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffer_size">proxy_buffer_size</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 17/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive set the buffer size, into which will be read the first part of the response, obtained from the proxied server. </p><p>In this part of response the small response-header is located, as a rule. </p><p>By default, the buffer size is equal to the size of one buffer in directive <code>proxy_buffers</code>; however, it is possible to set it to less. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_buffer_size"> proxy_buffer_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_buffer_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_buffer_size 16k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.9.4.
+            </p></div><p>
+Sets the <code><i>size</i></code> of the buffer used for reading data
+from the proxied server.
+Also sets the <code><i>size</i></code> of the buffer used for reading data
+from the client.
+</p><a name="proxy_connect_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_buffer_size">proxy_buffer_size</a>]</span>

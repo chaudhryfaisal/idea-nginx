@@ -1,31 +1,40 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=11" title="Edit section: proxy cache lock">edit</a>]</span> <span class="mw-headline" id="proxy_cache_lock"> proxy_cache_lock </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_cache_lock</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.1.12</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock">proxy_cache_lock</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 78/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_cache_lock"> proxy_cache_lock </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache_lock</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_cache_lock off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.12.
+            </p></div><p>
+When enabled, only one request at a time will be allowed to populate
+a new cache element identified according to the <a href="#proxy_cache_key">proxy_cache_key</a>
+directive by passing a request to a proxied server.
+Other requests of the same cache element will either wait
+for a response to appear in the cache or the cache lock for
+this element to be released, up to the time set by the
+<a href="#proxy_cache_lock_timeout">proxy_cache_lock_timeout</a> directive.
+</p><a name="proxy_cache_lock_age"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock">proxy_cache_lock</a>]</span>

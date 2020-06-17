@@ -1,67 +1,197 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=62" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>server</b> { ... }</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server">server</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 510/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns configuration for the virtual server. </p><p>There is no separation of IP and name-based (the <code>Host</code> header of the request) servers. </p><p>Instead, the directive <code>listen</code> is used to describe all addresses and ports on which incoming connections can occur, and in directive <code>server_name</code> indicate all names of the server. </p><br><i>Module: HttpCoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=6" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>server</b> <i>address</i> [ <i>parameters</i> ]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> upstream</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#server">server</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 37/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns the name and the parameters of server. For the name it is possible to use a domain name, an address, port or unix socket. If domain name resolves to several addresses, then all are used. </p><ul>
- <li> weight = NUMBER - set weight of the server, if not set weight is equal to one. </li>
- <li> max_fails = NUMBER - number of unsuccessful attempts at communicating with the server within the time period (assigned by parameter fail_timeout) after which it is considered inoperative. If not set, the number of attempts is one. A value of 0 turns off this check. What is considered a failure is defined by <a href="/NginxHttpProxyModule#proxy_next_upstream" title="NginxHttpProxyModule" class="mw-redirect">proxy_next_upstream</a> or <a href="/HttpFcgiModule#fastcgi_next_upstream" title="HttpFcgiModule" class="mw-redirect">fastcgi_next_upstream</a> (except http_404 errors which do not count towards max_fails). </li>
- <li> fail_timeout = TIME - the time during which must occur *max_fails* number of unsuccessful attempts at communication with the server that would cause the server to be considered inoperative, and also the time for which the server will be considered inoperative (before another attempt is made). If not set the time is 10 seconds. fail_timeout has nothing to do with upstream response time, use <a href="/NginxHttpProxyModule#proxy_connect_timeout" title="NginxHttpProxyModule" class="mw-redirect">proxy_connect_timeout</a> and <a href="/NginxHttpProxyModule#proxy_read_timeout" title="NginxHttpProxyModule" class="mw-redirect">proxy_read_timeout</a> for controlling this. </li>
- <li> down - marks server as permanently offline, to be used with the directive ip_hash. </li>
- <li> backup - (0.6.7 or later) only uses this server if the non-backup servers are all down or busy (cannot be used with the directive ip_hash) </li>
-</ul><p>Example configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a>  backend  <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   backend1.example.com    weight<span class="sy0">=</span><span class="nu0">5</span><span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   127.0.0.1:<span class="nu0">8080</span>          max_fails<span class="sy0">=</span><span class="nu0">3</span>  fail_timeout<span class="sy0">=</span>30s<span class="sy0">;</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   unix:/tmp/backend3<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p><b>Attention: If you use only one upstream server nginx set a internal variable to 1, this means that the max_fails &amp; fail_timeout parameter are not handled.</b> </p><p>Effect: If nginx can not connect to upstream the request it's gone. </p><p>Solution: Use the same server several times </p><br><i>Module: HttpUpstreamModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=11" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><p><b>syntax:</b> <i>server {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>mail</i> </p><p>Directive assigns configuration for the virtual server. </p><p>There is no clear separation of the virtual servers ip-based and name-based (the value of the line &quot;Host&quot; header in the request). </p><p>Instead of this by directives listen are described all addresses and ports, on which it is necessary to assume connections for this server, and in directive server_name are indicated all names of servers. Example configurations are described in tuning of virtual servers. </p><br><i>Module: MailCoreModule</i>
+<h2><span class="mw-headline" id="server"> server </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>server</strong> <code><i>address</i></code> [<code><i>parameters</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the <code><i>address</i></code> and other <code><i>parameters</i></code>
+of a server.
+The address can be specified as a domain name or IP address
+with an obligatory port, or as a UNIX-domain socket path
+specified after the “<code>unix:</code>” prefix.
+A domain name that resolves to several IP addresses defines
+multiple servers at once.
+</p><p>
+The following parameters can be defined:
+</p> <dl class="compact">
+<dt id="weight">
+<code>weight</code>=<code><i>number</i></code>
+</dt>
+<dd>
+sets the weight of the server, by default, 1.
+</dd>
+<dt id="max_conns">
+<code>max_conns</code>=<code><i>number</i></code>
+</dt>
+<dd>
+limits the maximum <code><i>number</i></code> of simultaneous
+connections to the proxied server (1.11.5).
+Default value is zero, meaning there is no limit.
+If the server group does not reside in the <a href="#zone">shared memory</a>,
+the limitation works per each worker process.
+<blockquote class="note">
+Prior to version 1.11.5, this parameter was available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote>
+</dd>
+<dt id="max_fails">
+<code>max_fails</code>=<code><i>number</i></code>
+</dt>
+<dd>
+sets the number of unsuccessful attempts to communicate with the server
+that should happen in the duration set by the <code>fail_timeout</code>
+parameter to consider the server unavailable for a duration also set by the
+<code>fail_timeout</code> parameter.
+By default, the number of unsuccessful attempts is set to 1.
+The zero value disables the accounting of attempts.
+Here, an unsuccessful attempt is an error or timeout
+while establishing a connection with the server.
+</dd>
+<dt id="fail_timeout">
+<code>fail_timeout</code>=<code><i>time</i></code>
+</dt>
+<dd>
+sets
+<ul class="compact">
+<li>
+the time during which the specified number of unsuccessful attempts to
+communicate with the server should happen to consider the server unavailable;
+</li>
+<li>
+and the period of time the server will be considered unavailable.
+</li>
+</ul>
+By default, the parameter is set to 10 seconds.
+</dd>
+<dt id="backup">
+<code>backup</code>
+</dt>
+<dd>
+marks the server as a backup server.
+Connections to the backup server will be passed
+when the primary servers are unavailable.
+<blockquote class="note">
+The parameter cannot be used along with the
+<a href="#hash">hash</a> and <a href="#random">random</a> load balancing methods.
+</blockquote>
+</dd>
+<dt id="down">
+<code>down</code>
+</dt>
+<dd>
+marks the server as permanently unavailable.
+</dd>
+</dl><p> 
+</p><p>
+Additionally,
+the following parameters are available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>:
+</p> <dl class="compact">
+<dt id="resolve">
+<code>resolve</code>
+</dt>
+<dd>
+monitors changes of the IP addresses
+that correspond to a domain name of the server,
+and automatically modifies the upstream configuration
+without the need of restarting nginx.
+The server group must reside in the <a href="#zone">shared memory</a>.
+<p>
+In order for this parameter to work,
+the <code>resolver</code> directive
+must be specified in the
+<a href="ngx_stream_core_module.html#resolver">stream</a> block
+or in the corresponding <a href="#resolver">upstream</a> block.
+</p>
+</dd>
+<dt id="service">
+<code>service</code>=<code><i>name</i></code>
+</dt>
+<dd>
+enables resolving of DNS
+<a href="https://tools.ietf.org/html/rfc2782">SRV</a>
+records and sets the service <code><i>name</i></code> (1.9.13).
+In order for this parameter to work, it is necessary to specify
+the <a href="#resolve">resolve</a> parameter for the server
+and specify a hostname without a port number.
+<p>
+If the service name does not contain a dot (“<code>.</code>”), then
+the <a href="https://tools.ietf.org/html/rfc2782">RFC</a>-compliant name
+is constructed
+and the TCP protocol is added to the service prefix.
+For example, to look up the
+<code>_http._tcp.backend.example.com</code> SRV record,
+it is necessary to specify the directive:
+</p> <blockquote class="example"><pre>
+server backend.example.com service=http resolve;
+</pre></blockquote><p> 
+If the service name contains one or more dots, then the name is constructed
+by joining the service prefix and the server name.
+For example, to look up the <code>_http._tcp.backend.example.com</code>
+and <code>server1.backend.example.com</code> SRV records,
+it is necessary to specify the directives:
+</p> <blockquote class="example"><pre>
+server backend.example.com service=_http._tcp resolve;
+server example.com service=server1.backend resolve;
+</pre></blockquote><p> 
+</p>
+<p>
+Highest-priority SRV records
+(records with the same lowest-number priority value)
+are resolved as primary servers,
+the rest of SRV records are resolved as backup servers.
+If the <a href="#backup">backup</a> parameter is specified for the server,
+high-priority SRV records are resolved as backup servers,
+the rest of SRV records are ignored.
+</p>
+</dd>
+<dt id="slow_start">
+<code>slow_start</code>=<code><i>time</i></code>
+</dt>
+<dd>
+sets the <code><i>time</i></code> during which the server will recover its weight
+from zero to a nominal value, when unhealthy server becomes
+<a href="ngx_stream_upstream_hc_module.html#health_check">healthy</a>,
+or when the server becomes available after a period of time
+it was considered <a href="#fail_timeout">unavailable</a>.
+Default value is zero, i.e. slow start is disabled.
+<blockquote class="note">
+The parameter cannot be used along with the
+<a href="#hash">hash</a> and <a href="#random">random</a> load balancing methods.
+</blockquote>
+</dd>
+</dl><p> 
+</p><p>
+</p> <blockquote class="note">
+If there is only a single server in a group, <code>max_fails</code>,
+<code>fail_timeout</code> and <code>slow_start</code> parameters
+are ignored, and such a server will never be considered unavailable.
+</blockquote><p> 
+</p><a name="zone"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#server">server</a>]</span>

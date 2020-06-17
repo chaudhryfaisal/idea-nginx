@@ -1,27 +1,35 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=19" title="Edit section: fastcgi ignore client abort">edit</a>]</span> <span class="mw-headline" id="fastcgi_ignore_client_abort"> fastcgi_ignore_client_abort </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_ignore_client_abort</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_ignore_client_abort">fastcgi_ignore_client_abort</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 146/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive determines if current request to the FastCGI-server must be aborted in case the client aborts the request to the server. </p><p>In 1.0.2 POST requests are not handled correctly when fastcgi_ignore_client_abort is set to on which can lead to workers processes segfaulting. Switching fastcgi_ignore_client_abort back to default (off) should resolve this issue. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_ignore_client_abort"> fastcgi_ignore_client_abort </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_ignore_client_abort</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_ignore_client_abort off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Determines whether the connection with a FastCGI server should be
+closed when a client closes the connection without waiting
+for a response.
+</p><a name="fastcgi_ignore_headers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_ignore_client_abort">fastcgi_ignore_client_abort</a>]</span>

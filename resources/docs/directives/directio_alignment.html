@@ -1,31 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=17" title="Edit section: directio alignment">edit</a>]</span> <span class="mw-headline" id="directio_alignment"> directio_alignment </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>directio_alignment</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>512</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 0.8.11</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#directio_alignment">directio_alignment</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 132/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="directio_alignment"> directio_alignment </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>directio_alignment</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>directio_alignment 512;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 0.8.11.
+            </p></div><p>
+Sets the alignment for
+<a href="#directio">directio</a>.
+In most cases, a 512-byte alignment is enough.
+However, when using XFS under Linux, it needs to be increased to 4K.
+</p><a name="disable_symlinks"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#directio_alignment">directio_alignment</a>]</span>

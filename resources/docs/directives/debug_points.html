@@ -1,5 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=5" title="Edit section: debug points">edit</a>]</span> <span class="mw-headline" id="debug_points"> debug_points </span></h2><p><b>Syntax:</b> <i>debug_points [stop | abort] </i> </p><p><b>Default:</b> <i>none</i> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#debug_points"><span class="kw1">debug_points</span></a> stop<span class="sy0">;</span></pre>
- </div>
-</div><p>There are some assertion points inside nginx that allow to stop nginx to attach the debugger, or to abort and to create the core file. </p><br><i>Module: CoreModule</i>
+<h2><span class="mw-headline" id="debug_points"> debug_points </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>debug_points</strong> <code>abort</code> | <code>stop</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+This directive is used for debugging.
+</p><p>
+When internal error is detected, e.g. the leak of sockets on
+restart of working processes, enabling <code>debug_points</code>
+leads to a core file creation (<code>abort</code>)
+or to stopping of a process (<code>stop</code>) for further
+analysis using a system debugger.
+</p><a name="env"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#debug_points">debug_points</a>]</span>

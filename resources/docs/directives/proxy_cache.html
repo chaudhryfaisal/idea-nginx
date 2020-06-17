@@ -1,32 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=8" title="Edit section: proxy cache">edit</a>]</span> <span class="mw-headline" id="proxy_cache"> proxy_cache </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_cache</b> <i>zone</i> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache">proxy_cache</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 45/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive sets name of zone for caching. The same zone can be used in multiple places. </p><p>The cache honors backend's &quot;Expires&quot;, &quot;Cache-Control: no-cache&quot;, and &quot;Cache-Control: max-age=XXX&quot; headers since version 0.7.48. Since version 7.66, &quot;private&quot; and &quot;no-store&quot; are also honored. nginx does not handle &quot;Vary&quot; headers when caching. In order to ensure private items are not served to all users unintentionally by the cache, the back-end can set &quot;no-cache&quot; or &quot;max-age=0&quot;, or the <a href="#proxy_cache_key">proxy_cache_key</a> must include user-specific data such as $cookie_xxx. However, using cookie values as part of <b>proxy_cache_key</b> can defeat the benefits of caching for public items, so separate locations with different <b>proxy_cache_key</b> values might be necessary to separate private and public items. </p><p>The cache depends on proxy buffers, and will not work if proxy_buffers is set to off. </p><p>The following response headers flag a response as uncacheable unless they are <a href="#proxy_ignore_headers">ignored</a>: </p><ul>
- <li> Set-Cookie </li>
- <li> Cache-Control containing &quot;no-cache&quot;, &quot;no-store&quot;, &quot;private&quot;, or a &quot;max-age&quot; with a non-numeric or 0 value </li>
- <li> Expires with a time in the past </li>
- <li> X-Accel-Expires: 0 </li>
-</ul><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_cache"> proxy_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cache</strong> <code><i>zone</i></code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_cache off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a shared memory zone used for caching.
+The same zone can be used in several places.
+Parameter value can contain variables (1.7.9).
+The <code>off</code> parameter disables caching inherited
+from the previous configuration level.
+</p><a name="proxy_cache_background_update"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache">proxy_cache</a>]</span>

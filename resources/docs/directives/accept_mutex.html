@@ -1,1 +1,46 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=3" title="Edit section: accept mutex">edit</a>]</span> <span class="mw-headline" id="accept_mutex"> accept_mutex </span></h2><p><b>Syntax:</b> <i>accept_mutex [ on | off ] </i> </p><p><b>Default:</b> <i>on</i> </p><p>nginx uses accept mutex to serialize accept() syscalls. </p><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="accept_mutex"> accept_mutex </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>accept_mutex</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>accept_mutex off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If <code>accept_mutex</code> is enabled,
+worker processes will accept new connections by turn.
+Otherwise, all worker processes will be notified about new connections,
+and if volume of new connections is low, some of the worker processes
+may just waste system resources.
+</p> <blockquote class="note">
+There is no need to enable <code>accept_mutex</code>
+on systems that support the
+<a href="events.html#epoll">EPOLLEXCLUSIVE</a> flag (1.11.3) or
+when using <a href="http/ngx_http_core_module.html#reuseport">reuseport</a>.
+</blockquote><p> 
+</p> <blockquote class="note">
+Prior to version 1.11.3, the default value was <code>on</code>.
+</blockquote><p> 
+</p><a name="accept_mutex_delay"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#accept_mutex">accept_mutex</a>]</span>

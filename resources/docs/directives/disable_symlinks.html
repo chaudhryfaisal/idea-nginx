@@ -1,31 +1,96 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=18" title="Edit section: disable symlinks">edit</a>]</span> <span class="mw-headline" id="disable_symlinks"> disable_symlinks </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>disable_symlinks</b> <code>off</code> <br /><b>disable_symlinks</b> <code>on</code> | <code>if_not_owner</code> [ <code>from</code> = <i>part</i> ]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.1.15</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#disable_symlinks">disable_symlinks</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 139/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="disable_symlinks"> disable_symlinks </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>disable_symlinks</strong> <code>off</code>;</code><br><code><strong>disable_symlinks</strong> 
+    <code>on</code> |
+    <code>if_not_owner</code>
+    [<code>from</code>=<code><i>part</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>disable_symlinks off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.15.
+            </p></div><p>
+Determines how symbolic links should be treated when opening files:
+</p> <dl class="compact">
+<dt><code>off</code></dt>
+<dd>
+Symbolic links in the pathname are allowed and not checked.
+This is the default behavior.
+</dd>
+<dt><code>on</code></dt>
+<dd>
+If any component of the pathname is a symbolic link,
+access to a file is denied.
+</dd>
+<dt><code>if_not_owner</code></dt>
+<dd>
+Access to a file is denied if any component of the pathname
+is a symbolic link, and the link and object that the link
+points to have different owners.
+</dd>
+<dt><code>from</code>=<code><i>part</i></code></dt>
+<dd>
+When checking symbolic links
+(parameters <code>on</code> and <code>if_not_owner</code>),
+all components of the pathname are normally checked.
+Checking of symbolic links in the initial part of the pathname
+may be avoided by specifying additionally the
+<code>from</code>=<code><i>part</i></code> parameter.
+In this case, symbolic links are checked only from
+the pathname component that follows the specified initial part.
+If the value is not an initial part of the pathname checked, the whole
+pathname is checked as if this parameter was not specified at all.
+If the value matches the whole file name,
+symbolic links are not checked.
+The parameter value can contain variables.
+</dd>
+</dl><p> 
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+disable_symlinks on from=$document_root;
+</pre></blockquote><p> 
+</p><p>
+This directive is only available on systems that have the
+<code>openat()</code> and <code>fstatat()</code> interfaces.
+Such systems include modern versions of FreeBSD, Linux, and Solaris.
+</p><p>
+Parameters <code>on</code> and <code>if_not_owner</code>
+add a processing overhead.
+</p> <blockquote class="note">
+On systems that do not support opening of directories only for search,
+to use these parameters it is required that worker processes
+have read permissions for all directories being checked.
+</blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+The
+<a href="ngx_http_autoindex_module.html">ngx_http_autoindex_module</a>,
+<a href="ngx_http_random_index_module.html">ngx_http_random_index_module</a>,
+and <a href="ngx_http_dav_module.html">ngx_http_dav_module</a>
+modules currently ignore this directive.
+</blockquote><p> 
+</p><a name="error_page"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#disable_symlinks">disable_symlinks</a>]</span>

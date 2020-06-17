@@ -1,53 +1,100 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=19" title="Edit section: error page">edit</a>]</span> <span class="mw-headline" id="error_page"> error_page </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>error_page</b> <i>code</i> ... [ <code>=</code> [ <i>response</i> ]] <i>uri</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page">error_page</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 146/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive specifies the URI that will be shown for the errors indicated. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">404</span>          /<span class="nu0">404</span>.html<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">502</span> <span class="nu0">503</span> <span class="nu0">504</span>  /50x.html<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">403</span>          <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://example.com/forbidden.html<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">404</span>          <span class="sy0">=</span> <span class="re0">@fetch</span><span class="sy0">;</span></pre>
- </div>
-</div><p>Furthermore, it is possible to change the status code of the answer to another, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a> <span class="nu0">404</span> <span class="sy0">=</span><span class="nu0">200</span> /empty.gif<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a> <span class="nu0">404</span> <span class="sy0">=</span><span class="nu0">403</span> /forbidden.gif<span class="sy0">;</span></pre>
- </div>
-</div><p>Additionally you can have your designated error handler determine the returned status code by using = without specifying a status code. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">404</span> <span class="sy0">=</span> /<span class="nu0">404</span>.php<span class="sy0">;</span></pre>
- </div>
-</div><p>If there is no need to change URI during redirection it is possible to redirect processing of error pages into a named location: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">(</span>
-    <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a> <span class="nu0">404</span> <span class="re0">@fallback</span><span class="sy0">;</span>
-<span class="br0">)</span>
-&nbsp;
-<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@fallback</span> <span class="br0">(</span>
-    <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://backend<span class="sy0">;</span>
-<span class="br0">)</span></pre>
- </div>
-</div><p>If you want to use error_page for proxy (upstream) status codes, please see <a rel="nofollow" class="external free" href="http://wiki.nginx.org/HttpProxyModule#proxy_intercept_errors">http://wiki.nginx.org/HttpProxyModule#proxy_intercept_errors</a> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="error_page"> error_page </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>error_page</strong> 
+    <code><i>code</i></code> ...
+    [<code>=</code>[<code><i>response</i></code>]]
+    <code><i>uri</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the URI that will be shown for the specified errors.
+A <code><i>uri</i></code> value can contain variables.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+error_page 404             /404.html;
+error_page 500 502 503 504 /50x.html;
+</pre></blockquote><p> 
+</p><p>
+This causes an internal redirect to the specified <code><i>uri</i></code>
+with the client request method changed to “<code>GET</code>”
+(for all methods other than
+“<code>GET</code>” and “<code>HEAD</code>”).
+</p><p>
+Furthermore, it is possible to change the response code to another
+using the “<code>=</code><code><i>response</i></code>” syntax, for example:
+</p> <blockquote class="example"><pre>
+error_page 404 =200 /empty.gif;
+</pre></blockquote><p> 
+</p><p>
+If an error response is processed by a proxied server
+or a FastCGI/uwsgi/SCGI/gRPC server,
+and the server may return different response codes (e.g., 200, 302, 401
+or 404), it is possible to respond with the code it returns:
+</p> <blockquote class="example"><pre>
+error_page 404 = /404.php;
+</pre></blockquote><p> 
+</p><p>
+If there is no need to change URI and method during internal redirection
+it is possible to pass error processing into a named location:
+</p> <blockquote class="example"><pre>
+location / {
+    error_page 404 = @fallback;
+}
+location @fallback {
+    proxy_pass http://backend;
+}
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+If <code><i>uri</i></code> processing leads to an error,
+the status code of the last occurred error is returned to the client.
+</blockquote><p> 
+</p><p>
+It is also possible to use URL redirects for error processing:
+</p> <blockquote class="example"><pre>
+error_page 403      http://example.com/forbidden.html;
+error_page 404 =301 http://example.com/notfound.html;
+</pre></blockquote><p> 
+In this case, by default, the response code 302 is returned to the client.
+It can only be changed to one of the redirect status
+codes (301, 302, 303, 307, and 308).
+</p> <blockquote class="note">
+The code 307 was not treated as a redirect until versions 1.1.16 and 1.0.13.
+</blockquote><p> 
+</p> <blockquote class="note">
+The code 308 was not treated as a redirect until version 1.13.0.
+</blockquote><p> 
+</p><p>
+These directives are inherited from the previous level if and
+only if there are no
+<code>error_page</code>
+directives defined on the current level.
+</p><a name="etag"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page">error_page</a>]</span>

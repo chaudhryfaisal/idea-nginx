@@ -1,1 +1,50 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=14" title="Edit section: smtp capabilities">edit</a>]</span> <span class="mw-headline" id="smtp_capabilities"> smtp_capabilities </span></h2><p><b>syntax:</b> <i>smtp_capabilities</i> <i><b>“capability1” [“capability2” .. “capabilityN”] </b></i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>main, server</i> </p><p>With this directive you can set the list of SMTP protocol extensions presented to the client upon issuing the EHLO command. This list is automatically extended by the methods enabled with the directive <a href="#smtp_auth">smtp_auth</a>. </p><p>The current list of standardized SMTP expansions is published on <a rel="nofollow" class="external text" href="http://www.iana.org/assignments/mail-parameters">www.iana.org</a> . </p><br><i>Module: MailCoreModule</i>
+<h2><span class="mw-headline" id="smtp_capabilities"> smtp_capabilities </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>smtp_capabilities</strong> <code><i>extension</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the SMTP protocol extensions list
+that is passed to the client in response to the
+<code>EHLO</code> command.
+The authentication methods specified in the <a href="#smtp_auth">smtp_auth</a> directive and
+<a href="https://tools.ietf.org/html/rfc3207">STARTTLS</a>
+are automatically added to this list depending on the
+<a href="ngx_mail_ssl_module.html#starttls">starttls</a> directive value.
+</p><p>
+It makes sense to specify the extensions
+supported by the MTA
+to which the clients are proxied (if these extensions are related to commands
+used after the authentication, when nginx transparently proxies the client
+connection to the backend).
+</p><p>
+The current list of standardized extensions is published at
+<a href="http://www.iana.org/assignments/mail-parameters">www.iana.org</a>.
+</p><a name="smtp_client_buffer"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_smtp_module.html#smtp_capabilities">smtp_capabilities</a>]</span>

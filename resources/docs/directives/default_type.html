@@ -1,27 +1,35 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=15" title="Edit section: default type">edit</a>]</span> <span class="mw-headline" id="default_type"> default_type </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>default_type</b> <i>mime-type</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>text/plain</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type">default_type</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 115/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Assigns the default MIME-type to be used for files where the standard MIME map doesn't specify anything. </p><p>See also <a href="#types">types</a> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="default_type"> default_type </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>default_type</strong> <code><i>mime-type</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>default_type text/plain;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines the default MIME type of a response.
+Mapping of file name extensions to MIME types can be set
+with the <a href="#types">types</a> directive.
+</p><a name="directio"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type">default_type</a>]</span>

@@ -1,1 +1,37 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=6" title="Edit section: uwsgi buffers">edit</a>]</span> <span class="mw-headline" id="uwsgi_buffers"> uwsgi_buffers </span></h2><p><b>syntax:</b> <i>uwsgi_buffers the_number is_size</i> </p><p><b>default:</b> <i>uwsgi_buffers 8 4k/8k</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the number and the size of buffers, into which will be read the answer, obtained from the uwsgi server. By default, the size of one buffer is equal to the size of page. Depending on platform this is either 4K, 8K or 16K. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_buffers"> uwsgi_buffers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_buffers</strong> <code><i>number</i></code> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_buffers 8 4k|8k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the <code><i>number</i></code> and <code><i>size</i></code> of the
+buffers used for reading a response from the uwsgi server,
+for a single connection.
+By default, the buffer size is equal to one memory page.
+This is either 4K or 8K, depending on a platform.
+</p><a name="uwsgi_busy_buffers_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_buffers">uwsgi_buffers</a>]</span>

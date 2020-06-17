@@ -1,37 +1,43 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpAccessModule&amp;action=edit&amp;section=4" title="Edit section: deny">edit</a>]</span> <span class="mw-headline" id="deny"> deny </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>deny</b> <i>address</i> | <i>CIDR</i> | <code>all</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />limit_except</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_access_module.html#deny">deny</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 23/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive forbids access for the network or addresses indicated. </p><h1><span class="editsection">[<a href="/index.php?title=HttpAccessModule&amp;action=edit&amp;section=5" title="Edit section: Tips &amp; Tricks">edit</a>]</span> <span class="mw-headline" id="Tips_.26_Tricks"> Tips &amp; Tricks </span></h1><p>The NginxHttpAccessModule can be used in conjunction with the <i>error_page</i> directive to redirect unauthorised visitors to an alternative site: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>  <span class="nu0">403</span>  <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://example.com/forbidden.html<span class="sy0">;</span>
-<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a>    192.168.1.1<span class="sy0">;</span>
-  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a>   192.168.1.0/<span class="nu0">24</span><span class="sy0">;</span>
-  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a>   10.1.1.0/<span class="nu0">16</span><span class="sy0">;</span>
-  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a>    all<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><h1><span class="editsection">[<a href="/index.php?title=HttpAccessModule&amp;action=edit&amp;section=6" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_access_module.html">Original Documentation</a> </p><br><i>Module: HttpAccessModule</i>
+<h2><span class="mw-headline" id="deny"> deny </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>deny</strong> 
+    <code><i>address</i></code> |
+    <code><i>CIDR</i></code> |
+    <code>unix:</code> |
+    <code>all</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Denies access for the specified network or address.
+If the special value <code>unix:</code> is specified,
+denies access for all UNIX-domain sockets.
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_access_module.html#deny">deny</a>]</span>

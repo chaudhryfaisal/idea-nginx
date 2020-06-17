@@ -1,27 +1,40 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=58" title="Edit section: send lowat">edit</a>]</span> <span class="mw-headline" id="send_lowat"> send_lowat </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>send_lowat</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>0</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#send_lowat">send_lowat</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 482/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="send_lowat"> send_lowat </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>send_lowat</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>send_lowat 0;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+If the directive is set to a non-zero value, nginx will try to minimize
+the number of send operations on client sockets by using either
+<code>NOTE_LOWAT</code> flag of the
+<a href="../events.html#kqueue">kqueue</a> method
+or the <code>SO_SNDLOWAT</code> socket option.
+In both cases the specified <code><i>size</i></code> is used.
+</p><p>
+This directive is ignored on Linux, Solaris, and Windows.
+</p><a name="send_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#send_lowat">send_lowat</a>]</span>

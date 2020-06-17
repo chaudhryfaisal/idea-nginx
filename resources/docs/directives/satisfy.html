@@ -1,40 +1,51 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=56" title="Edit section: satisfy">edit</a>]</span> <span class="mw-headline" id="satisfy"> satisfy </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>satisfy</b> <code>all</code> | <code>any</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>all</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy">satisfy</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 465/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This determines the adopted access policy when directives from multiple access phase handlers, such as the <a href="/HttpAccessModule" title="HttpAccessModule">Access</a> and <a href="/HttpAuthBasicModule" title="HttpAuthBasicModule">Auth Basic</a> modules, are defined in a context: </p><ul>
- <li> all - All access phase handlers must grant access to the context </li>
- <li> any - Any access phase handler may grant access to the context </li>
-</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
-  satisfy any<span class="sy0">;</span>
-  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a> 192.168.1.0/<span class="nu0">32</span><span class="sy0">;</span>
-  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a> all<span class="sy0">;</span>
-  <a href="/NginxHttpAuthBasicModule#auth_basic"><span class="kw6">auth_basic</span></a> <span class="st0">&quot;closed site&quot;</span><span class="sy0">;</span>
-  <a href="/NginxHttpAuthBasicModule#auth_basic_user_file"><span class="kw6">auth_basic_user_file</span></a> conf/htpasswd<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="satisfy"> satisfy </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>satisfy</strong> <code>all</code> | <code>any</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>satisfy all;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Allows access if all (<code>all</code>) or at least one
+(<code>any</code>) of the
+<a href="ngx_http_access_module.html">ngx_http_access_module</a>,
+<a href="ngx_http_auth_basic_module.html">ngx_http_auth_basic_module</a>,
+<a href="ngx_http_auth_request_module.html">ngx_http_auth_request_module</a>,
+or
+<a href="ngx_http_auth_jwt_module.html">ngx_http_auth_jwt_module</a>
+modules allow access.
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+location / {
+    satisfy any;
+    allow 192.168.1.0/32;
+    deny  all;
+    auth_basic           "closed site";
+    auth_basic_user_file conf/htpasswd;
+}
+</pre></blockquote><p> 
+</p><a name="send_lowat"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy">satisfy</a>]</span>

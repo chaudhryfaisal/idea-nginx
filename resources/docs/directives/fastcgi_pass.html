@@ -1,43 +1,56 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=28" title="Edit section: fastcgi pass">edit</a>]</span> <span class="mw-headline" id="fastcgi_pass"> fastcgi_pass </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_pass</b> <i>address</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_pass">fastcgi_pass</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 224/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive assigns the port or socket on which the FastCGI-server is listening. Port can be indicated by itself or as an address and port, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   localhost:<span class="nu0">9000</span><span class="sy0">;</span></pre>
- </div>
-</div><p>using a Unix domain socket: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   unix:/tmp/fastcgi.socket<span class="sy0">;</span></pre>
- </div>
-</div><p>You may also use an upstream block. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend  <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   localhost:<span class="nu0">1234</span><span class="sy0">;</span>
-<span class="br0">}</span>
-&nbsp;
-<a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   backend<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_pass"> fastcgi_pass </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_pass</strong> <code><i>address</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the address of a FastCGI server.
+The address can be specified as a domain name or IP address,
+and a port:
+</p> <blockquote class="example"><pre>
+fastcgi_pass localhost:9000;
+</pre></blockquote><p> 
+or as a UNIX-domain socket path:
+</p> <blockquote class="example"><pre>
+fastcgi_pass unix:/tmp/fastcgi.socket;
+</pre></blockquote><p> 
+</p><p>
+If a domain name resolves to several addresses, all of them will be
+used in a round-robin fashion.
+In addition, an address can be specified as a
+<a href="ngx_http_upstream_module.html">server group</a>.
+</p><p>
+Parameter value can contain variables.
+In this case, if an address is specified as a domain name,
+the name is searched among the described
+<a href="ngx_http_upstream_module.html">server groups</a>,
+and, if not found, is determined using a
+<a href="ngx_http_core_module.html#resolver">resolver</a>.
+</p><a name="fastcgi_pass_header"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_pass">fastcgi_pass</a>]</span>

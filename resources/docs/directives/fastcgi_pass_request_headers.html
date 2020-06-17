@@ -1,1 +1,35 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=31" title="Edit section: fastcgi pass request headers">edit</a>]</span> <span class="mw-headline" id="fastcgi_pass_request_headers"> fastcgi_pass_request_headers </span></h2><p><b>syntax:</b> fastcgi_pass_request_headers <i>on | off</i> </p><p><b>default:</b> fastcgi_pass_request_headers on </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>variables:</b> <i>no</i> </p><p><br /> Determines whether the request headers are passed to the backend as HTTP_* values. Should generally be left on. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_pass_request_headers"> fastcgi_pass_request_headers </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_pass_request_headers</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_pass_request_headers on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Indicates whether the header fields of the original request are passed
+to the FastCGI server.
+See also the <a href="#fastcgi_pass_request_body">fastcgi_pass_request_body</a> directive.
+</p><a name="fastcgi_read_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_pass_request_headers">fastcgi_pass_request_headers</a>]</span>

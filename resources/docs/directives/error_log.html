@@ -1,43 +1,71 @@
-<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=6" title="Edit section: error log">edit</a>]</span> <span class="mw-headline" id="error_log"> error_log </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>error_log</b> <i>file</i> | <code>stderr</code> [ <code>debug</code> | <code>info</code> | <code>notice</code> | <code>warn</code> | <code>error</code> | <code>crit</code> | <code>alert</code> | <code>emerg</code> ]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>logs/error.log error</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> main<br />http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#error_log">error_log</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 34/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Specifies the file where server (and fastcgi) errors are logged. </p><p>Default values for the error level: </p><ol>
- <li> in the main section - <code>error</code> </li>
- <li> in the HTTP section - <code>crit</code> </li>
- <li> in the server section - <code>crit</code> </li>
-</ol><p>If you've built Nginx with <code>--with-debug</code>, you may also use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> LOGFILE <span class="br0">[</span>debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap<span class="br0">]</span><span class="sy0">;</span></pre>
- </div>
-</div><p>Note that <code>error_log off</code> does not disable logging - the log will be written to a file named &quot;off&quot;. To disable logging, you may use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> /dev/null crit<span class="sy0">;</span></pre>
- </div>
-</div><p>Also note that as of version 0.7.53, nginx will use a compiled-in default error log location until it has read the config file. If the user running nginx doesn't have write permission to this log location, nginx will raise an alert like this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="text source-text">
-  <pre class="de1">[alert]: could not open error log file: open() &quot;/var/log/nginx/error.log&quot; failed (13: Permission denied)</pre>
- </div>
-</div><br><i>Module: CoreModule</i>
+<h2><span class="mw-headline" id="error_log"> error_log </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>error_log</strong> <code><i>file</i></code> [<code><i>level</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>error_log logs/error.log error;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>main</code>, <code>http</code>, <code>mail</code>, <code>stream</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Configures logging.
+Several logs can be specified on the same level (1.5.2).
+If on the <code>main</code> configuration level writing a log to a file
+is not explicitly defined, the default file will be used.
+</p><p>
+The first parameter defines a <code><i>file</i></code> that will store the log.
+The special value <code>stderr</code> selects the standard error file.
+Logging to <a href="syslog.html">syslog</a> can be configured by specifying
+the “<code>syslog:</code>” prefix.
+Logging to a
+<a href="debugging_log.html#memory">cyclic memory buffer</a>
+can be configured by specifying the “<code>memory:</code>” prefix and
+buffer <code><i>size</i></code>, and is generally used for debugging (1.7.11).
+</p><p>
+The second parameter determines the <code><i>level</i></code> of logging,
+and can be one of the following:
+<code>debug</code>, <code>info</code>, <code>notice</code>,
+<code>warn</code>, <code>error</code>, <code>crit</code>,
+<code>alert</code>, or <code>emerg</code>.
+Log levels above are listed in the order of increasing severity.
+Setting a certain log level will cause all messages of
+the specified and more severe log levels to be logged.
+For example, the default level <code>error</code> will
+cause <code>error</code>, <code>crit</code>,
+<code>alert</code>, and <code>emerg</code> messages
+to be logged.
+If this parameter is omitted then <code>error</code> is used.
+</p> <blockquote class="note">
+For <code>debug</code> logging to work, nginx needs to
+be built with <code>--with-debug</code>,
+see “<a href="debugging_log.html">A debugging log</a>”.
+</blockquote><p> 
+</p> <blockquote class="note">
+The directive can be specified on the
+<code>stream</code> level
+starting from version 1.7.11,
+and on the <code>mail</code> level
+starting from version 1.9.0.
+</blockquote><p> 
+</p><a name="events"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#error_log">error_log</a>]</span>

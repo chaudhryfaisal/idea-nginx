@@ -1,1 +1,40 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=7" title="Edit section: scgi busy buffers size">edit</a>]</span> <span class="mw-headline" id="scgi_busy_buffers_size"> scgi_busy_buffers_size </span></h2><p><b>syntax:</b> <i>scgi_busy_buffers_size size</i> </p><p><b>default:</b> <i>scgi_busy_buffers_size [&quot;#scgi_buffer_size&quot;] * 2</i> </p><p><b>context:</b> <i>http, server, location, if</i> </p><p><i>Undocumented</i> </p><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_busy_buffers_size"> scgi_busy_buffers_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_busy_buffers_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>scgi_busy_buffers_size 8k|16k;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+When <a href="#scgi_buffering">buffering</a> of responses from the SCGI
+server is enabled, limits the total <code><i>size</i></code> of buffers that
+can be busy sending a response to the client while the response is not
+yet fully read.
+In the meantime, the rest of the buffers can be used for reading the response
+and, if needed, buffering part of the response to a temporary file.
+By default, <code><i>size</i></code> is limited by the size of two buffers set by the
+<a href="#scgi_buffer_size">scgi_buffer_size</a> and <a href="#scgi_buffers">scgi_buffers</a> directives.
+</p><a name="scgi_cache"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_busy_buffers_size">scgi_busy_buffers_size</a>]</span>

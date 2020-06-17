@@ -1,8 +1,61 @@
-<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=5" title="Edit section: debug connection">edit</a>]</span> <span class="mw-headline" id="debug_connection"> debug_connection </span></h2><p><b>Syntax:</b> <i>debug_connection [ip | CIDR] </i> </p><p><b>Default:</b> <i>none</i> </p><p>Since 0.3.54 this option support CIDR address format </p><p>This option gives you the ability to write debug log only for the clients of this IP/NET. </p><p>Several different directives are possible. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> /var/log/nginx/errors<span class="sy0">;</span>
-<a href="/NginxHttpEventsModule#events"><span class="kw2">events</span></a> <span class="br0">{</span>
-  <a href="/NginxHttpEventsModule#debug_connection"><span class="kw2">debug_connection</span></a>   192.168.1.1<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: EventsModule</i>
+<h2><span class="mw-headline" id="debug_connection"> debug_connection </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>debug_connection</strong> 
+    <code><i>address</i></code> |
+    <code><i>CIDR</i></code> |
+    <code>unix:</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>events</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables debugging log for selected client connections.
+Other connections will use logging level set by the
+<a href="#error_log">error_log</a> directive.
+Debugged connections are specified by IPv4 or IPv6 (1.3.0, 1.2.1)
+address or network.
+A connection may also be specified using a hostname.
+For connections using UNIX-domain sockets (1.3.0, 1.2.1),
+debugging log is enabled by the “<code>unix:</code>” parameter.
+</p> <blockquote class="example"><pre>
+events {
+    debug_connection 127.0.0.1;
+    debug_connection localhost;
+    debug_connection 192.0.2.0/24;
+    debug_connection ::1;
+    debug_connection 2001:0db8::/32;
+    debug_connection unix:;
+    ...
+}
+</pre></blockquote><p> 
+</p> <blockquote class="note">
+For this directive to work, nginx needs to
+be built with <code>--with-debug</code>,
+see “<a href="debugging_log.html">A debugging log</a>”.
+</blockquote><p> 
+</p><a name="debug_points"></a>
+
+<span>[<a href="http://nginx.org/en/docs/ngx_core_module.html#debug_connection">debug_connection</a>]</span>

@@ -1,31 +1,97 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=54" title="Edit section: resolver timeout">edit</a>]</span> <span class="mw-headline" id="resolver_timeout"> resolver_timeout </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>resolver_timeout</b> <i>time</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>30s</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#resolver_timeout">resolver_timeout</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 445/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Directive defines timeout for name resolution, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">resolver_timeout 5s<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="resolver_timeout"> resolver_timeout </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>resolver_timeout</strong> <code><i>time</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>resolver_timeout 30s;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>upstream</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.17.5.
+            </p></div><p>
+Sets a timeout for name resolution, for example:
+</p> <blockquote class="example"><pre>
+resolver_timeout 5s;
+</pre></blockquote><p> 
+</p><p>
+</p> <blockquote class="note">
+This directive is available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>.
+</blockquote><p> 
+</p>
+<a name="variables"></a><center><h4>Embedded Variables</h4></center><p>
+The <code>ngx_stream_upstream_module</code> module
+supports the following embedded variables:
+</p> <dl class="compact">
+<dt id="var_upstream_addr"><code>$upstream_addr</code></dt>
+<dd>
+keeps the IP address and port,
+or the path to the UNIX-domain socket of the upstream server (1.11.4).
+If several servers were contacted during proxying,
+their addresses are separated by commas, e.g.
+“<code>192.168.1.1:12345, 192.168.1.2:12345, unix:/tmp/sock</code>”.
+If a server cannot be selected,
+the variable keeps the name of the server group.
+</dd>
+<dt id="var_upstream_bytes_received"><code>$upstream_bytes_received</code></dt>
+<dd>
+number of bytes received from an upstream server (1.11.4).
+Values from several connections
+are separated by commas like addresses in the
+<a href="#var_upstream_addr">$upstream_addr</a> variable.
+</dd>
+<dt id="var_upstream_bytes_sent"><code>$upstream_bytes_sent</code></dt>
+<dd>
+number of bytes sent to an upstream server (1.11.4).
+Values from several connections
+are separated by commas like addresses in the
+<a href="#var_upstream_addr">$upstream_addr</a> variable.
+</dd>
+<dt id="var_upstream_connect_time"><code>$upstream_connect_time</code></dt>
+<dd>
+time to connect to the upstream server (1.11.4);
+the time is kept in seconds with millisecond resolution.
+Times of several connections
+are separated by commas like addresses in the
+<a href="#var_upstream_addr">$upstream_addr</a> variable.
+</dd>
+<dt id="var_upstream_first_byte_time"><code>$upstream_first_byte_time</code></dt>
+<dd>
+time to receive the first byte of data (1.11.4);
+the time is kept in seconds with millisecond resolution.
+Times of several connections
+are separated by commas like addresses in the
+<a href="#var_upstream_addr">$upstream_addr</a> variable.
+</dd>
+<dt id="var_upstream_session_time"><code>$upstream_session_time</code></dt>
+<dd>
+session duration in seconds with millisecond resolution (1.11.4).
+Times of several connections
+are separated by commas like addresses in the
+<a href="#var_upstream_addr">$upstream_addr</a> variable.
+</dd>
+</dl><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#resolver_timeout">resolver_timeout</a>]</span>

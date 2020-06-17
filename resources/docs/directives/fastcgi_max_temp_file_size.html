@@ -1,27 +1,47 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=24" title="Edit section: fastcgi max temp file size">edit</a>]</span> <span class="mw-headline" id="fastcgi_max_temp_file_size"> fastcgi_max_temp_file_size </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_max_temp_file_size</b> <i>size</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>1024m</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_max_temp_file_size">fastcgi_max_temp_file_size</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 184/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> To disable buffering to temporary files on disk for all replies that are greater than the <a href="/HttpFcgiModule#fastcgi_buffers" title="HttpFcgiModule" class="mw-redirect">fastcgi_buffers</a> and transfer data synchronously to the client set fastcgi_max_temp_file_size to 0. </p><p>Otherwise if specified it must be equal or bigger than maximum of the value of fastcgi_buffer_size and one of the fastcgi_buffers. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_max_temp_file_size"> fastcgi_max_temp_file_size </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_max_temp_file_size</strong> <code><i>size</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>fastcgi_max_temp_file_size 1024m;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+When <a href="#fastcgi_buffering">buffering</a> of responses from the FastCGI
+server is enabled, and the whole response does not fit into the buffers
+set by the <a href="#fastcgi_buffer_size">fastcgi_buffer_size</a> and <a href="#fastcgi_buffers">fastcgi_buffers</a>
+directives, a part of the response can be saved to a temporary file.
+This directive sets the maximum <code><i>size</i></code> of the temporary file.
+The size of data written to the temporary file at a time is set
+by the <a href="#fastcgi_temp_file_write_size">fastcgi_temp_file_write_size</a> directive.
+</p><p>
+The zero value disables buffering of responses to temporary files.
+</p><p>
+</p> <blockquote class="note">
+This restriction does not apply to responses
+that will be <a href="#fastcgi_cache">cached</a>
+or <a href="#fastcgi_store">stored</a> on disk.
+</blockquote><p> 
+</p><a name="fastcgi_next_upstream"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_max_temp_file_size">fastcgi_max_temp_file_size</a>]</span>

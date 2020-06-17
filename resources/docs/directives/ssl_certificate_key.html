@@ -1,27 +1,53 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=7" title="Edit section: ssl certificate key">edit</a>]</span> <span class="mw-headline" id="ssl_certificate_key"> ssl_certificate_key </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ssl_certificate_key</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate_key">ssl_certificate_key</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 56/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive specifies the file containing the private key, in PEM format, for this virtual host. Since version 0.6.7 the file path is relative to the directory where nginx main configuration file, nginx.conf, resides. </p><br><i>Module: HttpSslModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=5" title="Edit section: ssl certificate key">edit</a>]</span> <span class="mw-headline" id="ssl_certificate_key"> ssl_certificate_key </span></h2><p><b>syntax:</b> <i>ssl_certificate_key</i> <i><b>file</b></i> </p><p><b>default:</b> <i>cert.pem</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Indicates file with the secret key in PEM format for this virtual server. </p><br><i>Module: MailSslModule</i>
+<h2><span class="mw-headline" id="ssl_certificate_key"> ssl_certificate_key </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_certificate_key</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a <code><i>file</i></code> with the secret key in the PEM format
+for the given server.
+</p><p>
+The value
+<code>engine</code>:<code><i>name</i></code>:<code><i>id</i></code>
+can be specified instead of the <code><i>file</i></code>,
+which loads a secret key with a specified <code><i>id</i></code>
+from the OpenSSL engine <code><i>name</i></code>.
+</p><a name="ssl_certificate_key_data"></a><p>
+The value
+<code>data</code>:<code><i>$variable</i></code>
+can be specified instead of the <code><i>file</i></code> (1.15.10),
+which loads a secret key from a variable without using intermediate files.
+Note that inappropriate use of this syntax may have its security implications,
+such as writing secret key data to
+<a href="../ngx_core_module.html#error_log">error log</a>.
+</p><p>
+Since version 1.15.9, variables can be used in the <code><i>file</i></code> name
+when using OpenSSL 1.0.2 or higher.
+</p><a name="ssl_ciphers"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_certificate_key">ssl_certificate_key</a>]</span>

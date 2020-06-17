@@ -1,37 +1,76 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpLogModule&amp;action=edit&amp;section=5" title="Edit section: open log file cache">edit</a>]</span> <span class="mw-headline" id="open_log_file_cache"> open_log_file_cache </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>open_log_file_cache</b> <code>max</code> = <i>N</i> [ <code>inactive</code> = <i>time</i> ] [ <code>min_uses</code> = <i>N</i> ] [ <code>valid</code> = <i>time</i> ]<br /><b>open_log_file_cache</b> <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_log_module.html#open_log_file_cache">open_log_file_cache</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 30/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive sets the cache, which stores file descriptors of frequently used logs with variable in path. </p><p>Directive options: </p><ul>
- <li> max - maximal number of descriptors in the cache, with overflow Least Recently Used is removed (LRU); </li>
- <li> inactive - sets the time after which descriptor without hits during this time are removed; default is 10 seconds; </li>
- <li> min_uses - sets the minimum number of file usage within the time specified in parameter <i>inactive</i>, after which the file descriptor will be put in the cache; default is 1; </li>
- <li> valid - sets the time until it will be checked if file still exists under same name; default is 60 seconds; </li>
- <li> off - disables the cache. </li>
-</ul><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpLogModule#open_log_file_cache"><span class="kw18">open_log_file_cache</span></a> max<span class="sy0">=</span><span class="nu0">1000</span> inactive<span class="sy0">=</span>20s min_uses<span class="sy0">=</span><span class="nu0">2</span> valid<span class="sy0">=</span>1m<span class="sy0">;</span></pre>
- </div>
-</div><h1><span class="editsection">[<a href="/index.php?title=HttpLogModule&amp;action=edit&amp;section=6" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_log_module.html">Original Documentation</a> </p><br><i>Module: HttpLogModule</i>
+<h2><span class="mw-headline" id="open_log_file_cache"> open_log_file_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>open_log_file_cache</strong> 
+<code>max</code>=<code><i>N</i></code>
+[<code>inactive</code>=<code><i>time</i></code>]
+[<code>min_uses</code>=<code><i>N</i></code>]
+[<code>valid</code>=<code><i>time</i></code>];</code><br><code><strong>open_log_file_cache</strong> <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>open_log_file_cache off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Defines a cache that stores the file descriptors of frequently used logs
+whose names contain variables.
+The directive has the following parameters:
+</p> <dl class="compact">
+<dt><code>max</code></dt>
+<dd>
+sets the maximum number of descriptors in a cache;
+if the cache becomes full the least recently used (LRU)
+descriptors are closed
+</dd>
+<dt><code>inactive</code></dt>
+<dd>
+sets the time after which the cached descriptor is closed
+if there were no access during this time;
+by default, 10 seconds
+</dd>
+<dt><code>min_uses</code></dt>
+<dd>
+sets the minimum number of file uses during the time
+defined by the <code>inactive</code> parameter
+to let the descriptor stay open in a cache;
+by default, 1
+</dd>
+<dt><code>valid</code></dt>
+<dd>
+sets the time after which it should be checked that the file
+still exists with the same name; by default, 60 seconds
+</dd>
+<dt><code>off</code></dt>
+<dd>
+disables caching
+</dd>
+</dl><p> 
+</p><p>
+Usage example:
+</p> <blockquote class="example"><pre>
+open_log_file_cache max=1000 inactive=20s valid=1m min_uses=2;
+</pre></blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_log_module.html#open_log_file_cache">open_log_file_cache</a>]</span>

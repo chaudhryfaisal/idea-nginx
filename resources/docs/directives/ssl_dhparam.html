@@ -1,31 +1,41 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=11" title="Edit section: ssl dhparam">edit</a>]</span> <span class="mw-headline" id="ssl_dhparam"> ssl_dhparam </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>ssl_dhparam</b> <i>file</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 0.7.2</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_dhparam">ssl_dhparam</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 93/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> This directive specifies a file containing Diffie-Hellman key agreement protocol cryptographic parameters, in PEM format, utilized for exchanging session keys between server and client. </p><br><i>Module: HttpSslModule</i>
+<h2><span class="mw-headline" id="ssl_dhparam"> ssl_dhparam </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>ssl_dhparam</strong> <code><i>file</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>stream</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies a <code><i>file</i></code> with DH parameters for DHE ciphers.
+</p><p>
+By default no parameters are set,
+and therefore DHE ciphers will not be used.
+</p> <blockquote class="note">
+Prior to version 1.11.0, builtin parameters were used by default.
+</blockquote><p> 
+</p><a name="ssl_ecdh_curve"></a>
+
+<span>[<a href="http://nginx.org/en/docs/stream/ngx_stream_ssl_module.html#ssl_dhparam">ssl_dhparam</a>]</span>

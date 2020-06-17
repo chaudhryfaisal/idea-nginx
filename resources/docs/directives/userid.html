@@ -1,32 +1,58 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUseridModule&amp;action=edit&amp;section=3" title="Edit section: userid">edit</a>]</span> <span class="mw-headline" id="userid"> userid </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>userid</b> <code>on</code> | <code>v1</code> | <code>log</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid">userid</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Enables or disables issuing cookies and logging requested cookies: </p><ul>
- <li> on - enables version 2 cookies and logs them; </li>
- <li> v1 - enables version 1 cookies and logs them; </li>
- <li> log - do not send cookies, but write down incoming cookies to log; </li>
- <li> off - do not send cookies, and don't write them to logs; </li>
-</ul><br><i>Module: HttpUseridModule</i>
+<h2><span class="mw-headline" id="userid"> userid </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>userid</strong> 
+    <code>on</code> |
+    <code>v1</code> |
+    <code>log</code> |
+    <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>userid off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables setting cookies and logging the received cookies:
+</p> <dl class="compact">
+<dt><code>on</code></dt>
+<dd>
+enables the setting of version 2 cookies
+and logging of the received cookies;
+</dd>
+<dt><code>v1</code></dt>
+<dd>
+enables the setting of version 1 cookies
+and logging of the received cookies;
+</dd>
+<dt><code>log</code></dt>
+<dd>
+disables the setting of cookies,
+but enables logging of the received cookies;
+</dd>
+<dt><code>off</code></dt>
+<dd>
+disables the setting of cookies and logging of the received cookies.
+</dd>
+</dl><p> 
+</p><a name="userid_domain"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_userid_module.html#userid">userid</a>]</span>

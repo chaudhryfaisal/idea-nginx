@@ -1,31 +1,76 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=20" title="Edit section: proxy cookie path">edit</a>]</span> <span class="mw-headline" id="proxy_cookie_path"> proxy_cookie_path </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>proxy_cookie_path</b> <code>off</code> <br /><b>proxy_cookie_path</b> <i>path</i> <i>replacement</i> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.1.15</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path">proxy_cookie_path</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 159/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="mw-headline" id="proxy_cookie_path"> proxy_cookie_path </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>proxy_cookie_path</strong> <code>off</code>;</code><br><code><strong>proxy_cookie_path</strong> <code><i>path</i></code> <code><i>replacement</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>proxy_cookie_path off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table><p>This directive appeared in version 1.1.15.
+            </p></div><p>
+Sets a text that should be changed in the <code>path</code>
+attribute of the “Set-Cookie” header fields of a
+proxied server response.
+Suppose a proxied server returned the “Set-Cookie”
+header field with the attribute
+“<code>path=/two/some/uri/</code>”.
+The directive
+</p> <blockquote class="example"><pre>
+proxy_cookie_path /two/ /;
+</pre></blockquote><p> 
+will rewrite this attribute to
+“<code>path=/some/uri/</code>”.
+</p><p>
+The <code><i>path</i></code> and <code><i>replacement</i></code> strings
+can contain variables:
+</p> <blockquote class="example"><pre>
+proxy_cookie_path $uri /some$uri;
+</pre></blockquote><p> 
+</p><p>
+The directive can also be specified using regular expressions.
+In this case, <code><i>path</i></code> should either start from
+the “<code>~</code>” symbol for a case-sensitive matching,
+or from the “<code>~*</code>” symbols for case-insensitive
+matching.
+The regular expression can contain named and positional captures,
+and <code><i>replacement</i></code> can reference them:
+</p> <blockquote class="example"><pre>
+proxy_cookie_path ~*^/user/([^/]+) /u/$1;
+</pre></blockquote><p> 
+</p><p>
+There could be several <code>proxy_cookie_path</code> directives:
+</p> <blockquote class="example"><pre>
+proxy_cookie_path /one/ /;
+proxy_cookie_path / /two/;
+</pre></blockquote><p> 
+</p><p>
+The <code>off</code> parameter cancels the effect of all
+<code>proxy_cookie_path</code> directives on the current level:
+</p> <blockquote class="example"><pre>
+proxy_cookie_path off;
+proxy_cookie_path /two/ /;
+proxy_cookie_path ~*^/user/([^/]+) /u/$1;
+</pre></blockquote><p> 
+</p><a name="proxy_force_ranges"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path">proxy_cookie_path</a>]</span>

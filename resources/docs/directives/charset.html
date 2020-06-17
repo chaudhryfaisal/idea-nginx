@@ -1,27 +1,68 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCharsetModule&amp;action=edit&amp;section=3" title="Edit section: charset">edit</a>]</span> <span class="mw-headline" id="charset"> charset </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>charset</b> <i>charset</i> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if in location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#charset">charset</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 13/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive charset adds the line &quot;Content-Type&quot; into response-header with indicated encoding. If this encoding is differed from that indicated in directive source_charset, then reencoding is carried out. The parameter &quot;off&quot; deactivate the insertation of the line &quot;Content-Type&quot; in the response-header. </p><p><br /> </p><br><i>Module: HttpCharsetModule</i>
+<h2><span class="mw-headline" id="charset"> charset </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>charset</strong> <code><i>charset</i></code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>charset off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if in location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Adds the specified charset to the “Content-Type”
+response header field.
+If this charset is different from the charset specified
+in the <a href="#source_charset">source_charset</a> directive, a conversion is performed.
+</p><p>
+The parameter <code>off</code> cancels the addition of charset
+to the “Content-Type” response header field.
+</p><p>
+A charset can be defined with a variable:
+</p> <blockquote class="example"><pre>
+charset $charset;
+</pre></blockquote><p> 
+In such a case, all possible values of a variable need to be present
+in the configuration at least once in the form of the
+<a href="#charset_map">charset_map</a>, <a href="#charset">charset</a>, or
+<a href="#source_charset">source_charset</a> directives.
+For <code>utf-8</code>, <code>windows-1251</code>, and
+<code>koi8-r</code> charsets, it is sufficient to include the files
+<code>conf/koi-win</code>, <code>conf/koi-utf</code>, and
+<code>conf/win-utf</code> into configuration.
+For other charsets, simply making a fictitious conversion table works,
+for example:
+</p> <blockquote class="example"><pre>
+charset_map iso-8859-5 _ { }
+</pre></blockquote><p> 
+</p><p>
+In addition, a charset can be set in the
+“X-Accel-Charset” response header field.
+This capability can be disabled using the
+<a href="ngx_http_proxy_module.html#proxy_ignore_headers">proxy_ignore_headers</a>,
+<a href="ngx_http_fastcgi_module.html#fastcgi_ignore_headers">fastcgi_ignore_headers</a>,
+<a href="ngx_http_uwsgi_module.html#uwsgi_ignore_headers">uwsgi_ignore_headers</a>,
+<a href="ngx_http_scgi_module.html#scgi_ignore_headers">scgi_ignore_headers</a>,
+and
+<a href="ngx_http_grpc_module.html#grpc_ignore_headers">grpc_ignore_headers</a>
+directives.
+</p><a name="charset_map"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#charset">charset</a>]</span>

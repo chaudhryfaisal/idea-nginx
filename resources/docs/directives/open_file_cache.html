@@ -1,42 +1,85 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=41" title="Edit section: open file cache">edit</a>]</span> <span class="mw-headline" id="open_file_cache"> open_file_cache </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>open_file_cache</b> <code>off</code> <br /><b>open_file_cache</b> <code>max</code> = <i>N</i> [ <code>inactive</code> = <i>time</i> ]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>off</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#open_file_cache">open_file_cache</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 351/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The directive sets the cache activity on. These information can be stored: </p><ul>
- <li> Open file descriptors, information with their size and modification time; </li>
- <li> Information about the existence of directories; </li>
- <li> Error information when searches for a file - no file, do not have rights to read, etc. See also <a href="#open_file_cache_errors">open_file_cache_errors</a> </li>
-</ul><p>Options directive: </p><ul>
- <li> <code>max</code> - specifies the maximum number of entries in the cache. When the cache overflows, the least recently used(LRU) items will be removed; </li>
- <li> <code>inactive</code> - specifies the time when the cached item is removed, if it has not been downloaded during that time, the default is 60 seconds; </li>
- <li> <code>off</code> - prohibits the cache activity. </li>
-</ul><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"> open_file_cache max<span class="sy0">=</span><span class="nu0">1000</span> inactive<span class="sy0">=</span>20s<span class="sy0">;</span> 
- open_file_cache_valid    30s<span class="sy0">;</span> 
- open_file_cache_min_uses <span class="nu0">2</span><span class="sy0">;</span>
- open_file_cache_errors   on<span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="open_file_cache"> open_file_cache </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>open_file_cache</strong> <code>off</code>;</code><br><code><strong>open_file_cache</strong> 
+<code>max</code>=<code><i>N</i></code>
+[<code>inactive</code>=<code><i>time</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>open_file_cache off;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Configures a cache that can store:
+</p> <ul class="compact">
+<li>
+open file descriptors, their sizes and modification times;
+</li>
+<li>
+information on existence of directories;
+</li>
+<li>
+file lookup errors, such as “file not found”, “no read permission”,
+and so on.
+<blockquote class="note">
+Caching of errors should be enabled separately by the
+<a href="#open_file_cache_errors">open_file_cache_errors</a>
+directive.
+</blockquote>
+</li>
+</ul><p> 
+</p><p>
+The directive has the following parameters:
+</p> <dl class="compact">
+<dt>
+<code>max</code>
+</dt>
+<dd>
+sets the maximum number of elements in the cache;
+on cache overflow the least recently used (LRU) elements are removed;
+</dd>
+<dt>
+<code>inactive</code>
+</dt>
+<dd>
+defines a time after which an element is removed from the cache
+if it has not been accessed during this time;
+by default, it is 60 seconds;
+</dd>
+<dt>
+<code>off</code>
+</dt>
+<dd>
+disables the cache.
+</dd>
+</dl><p> 
+</p><p>
+Example:
+</p> <blockquote class="example"><pre>
+open_file_cache          max=1000 inactive=20s;
+open_file_cache_valid    30s;
+open_file_cache_min_uses 2;
+open_file_cache_errors   on;
+</pre></blockquote><p> 
+</p><a name="open_file_cache_errors"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#open_file_cache">open_file_cache</a>]</span>

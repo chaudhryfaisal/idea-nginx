@@ -1,70 +1,99 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=9" title="Edit section: uninitialized variable warn">edit</a>]</span> <span class="mw-headline" id="uninitialized_variable_warn"> uninitialized_variable_warn </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>uninitialized_variable_warn</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location<br />if</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#uninitialized_variable_warn">uninitialized_variable_warn</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 106/1000000
-Post-expand include size: 186/2097152 bytes
-Template argument size: 90/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Enables or disables logging of warnings about noninitialized variables. </p><h1><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=10" title="Edit section: Internal implementation">edit</a>]</span> <span class="mw-headline" id="Internal_implementation"> Internal implementation </span></h1><p>Internally, the rewrite directives are compiled at the time the configuration file is loaded into internal codes, usable during the request by the interpreter. </p><p>This interpreter is a simple stack virtual machine. For example, the directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /download/ <span class="br0">{</span>
-  <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$forbidden</span><span class="br0">)</span> <span class="br0">{</span>
-    <a href="/NginxHttpRewriteModule#return"><span class="kw22">return</span></a>   <span class="nu0">403</span><span class="sy0">;</span>
-  <span class="br0">}</span>
-  <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
-    <a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a>  10k<span class="sy0">;</span>
-  <span class="br0">}</span>
-  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^/<span class="br0">(</span>download/.*<span class="br0">)</span>/media/<span class="br0">(</span>.*<span class="br0">)</span>\..*$  /$<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>will be compiled into this sequence: </p><pre>
-  variable $forbidden
-  checking to zero
-  recovery 403
-  completion of entire code
-  variable $slow
-  checking to zero
-  checkings of regular expression
-  copying &quot;/&quot;
-  copying $1
-  copying &quot;/mp3/&quot;
-  copying $2
-  copying &quot;.mp3&quot;
-  completion of regular expression
-  completion of entire sequence
-</pre><p>Note that there is no code for directive limit_rate, since it does not refer to module ngx_http_rewrite_module. The &quot;if&quot; block exists in the same part of the configuration as the &quot;location&quot; directive. </p><p>If $slow is true, then what's inside the &quot;if&quot; block is evaluated, and in this configuration limit_rate it is equal to 10k. </p><p>Directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^/<span class="br0">(</span>download/.*<span class="br0">)</span>/media/<span class="br0">(</span>.*<span class="br0">)</span>\..*$  /$<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span></pre>
- </div>
-</div><p>It is possible to reduce the sequence, if in the regular expression we include the first slash inside the parentheses: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^<span class="br0">(</span>/download/.*<span class="br0">)</span>/media/<span class="br0">(</span>.*<span class="br0">)</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span></pre>
- </div>
-</div><p>then the sequence will appear like this: </p><pre>
-  checking regular expression
-  copying $1
-  copying &quot;/mp3/&quot;
-  copying $2
-  copying &quot;.mp3&quot;
-  completion of regular expression
-  completion of entire code
-</pre><h1><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=11" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html">Original Documentation</a> </p><p><a rel="nofollow" class="external text" href="http://www.pcre.org/pcre.txt">PCRE Man Page in Plain Text</a> </p><p><br /> <a rel="nofollow" class="external text" href="http://regexone.com/">RegexOne&raquo; Learn regular expressions with simple, interactive examples.</a> </p><p><a rel="nofollow" class="external text" href="http://regexpal.com/">RegexPal — a JavaScript regular expression tester</a> </p><br><i>Module: HttpRewriteModule</i>
+<h2><span class="mw-headline" id="uninitialized_variable_warn"> uninitialized_variable_warn </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uninitialized_variable_warn</strong> <code>on</code> | <code>off</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uninitialized_variable_warn on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code>, <code>if</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Controls whether warnings about uninitialized variables are logged.
+</p>
+<a name="internals"></a><center><h4>Internal Implementation</h4></center><p>
+The <code>ngx_http_rewrite_module</code> module directives
+are compiled at the configuration stage into internal instructions
+that are interpreted during request processing.
+An interpreter is a simple virtual stack machine.
+</p><p>
+For example, the directives
+</p> <blockquote class="example"><pre>
+location /download/ {
+    if ($forbidden) {
+        return 403;
+    }
+    if ($slow) {
+        limit_rate 10k;
+    }
+    rewrite ^/(download/.*)/media/(.*)\..*$ /$1/mp3/$2.mp3 break;
+}
+</pre></blockquote><p> 
+will be translated into these instructions:
+</p> <blockquote class="example"><pre>
+variable $forbidden
+check against zero
+    return 403
+    end of code
+variable $slow
+check against zero
+match of regular expression
+copy "/"
+copy $1
+copy "/mp3/"
+copy $2
+copy ".mp3"
+end of regular expression
+end of code
+</pre></blockquote><p> 
+</p><p>
+Note that there are no instructions for the
+<a href="ngx_http_core_module.html#limit_rate">limit_rate</a>
+directive above as it is unrelated to the
+<code>ngx_http_rewrite_module</code> module.
+A separate configuration is created for the <a href="#if">if</a> block.
+If the condition holds true, a request is assigned this configuration
+where <code>limit_rate</code> equals to 10k.
+</p><p>
+The directive
+</p> <blockquote class="example"><pre>
+rewrite ^/(download/.*)/media/(.*)\..*$ /$1/mp3/$2.mp3 break;
+</pre></blockquote><p> 
+can be made smaller by one instruction if the first slash in the regular expression
+is put inside the parentheses:
+</p> <blockquote class="example"><pre>
+rewrite ^(<strong>/</strong>download/.*)/media/(.*)\..*$ $1/mp3/$2.mp3 break;
+</pre></blockquote><p> 
+The corresponding instructions will then look like this:
+</p> <blockquote class="example"><pre>
+match of regular expression
+copy $1
+copy "/mp3/"
+copy $2
+copy ".mp3"
+end of regular expression
+end of code
+</pre></blockquote><p> 
+</p>
+</div></div></body></html>
+
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#uninitialized_variable_warn">uninitialized_variable_warn</a>]</span>

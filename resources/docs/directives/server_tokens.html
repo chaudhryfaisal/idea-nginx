@@ -1,27 +1,50 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=67" title="Edit section: server tokens">edit</a>]</span> <span class="mw-headline" id="server_tokens"> server_tokens </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>server_tokens</b> <code>on</code> | <code>off</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens">server_tokens</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 572/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Whether to send the Nginx version number in error pages and <code>Server</code> header. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="server_tokens"> server_tokens </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>server_tokens</strong> 
+    <code>on</code> |
+    <code>off</code> |
+    <code>build</code> |
+    <code><i>string</i></code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>server_tokens on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Enables or disables emitting nginx version on error pages and in the
+“Server” response header field.
+</p><a name="server_tokens_build"></a><p>
+The <code>build</code> parameter (1.11.10) enables emitting
+a <a href="../configure.html#build">build name</a>
+along with nginx version.
+</p><p>
+Additionally, as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>,
+starting from version 1.9.13
+the signature on error pages and
+the “Server” response header field value
+can be set explicitly using the <code><i>string</i></code> with variables.
+An empty string disables the emission of the “Server” field.
+</p><a name="subrequest_output_buffer_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens">server_tokens</a>]</span>

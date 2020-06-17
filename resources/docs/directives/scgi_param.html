@@ -1,11 +1,60 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpScgiModule&amp;action=edit&amp;section=24" title="Edit section: scgi param">edit</a>]</span> <span class="mw-headline" id="scgi_param"> scgi_param </span></h2><p><b>syntax:</b> <i>scgi_param parameter value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns the parameter, which will be transferred to the SCGI-server. </p><p>It is possible to use strings, variables and their combination as values. Directives not set are inherited from the outer level. Directives set in current level clear any previously defined directives for the current level. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">scgi_param  SCGI             <span class="nu0">1</span><span class="sy0">;</span>
-scgi_param  REQUEST_URI      <span class="re0">$request_uri</span><span class="sy0">;</span></pre>
- </div>
-</div><p>Parameter REQUEST_URI is used to determine the name of script to execute, and QUERY_STRING contains the parameters of the request. <i>scgi_param SCGI 1;</i> is required to be in the list of parameters by the SCGI standard. <i>scgi_param CONTENT_LENGTH $content_length;</i> is automatically included as the first parameter. </p><p>If dealing with POST requests, two additional parameters are necessary. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">  scgi_param  REQUEST_METHOD   <span class="re0">$request_method</span><span class="sy0">;</span>
-  scgi_param  CONTENT_TYPE     <span class="re0">$content_type</span><span class="sy0">;</span></pre>
- </div>
-</div><br><i>Module: HttpScgiModule</i>
+<h2><span class="mw-headline" id="scgi_param"> scgi_param </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>scgi_param</strong> 
+    <code><i>parameter</i></code> <code><i>value</i></code>
+    [<code>if_not_empty</code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets a <code><i>parameter</i></code> that should be passed to the SCGI server.
+The <code><i>value</i></code> can contain text, variables, and their combination.
+These directives are inherited from the previous level if and
+only if there are no
+<code>scgi_param</code>
+directives defined on the current level.
+</p><p>
+Standard
+<a href="https://tools.ietf.org/html/rfc3875#section-4.1">CGI
+environment variables</a>
+should be provided as SCGI headers, see the <code>scgi_params</code> file
+provided in the distribution:
+</p> <blockquote class="example"><pre>
+location / {
+    include scgi_params;
+    ...
+}
+</pre></blockquote><p> 
+</p><p>
+If the directive is specified with <code>if_not_empty</code> (1.1.11) then
+such a parameter will be passed to the server only if its value is not empty:
+</p> <blockquote class="example"><pre>
+scgi_param HTTPS $https if_not_empty;
+</pre></blockquote><p> 
+</p><a name="scgi_pass"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_scgi_module.html#scgi_param">scgi_param</a>]</span>

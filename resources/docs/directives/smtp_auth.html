@@ -1,6 +1,59 @@
-<h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=13" title="Edit section: smtp auth">edit</a>]</span> <span class="mw-headline" id="smtp_auth"> smtp_auth </span></h2><p><b>syntax:</b> <i>smtp_auth</i> <i><b>[login] [plain] [cram-md5]&nbsp;;</b></i> </p><p><b>default:</b> <i>login plain</i> </p><p><b>context:</b> <i>main, server</i> </p><p>With this directive you can set the permitted methods of authentication for SMTP clients: </p><ul>
- <li> login - <a rel="nofollow" class="external text" href="http://www3.ietf.org/proceedings/03jul/I-D/draft-murchison-sasl-login-00.txt">AUTH LOGIN</a> </li>
- <li> plain - <a rel="nofollow" class="external text" href="http://ietf.org/rfc/rfc2595.txt">AUTH PLAIN</a> </li>
- <li> cram-md5 - <a rel="nofollow" class="external text" href="http://ietf.org/rfc/rfc2195.txt">AUTH CRAM-MD5</a> </li>
- <li> none - Disable SMTP Auth </li>
-</ul><br><i>Module: MailCoreModule</i>
+<h2><span class="mw-headline" id="smtp_auth"> smtp_auth </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>smtp_auth</strong> <code><i>method</i></code> ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>smtp_auth login plain;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>mail</code>, <code>server</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets permitted methods of
+<a href="https://tools.ietf.org/html/rfc2554">SASL authentication</a>
+for SMTP clients.
+Supported methods are:
+</p> <dl class="compact">
+<dt><code>login</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/draft-murchison-sasl-login-00">AUTH LOGIN</a>
+</dd>
+<dt><code>plain</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc4616">AUTH PLAIN</a>
+</dd>
+<dt><code>cram-md5</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc2195">AUTH CRAM-MD5</a>.
+In order for this method to work, the password must be stored unencrypted.
+</dd>
+<dt><code>external</code></dt>
+<dd>
+<a href="https://tools.ietf.org/html/rfc4422">AUTH EXTERNAL</a> (1.11.6).
+</dd>
+<dt><code>none</code></dt>
+<dd>
+Authentication is not required.
+</dd>
+</dl><p> 
+</p><a name="smtp_capabilities"></a>
+
+<span>[<a href="http://nginx.org/en/docs/mail/ngx_mail_smtp_module.html#smtp_auth">smtp_auth</a>]</span>

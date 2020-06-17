@@ -1,35 +1,172 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=14" title="Edit section: fastcgi cache path">edit</a>]</span> <span class="mw-headline" id="fastcgi_cache_path"> fastcgi_cache_path </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>fastcgi_cache_path</b> <i>path</i> [ <code>levels</code> = <i>levels</i> ] <code>keys_zone</code> = <i>name</i>&nbsp;: <i>size</i> [ <code>inactive</code> = <i>time</i> ] [ <code>max_size</code> = <i>size</i> ] [ <code>loader_files</code> = <i>number</i> ] [ <code>loader_sleep</code> = <i>time</i> ] [ <code>loader_threshold</code> = <i>time</i> ]</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> </td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache_path">fastcgi_cache_path</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 96/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> The <i>clean_time</i> parameter was removed in 0.7.45. </p><p>This directive specifies path to the cache storage and other cache parameters. All data is stored in the files. The cache key and the name of cache file are calculated as MD5 sum of the proxied URL. </p><p>Level parameter sets number and width of the names of subdirectories used to store caching files. For example, with the directive like: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_cache_path"><span class="kw11">fastcgi_cache_path</span></a>  /data/nginx/cache  levels<span class="sy0">=</span><span class="nu0">1</span>:<span class="nu0">2</span>   keys_zone<span class="sy0">=</span>one:10m<span class="sy0">;</span></pre>
- </div>
-</div><p>the data will be stored in the following file: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1">/data/nginx/cache/c/<span class="nu0">29</span>/b7f54b2df7773722d382f4809d65029c</pre>
- </div>
-</div><p>Caching data is first written to the temporary file which is then moved to the final location in a cache directory. Starting from 0.8.9 it is possible to store temporary and cache files on different file systems, but it should be kept in mind that in such a case instead of cheap and atomic rename syscall a full file copy is performed. So it's better to use the same file system in both parameters of <a href="#fastcgi_temp_path">fastcgi_temp_path</a> and <code>fastcgi_cache_path</code> directives. </p><p>In addition, all active keys and information about data are kept in the shared memory zone, which name and size are specified by the options of the <code>key_zone</code> parameter. In case this data haven't been accessed for the time, specified in the option of <code>inactive</code> parameter, it is wiped out from the memory. By default inactive period is set to 10 minutes. </p><p>To maintain the maximum size of the cache, which is set by <code>max_size</code> parameter, a special process <b>cache manager</b> periodically deletes old data from the cache. </p><br><i>Module: HttpFastcgiModule</i>
+<h2><span class="mw-headline" id="fastcgi_cache_path"> fastcgi_cache_path </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>fastcgi_cache_path</strong> 
+    <code><i>path</i></code>
+    [<code>levels</code>=<code><i>levels</i></code>]
+    [<code>use_temp_path</code>=<code>on</code>|<code>off</code>]
+    <code>keys_zone</code>=<code><i>name</i></code>:<code><i>size</i></code>
+    [<code>inactive</code>=<code><i>time</i></code>]
+    [<code>max_size</code>=<code><i>size</i></code>]
+    [<code>manager_files</code>=<code><i>number</i></code>]
+    [<code>manager_sleep</code>=<code><i>time</i></code>]
+    [<code>manager_threshold</code>=<code><i>time</i></code>]
+    [<code>loader_files</code>=<code><i>number</i></code>]
+    [<code>loader_sleep</code>=<code><i>time</i></code>]
+    [<code>loader_threshold</code>=<code><i>time</i></code>]
+    [<code>purger</code>=<code>on</code>|<code>off</code>]
+    [<code>purger_files</code>=<code><i>number</i></code>]
+    [<code>purger_sleep</code>=<code><i>time</i></code>]
+    [<code>purger_threshold</code>=<code><i>time</i></code>];</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            
+            —
+        
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Sets the path and other parameters of a cache.
+Cache data are stored in files.
+Both the key and file name in a cache are a result of
+applying the MD5 function to the proxied URL.
+The <code>levels</code> parameter defines hierarchy levels of a cache:
+from 1 to 3, each level accepts values 1 or 2.
+For example, in the following configuration
+</p> <blockquote class="example"><pre>
+fastcgi_cache_path /data/nginx/cache levels=1:2 keys_zone=one:10m;
+</pre></blockquote><p> 
+file names in a cache will look like this:
+</p> <blockquote class="example"><pre>
+/data/nginx/cache/<strong>c</strong>/<strong>29</strong>/b7f54b2df7773722d382f4809d650<strong>29c</strong>
+</pre></blockquote><p> 
+</p><p>
+A cached response is first written to a temporary file,
+and then the file is renamed.
+Starting from version 0.8.9, temporary files and the cache can be put on
+different file systems.
+However, be aware that in this case a file is copied
+across two file systems instead of the cheap renaming operation.
+It is thus recommended that for any given location both cache and a directory
+holding temporary files
+are put on the same file system.
+A directory for temporary files is set based on
+the <code>use_temp_path</code> parameter (1.7.10).
+If this parameter is omitted or set to the value <code>on</code>,
+the directory set by the <a href="#fastcgi_temp_path">fastcgi_temp_path</a> directive
+for the given location will be used.
+If the value is set to <code>off</code>,
+temporary files will be put directly in the cache directory.
+</p><p>
+In addition, all active keys and information about data are stored
+in a shared memory zone, whose <code><i>name</i></code> and <code><i>size</i></code>
+are configured by the <code>keys_zone</code> parameter.
+One megabyte zone can store about 8 thousand keys.
+</p> <blockquote class="note">
+As part of
+<a href="http://nginx.com/products/">commercial subscription</a>,
+the shared memory zone also stores extended
+cache <a href="ngx_http_api_module.html#http_caches_">information</a>,
+thus, it is required to specify a larger zone size for the same number of keys.
+For example,
+one megabyte zone can store about 4 thousand keys.
+</blockquote><p> 
+</p><p>
+Cached data that are not accessed during the time specified by the
+<code>inactive</code> parameter get removed from the cache
+regardless of their freshness.
+By default, <code>inactive</code> is set to 10 minutes.
+</p><p>
+The special “cache manager” process monitors the maximum cache size set
+by the <code>max_size</code> parameter.
+When this size is exceeded, it removes the least recently used data.
+The data is removed in iterations configured by
+<code>manager_files</code>,
+<code>manager_threshold</code>, and
+<code>manager_sleep</code> parameters (1.11.5).
+During one iteration no more than <code>manager_files</code> items
+are deleted (by default, 100).
+The duration of one iteration is limited by the
+<code>manager_threshold</code> parameter (by default, 200 milliseconds).
+Between iterations, a pause configured by the <code>manager_sleep</code>
+parameter (by default, 50 milliseconds) is made.
+</p><p>
+A minute after the start the special “cache loader” process is activated.
+It loads information about previously cached data stored on file system
+into a cache zone.
+The loading is also done in iterations.
+During one iteration no more than <code>loader_files</code> items
+are loaded (by default, 100).
+Besides, the duration of one iteration is limited by the
+<code>loader_threshold</code> parameter (by default, 200 milliseconds).
+Between iterations, a pause configured by the <code>loader_sleep</code>
+parameter (by default, 50 milliseconds) is made.
+</p><p>
+Additionally,
+the following parameters are available as part of our
+<a href="http://nginx.com/products/">commercial subscription</a>:
+</p><p>
+</p> <dl class="compact">
+<dt id="purger">
+<code>purger</code>=<code>on</code>|<code>off</code>
+</dt>
+<dd>
+Instructs whether cache entries that match a
+<a href="#fastcgi_cache_purge">wildcard key</a>
+will be removed from the disk by the cache purger (1.7.12).
+Setting the parameter to <code>on</code>
+(default is <code>off</code>)
+will activate the “cache purger” process that
+permanently iterates through all cache entries
+and deletes the entries that match the wildcard key.
+</dd>
+<dt id="purger_files">
+<code>purger_files</code>=<code><i>number</i></code>
+</dt>
+<dd>
+Sets the number of items that will be scanned during one iteration (1.7.12).
+By default, <code>purger_files</code> is set to 10.
+</dd>
+<dt id="purger_threshold">
+<code>purger_threshold</code>=<code><i>number</i></code>
+</dt>
+<dd>
+Sets the duration of one iteration (1.7.12).
+By default, <code>purger_threshold</code> is set to 50 milliseconds.
+</dd>
+<dt id="purger_sleep">
+<code>purger_sleep</code>=<code><i>number</i></code>
+</dt>
+<dd>
+Sets a pause between iterations (1.7.12).
+By default, <code>purger_sleep</code> is set to 50 milliseconds.
+</dd>
+</dl><p> 
+</p><p>
+</p> <blockquote class="note">
+In versions 1.7.3, 1.7.7, and 1.11.10 cache header format has been changed.
+Previously cached responses will be considered invalid
+after upgrading to a newer nginx version.
+</blockquote><p> 
+</p><a name="fastcgi_cache_purge"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_cache_path">fastcgi_cache_path</a>]</span>

@@ -1,42 +1,59 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=71" title="Edit section: types">edit</a>]</span> <span class="mw-headline" id="types"> types </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>types</b> { ... }</td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>{ text/html html; image/gif gif; image/jpeg jpg; }</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#types">types</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 624/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Specifies one or more mappings between MIME types and file extensions. More than one extension can be assigned to a MIME type. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#types"><span class="kw3">types</span></a> <span class="br0">{</span>
-  text/html    html<span class="sy0">;</span>
-  image/gif    gif<span class="sy0">;</span>
-  image/jpeg   jpg<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><p>A sufficiently complete table of mappings is included with nginx, and is located at <code>conf/mime.types</code>. </p><p>If you wanted responses to particular location to always indicate a single MIME type, you could define an empty <i>types</i> block and set the <i>default_type</i> directive. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
- <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /download/ <span class="br0">{</span>
-  <a href="/NginxHttpCoreModule#types"><span class="kw3">types</span></a>         <span class="br0">{</span> <span class="br0">}</span>
-  <a href="/NginxHttpCoreModule#default_type"><span class="kw3">default_type</span></a>  application/octet-stream<span class="sy0">;</span>
-<span class="br0">}</span></pre>
- </div>
-</div><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="types"> types </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>types</strong> { ... }</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>types {
+    text/html  html;
+    image/gif  gif;
+    image/jpeg jpg;
+}</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Maps file name extensions to MIME types of responses.
+Extensions are case-insensitive.
+Several extensions can be mapped to one type, for example:
+</p> <blockquote class="example"><pre>
+types {
+    application/octet-stream bin exe dll;
+    application/octet-stream deb;
+    application/octet-stream dmg;
+}
+</pre></blockquote><p> 
+</p><p>
+A sufficiently full mapping table is distributed with nginx in the
+<code>conf/mime.types</code> file.
+</p><p>
+To make a particular location emit the
+“<code>application/octet-stream</code>”
+MIME type for all requests, the following configuration can be used:
+</p> <blockquote class="example"><pre>
+location /download/ {
+    types        { }
+    default_type application/octet-stream;
+}
+</pre></blockquote><p> 
+</p><a name="types_hash_bucket_size"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#types">types</a>]</span>

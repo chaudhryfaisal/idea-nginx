@@ -1,10 +1,96 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=26" title="Edit section: uwsgi next upstream">edit</a>]</span> <span class="mw-headline" id="uwsgi_next_upstream"> uwsgi_next_upstream </span></h2><p><b>syntax:</b> <i>uwsgi_next_upstream error|timeout|invalid_header|http_500|http_503|http_404|off</i> </p><p><b>default:</b> <i>uwsgi_next_upstream error timeout</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive defines in which cases request will be passed to the next server: </p><ul>
- <li> error — an error occurred during connection to the server, passing request to it or reading server respond header; </li>
- <li> timeout — a timeout occurred during connection to the server, passing request to it or reading server respond header; </li>
- <li> invalid_header — server returned empty or invalid answer; </li>
- <li> http_500 — server returned 500 respond; </li>
- <li> http_503 — server returned 503 respond; </li>
- <li> http_404 — server returned 404 respond; </li>
- <li> updating — <i>?</i> </li>
- <li> off — explicitly forbids passing request to the next server; </li>
-</ul><p>It should be clear that passing request to the next server is possible only if no data have been yet returned to the client. So, if the error or timeout occurred during the data transmission to the client it's too late to fix it. </p><br><i>Module: HttpUwsgiModule</i>
+<h2><span class="mw-headline" id="uwsgi_next_upstream"> uwsgi_next_upstream </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>uwsgi_next_upstream</strong> 
+    <code>error</code> |
+    <code>timeout</code> |
+    <code>invalid_header</code> |
+    <code>http_500</code> |
+    <code>http_503</code> |
+    <code>http_403</code> |
+    <code>http_404</code> |
+    <code>http_429</code> |
+    <code>non_idempotent</code> |
+    <code>off</code>
+    ...;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>uwsgi_next_upstream error timeout;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table></div><p>
+Specifies in which cases a request should be passed to the next server:
+</p> <dl class="compact">
+<dt><code>error</code></dt>
+<dd>an error occurred while establishing a connection with the
+server, passing a request to it, or reading the response header;</dd>
+<dt><code>timeout</code></dt>
+<dd>a timeout has occurred while establishing a connection with the
+server, passing a request to it, or reading the response header;</dd>
+<dt><code>invalid_header</code></dt>
+<dd>a server returned an empty or invalid response;</dd>
+<dt><code>http_500</code></dt>
+<dd>a server returned a response with the code 500;</dd>
+<dt><code>http_503</code></dt>
+<dd>a server returned a response with the code 503;</dd>
+<dt><code>http_403</code></dt>
+<dd>a server returned a response with the code 403;</dd>
+<dt><code>http_404</code></dt>
+<dd>a server returned a response with the code 404;</dd>
+<dt><code>http_429</code></dt>
+<dd>a server returned a response with the code 429 (1.11.13);</dd>
+<dt id="non_idempotent"><code>non_idempotent</code></dt>
+<dd>normally, requests with a
+<a href="https://tools.ietf.org/html/rfc7231#section-4.2.2">non-idempotent</a>
+method
+(<code>POST</code>, <code>LOCK</code>, <code>PATCH</code>)
+are not passed to the next server
+if a request has been sent to an upstream server (1.9.13);
+enabling this option explicitly allows retrying such requests;
+</dd>
+<dt><code>off</code></dt>
+<dd>disables passing a request to the next server.</dd>
+</dl><p> 
+</p><p>
+One should bear in mind that passing a request to the next server is
+only possible if nothing has been sent to a client yet.
+That is, if an error or timeout occurs in the middle of the
+transferring of a response, fixing this is impossible.
+</p><p>
+The directive also defines what is considered an
+<a href="ngx_http_upstream_module.html#max_fails">unsuccessful
+attempt</a> of communication with a server.
+The cases of <code>error</code>, <code>timeout</code> and
+<code>invalid_header</code> are always considered unsuccessful attempts,
+even if they are not specified in the directive.
+The cases of <code>http_500</code>, <code>http_503</code>,
+and <code>http_429</code> are
+considered unsuccessful attempts only if they are specified in the directive.
+The cases of <code>http_403</code> and <code>http_404</code>
+are never considered unsuccessful attempts.
+</p><p>
+Passing a request to the next server can be limited by
+<a href="#uwsgi_next_upstream_tries">the number of tries</a>
+and by <a href="#uwsgi_next_upstream_timeout">time</a>.
+</p><a name="uwsgi_next_upstream_timeout"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_uwsgi_module.html#uwsgi_next_upstream">uwsgi_next_upstream</a>]</span>

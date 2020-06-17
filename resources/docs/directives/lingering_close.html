@@ -1,31 +1,55 @@
-<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=30" title="Edit section: lingering close">edit</a>]</span> <span class="mw-headline" id="lingering_close"> lingering_close </span></h2><table class="directive-ref-table">
- <tbody>
-  <tr>
-   <td class="drt-td1"><b>Syntax:</b></td> 
-   <td class="drt-td2"> <b>lingering_close</b> <code>off</code> | <code>on</code> | <code>always</code> </td>
-  </tr> 
-  <tr>
-   <td><b>Default:</b></td> 
-   <td> <i>on</i></td>
-  </tr> 
-  <tr>
-   <td><b>Context:</b></td> 
-   <td> http<br />server<br />location</td>
-  </tr> 
-  <tr>
-   <td><b>Appeared in:</b></td> 
-   <td> 1.1.0<br />1.0.6</td>
-  </tr> 
-  <tr>
-   <td><b>Reference:</b></td>
-   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_close">lingering_close</a></td>
-  </tr>
- </tbody>
-</table><p>
- <!-- 
-NewPP limit report
-Preprocessor node count: 247/1000000
-Post-expand include size: 0/2097152 bytes
-Template argument size: 0/2097152 bytes
-Expensive parser function count: 0/100
---> </p><p><br /> Sets SO_LINGER on sockets. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="mw-headline" id="lingering_close"> lingering_close </span></h2>
+<table cellspacing="0">
+                <tr>
+                <th>
+            Syntax:
+                </th>
+                <td>
+            <code><strong>lingering_close</strong> 
+    <code>off</code> |
+    <code>on</code> |
+    <code>always</code>;</code><br>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Default:
+                </th>
+                <td>
+            <pre>lingering_close on;</pre>
+                </td>
+                </tr>
+            
+                <tr>
+                <th>
+            Context:
+                </th>
+                <td>
+            <code>http</code>, <code>server</code>, <code>location</code><br>
+                </td>
+                </tr>
+            </table>
+                        <p>
+                    This directive appeared in versions 1.1.0 and 1.0.6.
+                    
+                        </p>
+                    </div><p>
+Controls how nginx closes client connections.
+</p><p>
+The default value “<code>on</code>” instructs nginx to
+<a href="#lingering_timeout">wait for</a> and
+<a href="#lingering_time">process</a> additional data from a client
+before fully closing a connection, but only
+if heuristics suggests that a client may be sending more data.
+</p><p>
+The value “<code>always</code>” will cause nginx to unconditionally
+wait for and process additional client data.
+</p><p>
+The value “<code>off</code>” tells nginx to never wait for
+more data and close the connection immediately.
+This behavior breaks the protocol and should not be used under normal
+circumstances.
+</p><a name="lingering_time"></a>
+
+<span>[<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#lingering_close">lingering_close</a>]</span>
